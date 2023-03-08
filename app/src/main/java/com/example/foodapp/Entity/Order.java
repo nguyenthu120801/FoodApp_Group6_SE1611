@@ -1,11 +1,13 @@
 package com.example.foodapp.Entity;
 
+import java.util.Date;
+
 public class Order {
-    private int OrderID;
-    private int UserID;
+    private int orderID;
+    private int userID;
+    private Date orderDate;
+    private Date shipDate;
     private String status;
-    private String OrderDate;
-    private String ShipDate;
     private String address;
     public static final String STATUS_IN_PROGRESS = "In progress";
     public static final String STATUS_COMPLETED = "Completed";
@@ -14,36 +16,53 @@ public class Order {
     public Order() {
     }
 
-    public Order(int OrderID, int UserID, String status, String OrderDate, String ShipDate, String address) {
-        this.OrderID = OrderID;
-        this.UserID = UserID;
+    public Order(int orderID, int userID, Date orderDate, Date shipDate, String status, String address) {
+        this.orderID = orderID;
+        this.userID = userID;
+        this.orderDate = orderDate;
+        this.shipDate = shipDate;
         this.status = status;
-        this.OrderDate = OrderDate;
-        this.ShipDate = ShipDate;
         this.address = address;
     }
 
-    public Order(int UserID, String status, String ShipDate, String address) {
-        this.UserID = UserID;
+    public Order(int userID, Date orderDate, Date shipDate, String status, String address) {
+        this.userID = userID;
+        this.orderDate = orderDate;
+        this.shipDate = shipDate;
         this.status = status;
-        this.ShipDate = ShipDate;
         this.address = address;
     }
 
     public int getOrderID() {
-        return OrderID;
+        return orderID;
     }
 
-    public void setOrderID(int OrderID) {
-        this.OrderID = OrderID;
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
     public int getUserID() {
-        return UserID;
+        return userID;
     }
 
-    public void setUserID(int UserID) {
-        this.UserID = UserID;
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Date getShipDate() {
+        return shipDate;
+    }
+
+    public void setShipDate(Date shipDate) {
+        this.shipDate = shipDate;
     }
 
     public String getStatus() {
@@ -54,27 +73,23 @@ public class Order {
         this.status = status;
     }
 
-    public String getOrderDate() {
-        return OrderDate;
-    }
-
-    public void setOrderDate(String OrderDate) {
-        this.OrderDate = OrderDate;
-    }
-
-    public String getShipDate() {
-        return ShipDate;
-    }
-
-    public void setShipDate(String ShipDate) {
-        this.ShipDate = ShipDate;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID=" + orderID +
+                ", userID=" + userID +
+                ", orderDate=" + orderDate +
+                ", shipDate=" + shipDate +
+                ", status='" + status + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
