@@ -10,34 +10,20 @@ import com.example.foodapp.Entity.Order;
 
 import java.util.List;
 
-public class OrderDBHelper extends SQLiteOpenHelper {
-    private static final String ORDER_DATABASE ="orders.db";
-    private static final int ORDER_VERSION =1;
-    private static final String ORDER_TABLE ="orders";
-    private static final String ORDER_ID ="id";
-    private static final String ORDER_USERID ="user_id";
-    private static final String ORDER_ADDRESS ="address";
-    private static final String ORDER_ORDER_DATE ="order_date";
-    private static final String ORDER_SHIP_DATE ="ship_date";
-    private static final String ORDER_STATUS ="status";
+public class OrderDBHelper extends ConnectDatabase {
+    private static final String ORDER_TABLE ="Order";
+    private static final String ORDER_ID ="OrderID";
+    private static final String ORDER_USERID ="UserID";
+    private static final String ORDER_ADDRESS ="Address";
+    private static final String ORDER_ORDER_DATE ="OrderDate";
+    private static final String ORDER_SHIP_DATE ="ShipDate";
+    private static final String ORDER_STATUS ="Status";
 
     public OrderDBHelper( Context context) {
-        super(context, ORDER_DATABASE, null, ORDER_VERSION);
+        super(context);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String createTable = "CREATE TABLE " + ORDER_TABLE + "(" +
-                ORDER_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                ORDER_USERID+  " INTEGER, " +
-                ORDER_ADDRESS+ " TEXT, " +
-                ORDER_ORDER_DATE+  " DATE, " +
-                ORDER_SHIP_DATE+  " DATE, " +
-                ORDER_STATUS+  " INTEGER" +
-                ")";
-        sqLiteDatabase.execSQL(createTable);
-    }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
