@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.foodapp.Entity.Food;
+import com.example.foodapp.activity.OrderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         ((Button)findViewById(R.id.btn_checkout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(AddToCartActivity.this, OrderActivity.class);
             }
         });
 
