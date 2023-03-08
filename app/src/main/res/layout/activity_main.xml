@@ -195,6 +195,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="386dp"
                     android:layout_height="124dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.285"
                     app:layout_constraintStart_toStartOf="parent"
