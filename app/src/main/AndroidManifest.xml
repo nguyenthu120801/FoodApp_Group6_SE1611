@@ -13,7 +13,7 @@
         tools:targetApi="31">
         <activity
 
-            android:name=".View_ProductActivity"
+
 
             android:name=".FoodAdapter"
             android:exported="false">
