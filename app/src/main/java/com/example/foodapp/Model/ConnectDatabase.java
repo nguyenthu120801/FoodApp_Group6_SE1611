@@ -30,6 +30,8 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tUsername TEXT NOT NULL,\n" +
                 "\tPassword TEXT NOT NULL,\n" +
                 "\tRoleName TEXT NOT NULL, \n" +
+                "\tDob TEXT NOT NULL,\n" +
+                "\tEmail TEXT NOT NULL,\n" +
                 "\tPhone TEXT NOT NULL\n" +
                 ");";
         String sqlCategory = "CREATE TABLE Category(\n" +

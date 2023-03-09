@@ -9,13 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.foodapp.Model.OrderDBHelper;
+import com.example.foodapp.Model.UserDBHelper;
+
 import java.util.Date;
 
 public class SigupActivity extends AppCompatActivity {
 
     private Button btn_Register;
     EditText fullname, username, password, dob, email, phone;
-    DatabaseHelper DB;
+    UserDBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +32,7 @@ public class SigupActivity extends AppCompatActivity {
         dob = findViewById(R.id.edt_dob);
         email = findViewById(R.id.edt_email);
         phone = findViewById(R.id.edt_phone);
-        DB = new DatabaseHelper(this);
+        DB = new UserDBHelper(this);
 
 
         btn_Register.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +47,7 @@ public class SigupActivity extends AppCompatActivity {
                 String phone_number = phone.getText().toString();
 
 
-                Boolean insert = DB.insertData(fname,user,pass,birth,mail,phone_number);
+                Boolean insert = DB.insertUser(fname,user,pass,birth,mail,phone_number);
                 if(insert == true){
                     Toast.makeText(SigupActivity.this, "Register successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SigupActivity.this, LoginActivity.class);
