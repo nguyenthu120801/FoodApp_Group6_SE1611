@@ -44,14 +44,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edt_fullname"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:drawableLeft="@drawable/ic_round_cruelty_free_24"
         android:drawablePadding="13dp"
-        android:hint="@string/app_name"
-        android:text="Full name"
+        android:hint="full name"
+
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edt_username"
         android:layout_width="329dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
@@ -71,11 +71,11 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/edt_fullname"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/edt_password"
         android:layout_width="329dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
@@ -87,11 +87,11 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/edt_username"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/edt_phone"
         android:layout_width="329dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
@@ -100,14 +100,14 @@
         android:hint="@string/app_name"
         android:text="Phone"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editText5"
+        app:layout_constraintEnd_toEndOf="@+id/edt_email"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText5"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintStart_toStartOf="@+id/edt_email"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/edt_email"
         android:layout_width="329dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
@@ -116,12 +116,12 @@
         android:hint="@string/app_name"
         android:text="Email"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editText4"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:layout_constraintEnd_toEndOf="@+id/edt_dob"
+        app:layout_constraintTop_toBottomOf="@+id/edt_dob"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/edt_dob"
         android:layout_width="329dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
@@ -132,21 +132,22 @@
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/edt_password"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
+        android:id="@+id/btn_Register"
         android:layout_width="160dp"
         android:layout_height="62dp"
         android:layout_marginTop="52dp"
+        android:backgroundTint="@color/material_on_surface_emphasis_medium"
         android:padding="14dp"
         android:text="Register"
-        android:backgroundTint="@color/material_on_surface_emphasis_medium"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
