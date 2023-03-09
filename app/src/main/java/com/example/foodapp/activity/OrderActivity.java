@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.OrderDBHelper;
@@ -32,13 +33,17 @@ public class OrderActivity extends AppCompatActivity {
         int userId = Integer.parseInt(etUserId.getText().toString());
         String address = etAddress.getText().toString();
         Date orderDate = new Date();
-        Date shipDate = new Date();
-        int status = 0;
 
         Order order = new Order();
+        order.setUserID(userId);
+        order.setAddress(address);
+        order.setOrderDate(orderDate.toString());
+        order.setShipDate(orderDate.toString());
+        order.setStatus(Order.STATUS_IN_PROGRESS);
         Log.d("infoOrder", "insert data : " + order);
         OrderDBHelper dbHelper = new OrderDBHelper(OrderActivity.this);
         boolean isSuccess = dbHelper.insertOrder(order);
+        Toast.makeText(OrderActivity.this, "insert : "+isSuccess, Toast.LENGTH_SHORT).show();
         Log.d("infoOrder", "insert : " + isSuccess);
     }
 
