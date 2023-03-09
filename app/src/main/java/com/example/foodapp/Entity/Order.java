@@ -5,8 +5,8 @@ import java.util.Date;
 public class Order {
     private int orderID;
     private int userID;
-    private Date orderDate;
-    private Date shipDate;
+    private String orderDate;
+    private String shipDate;
     private String status;
     private String address;
     public static final String STATUS_IN_PROGRESS = "In progress";
@@ -16,8 +16,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderID, int userID, Date orderDate, Date shipDate, String status, String address) {
-        this.orderID = orderID;
+    public Order(int userID, String orderDate, String shipDate, String status, String address) {
         this.userID = userID;
         this.orderDate = orderDate;
         this.shipDate = shipDate;
@@ -25,7 +24,8 @@ public class Order {
         this.address = address;
     }
 
-    public Order(int userID, Date orderDate, Date shipDate, String status, String address) {
+    public Order(int orderID, int userID, String orderDate, String shipDate, String status, String address) {
+        this.orderID = orderID;
         this.userID = userID;
         this.orderDate = orderDate;
         this.shipDate = shipDate;
@@ -49,19 +49,19 @@ public class Order {
         this.userID = userID;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Date getShipDate() {
+    public String getShipDate() {
         return shipDate;
     }
 
-    public void setShipDate(Date shipDate) {
+    public void setShipDate(String shipDate) {
         this.shipDate = shipDate;
     }
 
@@ -86,8 +86,8 @@ public class Order {
         return "Order{" +
                 "orderID=" + orderID +
                 ", userID=" + userID +
-                ", orderDate=" + orderDate +
-                ", shipDate=" + shipDate +
+                ", orderDate='" + orderDate + '\'' +
+                ", shipDate='" + shipDate + '\'' +
                 ", status='" + status + '\'' +
                 ", address='" + address + '\'' +
                 '}';

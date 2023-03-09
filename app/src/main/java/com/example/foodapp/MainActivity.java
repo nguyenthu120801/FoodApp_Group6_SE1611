@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.foodapp.activity.OrderActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView img_User;
@@ -22,7 +26,13 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(new Intent(MainActivity.this, View_ProductActivity.class));
             }
         });
+        FloatingActionButton toOrderBtn = findViewById(R.id.to_order_btn);
+        toOrderBtn.setOnClickListener(view -> toOrder());
 
+    }
 
+    public void toOrder(  ) {
+        Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+        startActivity(intent);
     }
 }

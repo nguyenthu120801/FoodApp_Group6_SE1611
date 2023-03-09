@@ -3,6 +3,7 @@ package com.example.foodapp.Model;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -41,8 +42,8 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         String sqlOrder = "CREATE TABLE ["+ORDER_TABLE+"](\n" +
                 "\t"+ORDER_ID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\t"+ORDER_USERID+" INTEGER  NOT NULL,\n" +
-                "\t"+ORDER_ORDER_DATE+" DATE  NOT NULL,\n" +
-                "\t"+ORDER_SHIP_DATE+" DATE ,\n" +
+                "\t"+ORDER_ORDER_DATE+" TEXT  NOT NULL,\n" +
+                "\t"+ORDER_SHIP_DATE+" TEXT ,\n" +
                 "\t"+ORDER_STATUS+" TEXT NOT NULL, \n" +
                 "\t"+ORDER_ADDRESS+" TEXT NOT NULL,\n" +
                 "\tFOREIGN KEY (UserID) REFERENCES User(ID)\n"  +
@@ -63,6 +64,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tFOREIGN KEY (ProductID) REFERENCES Product(ProductID),\n" +
                 "\tFOREIGN KEY (OrderID) REFERENCES [Order](OrderID)\n" +
                 ");";
+        Log.d("infoOrder", "create order table : " + sqlOrder);
         // execute sql
         sqLiteDatabase.execSQL(sqlUser);
         sqLiteDatabase.execSQL(sqlCategory);
