@@ -16,11 +16,12 @@ import com.example.foodapp.Entity.Food;
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
-
+    public double total;
     public List<Food> foodList;
     private onChangeItem onChangeItem;
 
-    public FoodAdapter(List<Food> foodList, com.example.foodapp.onChangeItem onChangeItem) {
+    public FoodAdapter(double total, List<Food> foodList, com.example.foodapp.onChangeItem onChangeItem) {
+        this.total = total;
         this.foodList = foodList;
         this.onChangeItem = onChangeItem;
     }
@@ -47,19 +48,22 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                     int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) + 1;
                     tv_quantity.setText(String.valueOf(newQuantity));
                     tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * newQuantity);
+                    total += Double.parseDouble(tv_price.getText().toString());
+                    onChangeItem.onPriceChange(total);
                 }
             });
 
             itemView.findViewById(R.id.minus).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) - 1;
-                    if(newQuantity <= 1){
+                    if(Integer.parseInt(tv_quantity.getText().toString()) > 1) {
                         tv_quantity.setText("1");
-                    }else {
+                        int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) - 1;
                         tv_quantity.setText(String.valueOf(newQuantity));
+                        tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * Integer.parseInt(tv_quantity.getText().toString()));
+                        total -= Double.parseDouble(tv_price.getText().toString());
+                        onChangeItem.onPriceChange(total);
                     }
-                    tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * Integer.parseInt(tv_quantity.getText().toString()));
                 }
             });
 
