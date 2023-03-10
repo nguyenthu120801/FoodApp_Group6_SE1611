@@ -12,9 +12,6 @@
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
         <activity
-
-
-
             android:name=".FoodAdapter"
             android:exported="false">
             <meta-data
@@ -40,6 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View_ProductActivity"
             android:exported="false" />
         <activity
             android:name=".IntroActivity"
