@@ -74,10 +74,6 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         contentValues.put("Name",name);
         contentValues.put("Image",image);
         long result = db.insert("Category", null, contentValues);
-        if(result ==-1){
-            return false;
-        }else {
-            return true;
-        }
+        return result != -1;
     }
 }
