@@ -61,6 +61,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sqlOrderDetail);
 
         insertCategory("Pizza","cat_1");
+        insertCategory("Burger","cat_2");
     }
 
     @Override
