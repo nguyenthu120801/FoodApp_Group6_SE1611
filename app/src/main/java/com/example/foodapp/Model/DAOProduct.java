@@ -16,18 +16,28 @@ public class DAOProduct extends ConnectDatabase{
         super(context);
     }
 
-    public List<Product> getAllProduct(){
+    public List<Product> getListProduct(Integer CategoryID){
         List<Product> list = new ArrayList<>();
         SQLiteDatabase lite = getReadableDatabase();
-        String sql = "select * from Product";
-        Cursor cursor = lite.rawQuery(sql , null);
+        String sql;
+        String [] selectionArgs;
+        // if all product
+        if(CategoryID == null){
+            sql = "select * from Product";
+            selectionArgs = null;
+        }else{
+            sql = "select * from Product where CategoryID = ?";
+            selectionArgs = new String[]{CategoryID.toString()};
+        }
+        Cursor cursor = lite.rawQuery(sql , selectionArgs);
         while(cursor!= null && cursor.moveToNext()){
             int ProductID = cursor.getInt(0);
             String ProductName = cursor.getString(1);
-            String image = cursor.getString(2);
+            int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
-            int CategoryID = cursor.getInt(4);
-            Product product = new Product(ProductID, ProductName,image,price,CategoryID);
+            int categoryID = cursor.getInt(4);
+            String description = cursor.getString(5);
+            Product product = new Product(ProductID, ProductName,image,price,categoryID,description);
             list.add(product);
         }
         return list;
@@ -36,11 +46,11 @@ public class DAOProduct extends ConnectDatabase{
     public long AddProduct (Product product){
         SQLiteDatabase lite = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("ProductID",product.getProductID());
         values.put("ProductName",product.getProductName());
         values.put("Image", product.getImage());
         values.put("price",product.getPrice());
         values.put("CategoryID",product.getCategoryID());
+        values.put("Description",product.getDescription());
         return lite.insert("Product",null,values);
     }
 
@@ -52,10 +62,11 @@ public class DAOProduct extends ConnectDatabase{
         // if get data successful
         if(cursor!= null && cursor.moveToNext()){
             String ProductName = cursor.getString(1);
-            String image = cursor.getString(2);
+            int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
             int CategoryID = cursor.getInt(4);
-            Product product = new Product(ProductID, ProductName,image,price,CategoryID);
+            String description = cursor.getString(5);
+            Product product = new Product(ProductID, ProductName,image,price,CategoryID,description);
             return product;
         }
         return null;
@@ -70,6 +81,7 @@ public class DAOProduct extends ConnectDatabase{
         values.put("Image", product.getImage());
         values.put("price",product.getPrice());
         values.put("CategoryID",product.getCategoryID());
+        values.put("Description",product.getDescription());
         return lite.update("Product",values,whereClause,whereArgs);
     }
 
@@ -80,3 +92,4 @@ public class DAOProduct extends ConnectDatabase{
         return lite.delete("Product",whereClause,whereArgs);
     }
 }
+

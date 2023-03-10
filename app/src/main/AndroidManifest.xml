@@ -12,28 +12,7 @@
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
         <activity
-            android:name=".OrderManageActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".View_ProductActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.OrderActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SigupActivity"
+            android:name=".FoodAdapter"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -48,7 +27,6 @@
         </activity>
         <activity
             android:name=".AddToCartActivity"
-
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -59,6 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View_ProductActivity"
             android:exported="false" />
         <activity
             android:name=".IntroActivity"

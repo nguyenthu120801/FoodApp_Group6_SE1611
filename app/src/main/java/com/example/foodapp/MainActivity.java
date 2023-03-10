@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         img_User.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                //startActivity(new Intent(MainActivity.this, View_ProductActivity.class));
+               // startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, View_ProductActivity.class));
             }
         });
         FloatingActionButton toOrderBtn = findViewById(R.id.to_order_btn);
