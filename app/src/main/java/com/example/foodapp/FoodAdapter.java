@@ -12,17 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foodapp.Entity.Food;
+import com.example.foodapp.Entity.Product;
 
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
     public double total;
-    public List<Food> foodList;
+    public List<Product> productList;
     private onChangeItem onChangeItem;
 
-    public FoodAdapter(double total, List<Food> foodList, com.example.foodapp.onChangeItem onChangeItem) {
+    public FoodAdapter(double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
         this.total = total;
-        this.foodList = foodList;
+        this.productList = productList;
         this.onChangeItem = onChangeItem;
     }
 
@@ -80,15 +81,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FoodHolder holder, int position) {
-        holder.img.setImageResource(foodList.get(position).getImage());
-        holder.tv_foodName.setText(foodList.get(position).getFoodName());
-        holder.tv_price.setText(String.valueOf(foodList.get(position).getPrice()));
+        holder.img.setImageResource(productList.get(position).getImage());
+        holder.tv_foodName.setText(productList.get(position).getProductName());
+        holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
 
     }
 
     @Override
     public int getItemCount() {
-        return foodList.size();
+        return productList.size();
     }
 
 

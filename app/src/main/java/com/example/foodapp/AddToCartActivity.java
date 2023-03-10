@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.foodapp.Entity.Food;
+import com.example.foodapp.Entity.Product;
+import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.activity.OrderActivity;
 
 import java.util.ArrayList;
@@ -26,16 +28,16 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
 
         rcv = findViewById(R.id.rec_foodCart);
         tv_total = findViewById(R.id.tv_totalPrice);
-        List<Food> foodList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         double total = 0;
-        //Food food = (Food) getIntent().getSerializableExtra("nunu");
-        for(int i =0; i<3; i++) {
-            Food f1 = new Food(i, "món ngon" + i, R.drawable.pizza, 8);
-            foodList.add(f1);
-            total+= f1.getPrice();
+        int id = getIntent().getIntExtra("id", 0);
+        Product product = new DAOProduct(this).getProduct(id);
+        productList.add(product);
+        for(Product p : productList) {
+            total+= p.getPrice();
         }
         
-        FoodAdapter adapter = new FoodAdapter(total, foodList, this::onPriceChange);
+        FoodAdapter adapter = new FoodAdapter(total, productList, this::onPriceChange);
         rcv.setLayoutManager(new LinearLayoutManager(this));
         rcv.setAdapter(adapter);
 
