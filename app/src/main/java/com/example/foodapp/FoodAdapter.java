@@ -41,7 +41,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
             tv_price = itemView.findViewById(R.id.tv_foodPrice);
             tv_TotlaPrice = itemView.findViewById(R.id.tv_totalPriceFood);
             tv_quantity = itemView.findViewById(R.id.tv_quantity);
-
+            onChangeItem.onPriceChange(total);
 
             itemView.findViewById(R.id.plus).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -83,6 +83,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         holder.img.setImageResource(productList.get(position).getImage());
         holder.tv_foodName.setText(productList.get(position).getProductName());
         holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
+        holder.tv_TotlaPrice.setText(String.valueOf(
+                productList.get(position).getPrice() * Integer.parseInt(holder.tv_quantity.getText().toString())));
 
     }
 
