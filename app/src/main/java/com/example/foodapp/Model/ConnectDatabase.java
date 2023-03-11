@@ -1,5 +1,6 @@
 package com.example.foodapp.Model;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,10 +36,12 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tEmail TEXT NOT NULL,\n" +
                 "\tPhone TEXT NOT NULL\n" +
                 ");";
-        String sqlCategory = "CREATE TABLE Category(\n" +
-                "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "\tName TEXT NOT NULL\n" +
-                ");";
+
+        String sqlCategory = "CREATE TABLE Category(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "Name TEXT NOT NULL," +
+                "Image TEXT NOT NULL);";
+
         String sqlOrder = "CREATE TABLE ["+ORDER_TABLE+"](\n" +
                 "\t"+ORDER_ID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\t"+ORDER_USERID+" INTEGER  NOT NULL,\n" +
@@ -71,10 +74,22 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sqlProduct);
         sqLiteDatabase.execSQL(sqlOrder);
         sqLiteDatabase.execSQL(sqlOrderDetail);
+
+        insertCategory("Pizza","cat_1");
+        insertCategory("Burger","cat_2");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+    }
+
+    public boolean insertCategory(String name, String image){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Name",name);
+        contentValues.put("Image",image);
+        long result = db.insert("Category", null, contentValues);
+        return result != -1;
     }
 }

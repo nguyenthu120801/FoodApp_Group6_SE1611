@@ -36,7 +36,6 @@ public class DAOProduct extends ConnectDatabase{
     public long AddProduct (Product product){
         SQLiteDatabase lite = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("ProductID",product.getProductID());
         values.put("ProductName",product.getProductName());
         values.put("Image", product.getImage());
         values.put("price",product.getPrice());
