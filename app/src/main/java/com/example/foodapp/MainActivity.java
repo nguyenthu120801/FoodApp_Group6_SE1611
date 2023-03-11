@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toOrder(  ) {
-        Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+        Intent intent = new Intent(MainActivity.this, FoodDetailActivity.class);
         startActivity(intent);
     }
 }

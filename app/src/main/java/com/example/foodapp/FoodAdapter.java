@@ -48,7 +48,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 public void onClick(View v) {
                     int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) + 1;
                     tv_quantity.setText(String.valueOf(newQuantity));
-                    tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * newQuantity);
+                    tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
                     total += Double.parseDouble(tv_price.getText().toString());
                     onChangeItem.onPriceChange(total);
                 }
@@ -58,10 +58,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 @Override
                 public void onClick(View v) {
                     if(Integer.parseInt(tv_quantity.getText().toString()) > 1) {
-                        tv_quantity.setText("1");
                         int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) - 1;
                         tv_quantity.setText(String.valueOf(newQuantity));
-                        tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * Integer.parseInt(tv_quantity.getText().toString()));
+                        tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
                         total -= Double.parseDouble(tv_price.getText().toString());
                         onChangeItem.onPriceChange(total);
                     }
