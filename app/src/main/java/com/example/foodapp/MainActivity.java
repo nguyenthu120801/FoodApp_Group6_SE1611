@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewCategoryList;
+    ImageView img_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
         FloatingActionButton toOrderBtn = findViewById(R.id.to_order_btn);
         toOrderBtn.setOnClickListener(view -> toOrder());
-
+        img_user =  findViewById(R.id.img_user);
+        img_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
 
         ArrayList<Category> categories = new ArrayList<>();
     }
