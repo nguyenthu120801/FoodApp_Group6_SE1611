@@ -1,6 +1,5 @@
 package com.example.foodapp.Model;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,17 +7,8 @@ import com.example.foodapp.R;
 import androidx.annotation.Nullable;
 
 public class ConnectDatabase extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "APP_FOOD_PRM392";
-
+    private static final String DATABASE_NAME = "PRM392_FOOD_APP";
     private static final int DATABASE_VERSION = 1;
-    private static final String ORDER_TABLE ="Order";
-    private static final String ORDER_ID ="OrderID";
-    private static final String ORDER_USERID ="UserID";
-    private static final String ORDER_ADDRESS ="Address";
-    private static final String ORDER_ORDER_DATE ="OrderDate";
-    private static final String ORDER_SHIP_DATE ="ShipDate";
-    private static final String ORDER_STATUS ="Status";
-
     public ConnectDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -37,7 +27,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertOrderDetail(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-                "INSERT INTO OrderDetail(OrderID,ProductID,quantity) VALUES (2,3,1)\n",
+                "INSERT INTO OrderDetail(OrderID,ProductID,quantity) VALUES (1,3,1)\n",
                 "INSERT INTO OrderDetail(OrderID,ProductID,quantity) VALUES (2,7,1)\n",
                 "INSERT INTO OrderDetail(OrderID,ProductID,quantity) VALUES (2,10,1)\n"
         };
@@ -51,6 +41,9 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(2,'2023-02-16','2023-02-16','Completed','7683 Ruskin Avenue')\n",
                 "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n"
         };
+        for(String sql : sqlInsert){
+            sqLiteDatabase.execSQL(sql);
+        }
     }
     private void InsertProduct(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert ={
@@ -63,7 +56,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở gà',"+R.drawable.pho_ga+",17.75,2,'Nước dùng phở gà có màu vàng nhạt nhưng vẫn giữ được độ trong chuẩn phở Việt. Bánh phở mềm, ngập trong nước dùng ngọt thanh, thơm mùi gừng, quế, hồi.')\n",
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở xào',"+R.drawable.pho_xao+",16.75,2,'Phở xào với những miếng thịt bò mềm, ngọt, quyện cùng với cải thìa, cà rốt, hành tây, vừa tươi, vừa giòn, vừa ngọt, thêm một chút ngò rí, hành lá thơm lừng.')\n",
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang cua',"+R.drawable.com_rang_cua+",18.75,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang lạp xưởng',"+R.drawable.com_rang_lap_xuong_va_tom+",12.75,4,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang lạp xưởng và tôm',"+R.drawable.com_rang_lap_xuong_va_tom+",12.75,4,NULL)\n",
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang kim chi',"+R.drawable.com_rang_kim_chi+",13.5,4,NULL)\n",
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún riêu cua',"+R.drawable.bun_rieu_cua+",16.00,3,'Nhắc đến bún riêu không ai là không nghĩ đến tô bún nóng hổi với nước dùng thanh ngọt, ăn cùng với chả riêu hấp béo mềm, dậy mùi thơm hấp dẫn của gạch cua.')\n",
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún bò giò heo',"+R.drawable.bun_bo_gio_heo+",16.25,3,'Điểm đặc biệt của món ăn này là phần giò heo và bắp bò chín mềm, thấm đều gia vị. Khi ăn ta sẽ cảm nhận được vị giòn ngon của da heo được giữ trọn vẹn')\n"
@@ -114,20 +107,17 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tPhone TEXT NOT NULL\n" +
                 ");";
 
-
-
-        String sqlCategory = "CREATE TABLE Category(" +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                "Name TEXT NOT NULL," +
-                "Image TEXT);";
-
-        String sqlOrder = "CREATE TABLE ["+ORDER_TABLE+"](\n" +
-                "\t"+ORDER_ID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "\t"+ORDER_USERID+" INTEGER  NOT NULL,\n" +
-                "\t"+ORDER_ORDER_DATE+" TEXT  NOT NULL,\n" +
-                "\t"+ORDER_SHIP_DATE+" TEXT ,\n" +
-                "\t"+ORDER_STATUS+" TEXT NOT NULL, \n" +
-                "\t"+ORDER_ADDRESS+" TEXT NOT NULL,\n" +
+        String sqlCategory = "CREATE TABLE Category(\n" +
+                "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                "\tName TEXT NOT NULL\n" +
+                ");";
+        String sqlOrder = "CREATE TABLE [Order](\n" +
+                "\tOrderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                "\tUserID INTEGER  NOT NULL,\n" +
+                "\tOrderDate TEXT  NOT NULL,\n" +
+                "\tShipDate TEXT ,\n" +
+                "\tStatus TEXT NOT NULL, \n" +
+                "\tAddress TEXT NOT NULL,\n" +
                 "\tFOREIGN KEY (UserID) REFERENCES User(ID)\n"  +
                 ");";
         String sqlProduct = "CREATE TABLE Product(\n" +
@@ -147,18 +137,25 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tFOREIGN KEY (ProductID) REFERENCES Product(ProductID),\n" +
                 "\tFOREIGN KEY (OrderID) REFERENCES [Order](OrderID)\n" +
                 ");";
+        String sqlCart = "CREATE TABLE Cart(\n" +
+                "\tCartID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                "\tUserID INTEGER  NOT NULL,\n" +
+                "\tProductID INTEGER  NOT NULL,\n" +
+                "\tquantity INTEGER  NOT NULL,\n" +
+                "\tFOREIGN KEY (ProductID) REFERENCES Product(ProductID),\n" +
+                "\tFOREIGN KEY (UserID) REFERENCES User(ID)\n" +
+                ");";
         // execute sql
         sqLiteDatabase.execSQL(sqlUser);
         sqLiteDatabase.execSQL(sqlCategory);
         sqLiteDatabase.execSQL(sqlProduct);
         sqLiteDatabase.execSQL(sqlOrder);
         sqLiteDatabase.execSQL(sqlOrderDetail);
+        sqLiteDatabase.execSQL(sqlCart);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-
-
 }
