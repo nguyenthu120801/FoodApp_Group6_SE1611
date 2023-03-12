@@ -106,6 +106,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tEmail TEXT, \n" +
                 "\tPhone TEXT NOT NULL\n" +
                 ");";
+
         String sqlCategory = "CREATE TABLE Category(\n" +
                 "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tName TEXT NOT NULL\n" +
