@@ -27,5 +27,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <EditText
+            android:id="@+id/text_order_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="36sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:hint="Order ID"
+            />
+        <Button
+            android:id="@+id/btn_view_order"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="View Order"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvViewOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
