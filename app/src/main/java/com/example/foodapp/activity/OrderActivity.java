@@ -37,6 +37,7 @@ public class OrderActivity extends AppCompatActivity {
         editTextOrderId = findViewById(R.id.text_order_id);
         btnSubmit.setOnClickListener(view -> insertOrder());
         btnViewOrder.setOnClickListener(view -> searchOrder(editTextOrderId.getText().toString()));
+
     }
 
     private void insertOrder() {
@@ -72,5 +73,7 @@ public class OrderActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(OrderActivity.this));
         recyclerView.setAdapter(new OrderAdapter(OrderActivity.this, orderList));
     }
+
+
 
 }
