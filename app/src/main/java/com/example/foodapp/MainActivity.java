@@ -15,6 +15,7 @@ import com.example.foodapp.Entity.Category;
 
 import java.util.ArrayList;
 
+import com.example.foodapp.activity.ListUserOrderActivity;
 import com.example.foodapp.activity.OrderActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toOrder(  ) {
         Intent intent = new Intent(MainActivity.this, FoodDetailActivity.class);
+        startActivity(intent);
+    }
+
+    public void toListOrder(View view) {
+        Intent intent = new Intent(MainActivity.this, ListUserOrderActivity.class);
         startActivity(intent);
     }
 }

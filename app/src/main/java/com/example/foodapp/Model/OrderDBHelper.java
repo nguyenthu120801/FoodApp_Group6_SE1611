@@ -19,15 +19,15 @@ import java.util.List;
 
 public class OrderDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "PRM392_APP_FOOD";
-    private static final String ORDER_TABLE ="Orders";
-    private static final String ORDER_ID ="OrderID";
-    private static final String ORDER_USERID ="UserID";
-    private static final String ORDER_ADDRESS ="Address";
-    private static final String ORDER_ORDER_DATE ="OrderDate";
-    private static final String ORDER_SHIP_DATE ="ShipDate";
-    private static final String ORDER_STATUS ="Status";
+    private static final String ORDER_TABLE = "Orders";
+    private static final String ORDER_ID = "OrderID";
+    private static final String ORDER_USERID = "UserID";
+    private static final String ORDER_ADDRESS = "Address";
+    private static final String ORDER_ORDER_DATE = "OrderDate";
+    private static final String ORDER_SHIP_DATE = "ShipDate";
+    private static final String ORDER_STATUS = "Status";
 
-    public OrderDBHelper( Context context) {
+    public OrderDBHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -38,7 +38,7 @@ public class OrderDBHelper extends SQLiteOpenHelper {
                 ORDER_USERID + " INTEGER NOT NULL, " +
                 ORDER_ORDER_DATE + " TEXT NOT NULL, " +
                 ORDER_SHIP_DATE + " TEXT, " +
-                ORDER_ADDRESS + " TEXT NOT NULL, "+
+                ORDER_ADDRESS + " TEXT NOT NULL, " +
                 ORDER_STATUS + " TEXT NOT NULL);";
         Log.d("infoOrder", "create order table : " + sqlOrder);
         sqLiteDatabase.execSQL(sqlOrder);
@@ -102,7 +102,7 @@ public class OrderDBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM "+ORDER_TABLE;
+        String selectQuery = "SELECT * FROM " + ORDER_TABLE;
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
@@ -122,6 +122,13 @@ public class OrderDBHelper extends SQLiteOpenHelper {
         db.close();
 
         return orders;
+    }
+
+    public boolean removeOrder(String orderId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int isSuccess = db.delete(ORDER_TABLE, ORDER_ID + " = ?", new String[]{orderId});
+        db.close();
+        return isSuccess != -1;
     }
 
 
