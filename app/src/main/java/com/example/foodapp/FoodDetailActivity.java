@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.foodapp.Entity.Product;
+import com.example.foodapp.Model.DAOProduct;
+
 public class FoodDetailActivity extends AppCompatActivity {
     TextView tv_foodName;
     TextView tv_price;
@@ -21,6 +24,8 @@ public class FoodDetailActivity extends AppCompatActivity {
         tv_foodName = findViewById(R.id.tv_foodName);
         tv_price = findViewById(R.id.tv_price);
         tv_description = findViewById(R.id.tv_description);
+
+        Product p = new DAOProduct(this).getProduct(3);
 
         ((Button)findViewById(R.id.btn_Add)).setOnClickListener(new View.OnClickListener() {
             @Override

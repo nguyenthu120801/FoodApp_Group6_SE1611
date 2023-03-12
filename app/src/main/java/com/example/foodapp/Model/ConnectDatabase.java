@@ -74,9 +74,6 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sqlProduct);
         sqLiteDatabase.execSQL(sqlOrder);
         sqLiteDatabase.execSQL(sqlOrderDetail);
-
-        insertCategory("Pizza","cat_1");
-        insertCategory("Burger","cat_2");
     }
 
     @Override
@@ -84,12 +81,5 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertCategory(String name, String image){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("Name",name);
-        contentValues.put("Image",image);
-        long result = db.insert("Category", null, contentValues);
-        return result != -1;
-    }
+
 }
