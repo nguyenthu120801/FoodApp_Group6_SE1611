@@ -119,7 +119,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         String sqlCategory = "CREATE TABLE Category(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "Name TEXT NOT NULL," +
-                "Image TEXT NOT NULL);";
+                "Image TEXT );";
 
         String sqlOrder = "CREATE TABLE ["+ORDER_TABLE+"](\n" +
                 "\t"+ORDER_ID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +

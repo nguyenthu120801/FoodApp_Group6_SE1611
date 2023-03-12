@@ -36,6 +36,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         tv_total = findViewById(R.id.tv_totalPrice);
         tv_notification = findViewById(R.id.tv_noti);
         orderDetailList = new DAOOrderDetail(this).getListOrderDetail(2);
+        rcv = findViewById(R.id.rv_category);
         double total = 0;
         int pID = 0;
         int id = getIntent().getIntExtra("id", 0);
