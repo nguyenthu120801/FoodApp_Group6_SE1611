@@ -15,7 +15,7 @@
         android:contentDescription="@string/app_name"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_text" />
 
     <TextView
         android:id="@+id/textView9"
@@ -41,12 +41,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
         android:layout_marginTop="6dp"
-        android:text="Category"
+        android:text="Category:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
@@ -69,6 +69,7 @@
         android:ems="10"
         android:hint="Price:"
         android:inputType="numberDecimal"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,8 +105,8 @@
 
     <ListView
         android:id="@+id/list_view"
-        android:layout_width="409dp"
-        android:layout_height="458dp"
+        android:layout_width="388dp"
+        android:layout_height="510dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"

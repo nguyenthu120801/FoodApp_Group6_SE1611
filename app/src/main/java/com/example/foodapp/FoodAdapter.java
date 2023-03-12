@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +14,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foodapp.Entity.Food;
+import com.example.foodapp.Entity.OrderDetail;
+import com.example.foodapp.Entity.Product;
 
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
+
+    public List<OrderDetail> orderDetailList;
     public double total;
-    public List<Food> foodList;
+    public List<Product> productList;
     private onChangeItem onChangeItem;
 
-    public FoodAdapter(double total, List<Food> foodList, com.example.foodapp.onChangeItem onChangeItem) {
+    public FoodAdapter(List<OrderDetail> orderDetailList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
+        this.orderDetailList = orderDetailList;
         this.total = total;
-        this.foodList = foodList;
+        this.productList = productList;
         this.onChangeItem = onChangeItem;
     }
+
+
+
 
     class FoodHolder extends RecyclerView.ViewHolder{
         public ImageView img;
@@ -40,27 +50,28 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
             tv_price = itemView.findViewById(R.id.tv_foodPrice);
             tv_TotlaPrice = itemView.findViewById(R.id.tv_totalPriceFood);
             tv_quantity = itemView.findViewById(R.id.tv_quantity);
-
+            onChangeItem.onPriceChange(total);
 
             itemView.findViewById(R.id.plus).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) + 1;
                     tv_quantity.setText(String.valueOf(newQuantity));
-                    tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * newQuantity);
+                    tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
                     total += Double.parseDouble(tv_price.getText().toString());
                     onChangeItem.onPriceChange(total);
                 }
             });
 
+
+
             itemView.findViewById(R.id.minus).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(Integer.parseInt(tv_quantity.getText().toString()) > 1) {
-                        tv_quantity.setText("1");
                         int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) - 1;
                         tv_quantity.setText(String.valueOf(newQuantity));
-                        tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * Integer.parseInt(tv_quantity.getText().toString()));
+                        tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
                         total -= Double.parseDouble(tv_price.getText().toString());
                         onChangeItem.onPriceChange(total);
                     }
@@ -80,15 +91,19 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FoodHolder holder, int position) {
-        holder.img.setImageResource(foodList.get(position).getImage());
-        holder.tv_foodName.setText(foodList.get(position).getFoodName());
-        holder.tv_price.setText(String.valueOf(foodList.get(position).getPrice()));
+        holder.img.setImageResource(productList.get(position).getImage());
+        holder.tv_foodName.setText(productList.get(position).getProductName());
+        holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
+        holder.tv_TotlaPrice.setText(String.valueOf(
+                productList.get(position).getPrice() * Integer.parseInt(holder.tv_quantity.getText().toString())));
+        holder.tv_quantity.setText(String.valueOf(orderDetailList.get(position).getQuantity()));
+
 
     }
 
     @Override
     public int getItemCount() {
-        return foodList.size();
+        return productList.size();
     }
 
 

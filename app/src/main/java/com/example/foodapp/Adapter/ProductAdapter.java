@@ -43,7 +43,7 @@ public class ProductAdapter extends BaseAdapter {
         TextView textProductName = view.findViewById(R.id.text_product_name);
         TextView textPrice = view.findViewById(R.id.text_price);
         textProductName.setText(product.getProductName());
-        textPrice.setText(product.getPrice() + "");
+         textPrice.setText(product.getPrice() + "$");
         return view;
     }
 }
