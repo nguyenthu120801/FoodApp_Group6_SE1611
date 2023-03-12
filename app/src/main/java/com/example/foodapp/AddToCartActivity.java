@@ -33,7 +33,6 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
 
-        rcv = findViewById(R.id.rec_foodCart);
         tv_total = findViewById(R.id.tv_totalPrice);
         tv_notification = findViewById(R.id.tv_noti);
         orderDetailList = new DAOOrderDetail(this).getListOrderDetail(2);

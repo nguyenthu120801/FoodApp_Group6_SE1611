@@ -7,7 +7,7 @@
     tools:context=".SigupActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/img_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAlignment="center"
@@ -26,8 +26,8 @@
         android:textColor="#040404"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="@+id/img_user"
+        app:layout_constraintTop_toBottomOf="@+id/img_user"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -39,8 +39,8 @@
         android:textColor="#020202"
         android:textSize="28dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/img_user"
+        app:layout_constraintStart_toEndOf="@+id/img_user"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
@@ -68,9 +68,9 @@
         android:hint="@string/app_name"
         android:text="User name"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/img_user"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/img_user"
         app:layout_constraintTop_toBottomOf="@+id/edt_fullname"
         app:layout_constraintWidth_percent=".8" />
 
@@ -84,9 +84,9 @@
         android:hint="@string/app_name"
         android:text="Pass word"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/img_user"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/img_user"
         app:layout_constraintTop_toBottomOf="@+id/edt_username"
         app:layout_constraintWidth_percent=".8" />
 
@@ -130,8 +130,8 @@
         android:hint="@string/app_name"
         android:text="DOB"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/img_user"
+        app:layout_constraintStart_toEndOf="@+id/img_user"
         app:layout_constraintTop_toBottomOf="@+id/edt_password"
         app:layout_constraintWidth_percent=".8" />
 

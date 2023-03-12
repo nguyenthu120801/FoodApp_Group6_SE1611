@@ -1,5 +1,6 @@
 package com.example.foodapp.Model;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,6 +11,14 @@ public class ConnectDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "APP_FOOD_PRM392";
 
     private static final int DATABASE_VERSION = 1;
+    private static final String ORDER_TABLE ="Order";
+    private static final String ORDER_ID ="OrderID";
+    private static final String ORDER_USERID ="UserID";
+    private static final String ORDER_ADDRESS ="Address";
+    private static final String ORDER_ORDER_DATE ="OrderDate";
+    private static final String ORDER_SHIP_DATE ="ShipDate";
+    private static final String ORDER_STATUS ="Status";
+
     public ConnectDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -104,17 +113,21 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tEmail TEXT, \n" +
                 "\tPhone TEXT NOT NULL\n" +
                 ");";
-        String sqlCategory = "CREATE TABLE Category(\n" +
-                "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "\tName TEXT NOT NULL\n" +
-                ");";
-        String sqlOrder = "CREATE TABLE [Order](\n" +
-                "\tOrderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "\tUserID INTEGER  NOT NULL,\n" +
-                "\tOrderDate TEXT  NOT NULL,\n" +
-                "\tShipDate TEXT ,\n" +
-                "\tStatus TEXT NOT NULL, \n" +
-                "\tAddress TEXT NOT NULL,\n" +
+
+
+
+        String sqlCategory = "CREATE TABLE Category(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "Name TEXT NOT NULL," +
+                "Image TEXT NOT NULL);";
+
+        String sqlOrder = "CREATE TABLE ["+ORDER_TABLE+"](\n" +
+                "\t"+ORDER_ID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                "\t"+ORDER_USERID+" INTEGER  NOT NULL,\n" +
+                "\t"+ORDER_ORDER_DATE+" TEXT  NOT NULL,\n" +
+                "\t"+ORDER_SHIP_DATE+" TEXT ,\n" +
+                "\t"+ORDER_STATUS+" TEXT NOT NULL, \n" +
+                "\t"+ORDER_ADDRESS+" TEXT NOT NULL,\n" +
                 "\tFOREIGN KEY (UserID) REFERENCES User(ID)\n"  +
                 ");";
         String sqlProduct = "CREATE TABLE Product(\n" +
@@ -140,10 +153,22 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sqlProduct);
         sqLiteDatabase.execSQL(sqlOrder);
         sqLiteDatabase.execSQL(sqlOrderDetail);
+
+        insertCategory("Pizza","cat_1");
+        insertCategory("Burger","cat_2");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+    }
+
+    public boolean insertCategory(String name, String image){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Name",name);
+        contentValues.put("Image",image);
+        long result = db.insert("Category", null, contentValues);
+        return result != -1;
     }
 }
