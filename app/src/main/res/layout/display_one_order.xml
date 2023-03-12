@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/order_id_text"
+        android:text="Order Id"
+        style="@style/orderView"/>
+    <TextView
+        android:id="@+id/user_id_text"
+        android:text="User Id"
+        style="@style/orderView"/>
+    <TextView
+        android:id="@+id/order_date_text"
+        android:text="Order Date"
+        style="@style/orderView"/>
+    <TextView
+        android:id="@+id/ship_date_text"
+        android:text="Ship Date"
+        style="@style/orderView"/>
+    <TextView
+        android:id="@+id/address_text"
+        android:text="Address"
+        style="@style/orderView"/>
+    <TextView
+        android:id="@+id/status_text"
+        android:text="Status"
+        style="@style/orderView"/>
+
+</LinearLayout>
