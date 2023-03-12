@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +14,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foodapp.Entity.Food;
+import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
 
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
+
+    public List<OrderDetail> orderDetailList;
     public double total;
     public List<Product> productList;
     private onChangeItem onChangeItem;
 
-    public FoodAdapter(double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
+    public FoodAdapter(List<OrderDetail> orderDetailList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
+        this.orderDetailList = orderDetailList;
         this.total = total;
         this.productList = productList;
         this.onChangeItem = onChangeItem;
     }
+
+
+
 
     class FoodHolder extends RecyclerView.ViewHolder{
         public ImageView img;
@@ -53,6 +62,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                     onChangeItem.onPriceChange(total);
                 }
             });
+
+
 
             itemView.findViewById(R.id.minus).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,6 +96,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
         holder.tv_TotlaPrice.setText(String.valueOf(
                 productList.get(position).getPrice() * Integer.parseInt(holder.tv_quantity.getText().toString())));
+        holder.tv_quantity.setText(String.valueOf(orderDetailList.get(position).getQuantity()));
+
 
     }
 

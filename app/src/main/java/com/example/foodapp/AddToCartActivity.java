@@ -7,12 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.foodapp.Entity.Food;
+import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.activity.OrderActivity;
 
@@ -23,6 +26,8 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     RecyclerView rcv;
     TextView tv_total;
     TextView tv_notification;
+    List<Product> productList = new ArrayList<>();
+    List<OrderDetail> orderDetailList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,18 +36,34 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         rcv = findViewById(R.id.rec_foodCart);
         tv_total = findViewById(R.id.tv_totalPrice);
         tv_notification = findViewById(R.id.tv_noti);
-        List<Product> productList = new ArrayList<>();
+        orderDetailList = new DAOOrderDetail(this).getListOrderDetail(2);
         double total = 0;
+        int pID = 0;
         int id = getIntent().getIntExtra("id", 0);
         Product product = new DAOProduct(this).getProduct(id);
-        if(product != null) {
-            productList.add(product);
+        if(product != null || orderDetailList.size() != 0) {
+            for (OrderDetail o : orderDetailList) {
+               if(o.getProductID() == id){
+                   pID = id;
+                   o.setQuantity(o.getQuantity() + 1);
+                   int n = new DAOOrderDetail(this).UpdateOrderDetail(new OrderDetail(o.getDetailID(), o.getOrderID(), o.getProductID(), o.getQuantity()));
+               }
+               productList.add(new DAOProduct(this).getProduct(o.getProductID()));
+
+            }
+            if(pID != id){
+                orderDetailList.add(new OrderDetail(2, id, 1));
+                new DAOOrderDetail(this).AddOrderDetail(new OrderDetail(2, id, 1));
+                productList.add(new DAOProduct(this).getProduct(id));
+            }
+
+
         }
         if(productList.size() != 0) {
             for (Product p : productList) {
                 total += p.getPrice();
             }
-            FoodAdapter adapter = new FoodAdapter(total, productList, this::onPriceChange);
+            FoodAdapter adapter = new FoodAdapter(orderDetailList, total, productList, this::onPriceChange);
             rcv.setLayoutManager(new LinearLayoutManager(this));
             rcv.setAdapter(adapter);
         }else{
