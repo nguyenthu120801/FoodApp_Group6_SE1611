@@ -19,13 +19,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".View_ProductActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".FoodDetailActivity"
             android:exported="false">
             <meta-data
@@ -44,6 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View_ProductActivity"
             android:exported="false" />
         <activity
             android:name=".IntroActivity"

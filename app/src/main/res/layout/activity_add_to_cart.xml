@@ -23,7 +23,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_marginTop="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -42,6 +42,7 @@
         <TextView
             android:id="@+id/textView10"
             android:layout_width="339dp"
+
             android:layout_height="wrap_content"
             android:text="Total:"
             android:textSize="20sp"
@@ -49,10 +50,12 @@
 
         <TextView
             android:id="@+id/tv_totalPrice"
-            android:layout_width="69dp"
+            android:layout_width="107dp"
             android:layout_height="30dp"
             android:text="$0"
+
             android:textSize="16sp" />
+
     </LinearLayout>
 
     <Button
@@ -60,10 +63,26 @@
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
+
         android:background="@drawable/orange_button"
         android:text="CheckOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/tv_noti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
