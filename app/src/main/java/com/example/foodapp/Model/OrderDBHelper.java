@@ -17,41 +17,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderDBHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "PRM392_APP_FOOD";
-    private static final String ORDER_TABLE ="Orders";
-    private static final String ORDER_ID ="OrderID";
-    private static final String ORDER_USERID ="UserID";
-    private static final String ORDER_ADDRESS ="Address";
-    private static final String ORDER_ORDER_DATE ="OrderDate";
-    private static final String ORDER_SHIP_DATE ="ShipDate";
-    private static final String ORDER_STATUS ="Status";
+public class OrderDBHelper extends ConnectDatabase {
+    private static final String ORDER_TABLE = "Order";
+    private static final String ORDER_ID = "OrderID";
+    private static final String ORDER_USERID = "UserID";
+    private static final String ORDER_ADDRESS = "Address";
+    private static final String ORDER_ORDER_DATE = "OrderDate";
+    private static final String ORDER_SHIP_DATE = "ShipDate";
+    private static final String ORDER_STATUS = "Status";
 
-    public OrderDBHelper( Context context) {
-        super(context, DATABASE_NAME, null, 1);
+    public OrderDBHelper(@Nullable Context context) {
+        super(context);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sqlOrder = "CREATE TABLE " + ORDER_TABLE + " (" +
-                ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                ORDER_USERID + " INTEGER NOT NULL, " +
-                ORDER_ORDER_DATE + " TEXT NOT NULL, " +
-                ORDER_SHIP_DATE + " TEXT, " +
-                ORDER_ADDRESS + " TEXT NOT NULL, "+
-                ORDER_STATUS + " TEXT NOT NULL);";
-        Log.d("infoOrder", "create order table : " + sqlOrder);
-        sqLiteDatabase.execSQL(sqlOrder);
-
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-    }
 
     public boolean insertOrder(Order order) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ORDER_USERID, order.getUserID());
         values.put(ORDER_ADDRESS, order.getAddress());
@@ -68,7 +49,7 @@ public class OrderDBHelper extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public Order searchOrder(String orderId) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String[] columns = {ORDER_ID, ORDER_USERID, ORDER_ADDRESS, ORDER_ORDER_DATE, ORDER_SHIP_DATE, ORDER_STATUS};
         String selection = ORDER_ID + " = ?";
         String[] selectionArgs = {orderId};
@@ -99,10 +80,9 @@ public class OrderDBHelper extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
 
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String selectQuery = "SELECT * FROM "+ORDER_TABLE;
+        String selectQuery = "SELECT * FROM [" + ORDER_TABLE+"]";
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
@@ -122,6 +102,15 @@ public class OrderDBHelper extends SQLiteOpenHelper {
         db.close();
 
         return orders;
+    }
+
+    public boolean removeOrder(int orderId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("infoOrder", "begin call database");
+        int isSuccess = db.delete("["+ORDER_TABLE+"]", ORDER_ID + " = ?", new String[]{String.valueOf(orderId)});
+        Log.d("infoOrder", "end call database");
+        db.close();
+        return isSuccess != -1;
     }
 
 

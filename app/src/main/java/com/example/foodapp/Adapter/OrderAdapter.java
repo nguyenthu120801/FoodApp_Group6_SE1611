@@ -3,12 +3,14 @@ package com.example.foodapp.Adapter;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Entity.Order;
+import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.R;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new OrderViewHolder(LayoutInflater.from(context).inflate(R.layout.display_one_order, parent,false));
+        return new OrderViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_view_order, parent,false));
     }
 
     @Override
@@ -34,14 +36,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         Order order = orderList.get(position);
         Log.d("infoOrder", "vị trí : "+ position);
         Log.d("infoOrder", "order : "+ order);
-        holder.orderIdText.setText(String.valueOf(order.getOrderID()));
-        holder.userIdText.setText(String.valueOf(order.getUserID()));
-        holder.orderDateText.setText(order.getOrderDate());
-        holder.shipDateText.setText(order.getShipDate());
-        holder.addressText.setText(order.getAddress());
-        holder.statusText.setText(order.getStatus());
-    }
+        holder.orderIdText.setText("Order ID : " + order.getOrderID());
+        holder.userIdText.setText("User ID : " +order.getUserID());
+        holder.orderDateText.setText("Order Date : " +order.getOrderDate());
+        holder.shipDateText.setText("Ship Date : " +order.getShipDate());
+        holder.addressText.setText("Address : " +order.getAddress());
+        holder.statusText.setText("Status : " +order.getStatus());
 
+        holder.cancelButton.setOnClickListener(view -> cancelOrder(order.getOrderID()));
+    }
+    private void cancelOrder(int orderId){
+        OrderDBHelper orderDBHelper = new OrderDBHelper(context);
+        boolean isSuccess =  orderDBHelper.removeOrder(orderId);
+        Log.d("infoOrder", "is success : " + isSuccess);
+    }
     @Override
     public int getItemCount() {
         return orderList.size();

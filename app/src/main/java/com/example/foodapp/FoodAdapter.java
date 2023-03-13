@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Food;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
@@ -21,13 +22,13 @@ import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
-    public List<OrderDetail> orderDetailList;
+    public List<Cart> cartList;
     public double total;
     public List<Product> productList;
     private onChangeItem onChangeItem;
 
-    public FoodAdapter(List<OrderDetail> orderDetailList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
-        this.orderDetailList = orderDetailList;
+    public FoodAdapter(List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
+        this.cartList = cartList;
         this.total = total;
         this.productList = productList;
         this.onChangeItem = onChangeItem;
@@ -96,7 +97,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
         holder.tv_TotlaPrice.setText(String.valueOf(
                 productList.get(position).getPrice() * Integer.parseInt(holder.tv_quantity.getText().toString())));
-        holder.tv_quantity.setText(String.valueOf(orderDetailList.get(position).getQuantity()));
+        holder.tv_quantity.setText(String.valueOf(cartList.get(position).getQuantity()));
 
 
     }

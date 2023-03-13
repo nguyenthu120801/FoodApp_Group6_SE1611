@@ -10,6 +10,7 @@ import android.view.View;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOProduct;
+import com.example.foodapp.activity.ListUserOrderActivity;
 
 public class IntroActivity extends AppCompatActivity {
     private ConstraintLayout btn_start;
@@ -21,9 +22,13 @@ public class IntroActivity extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(IntroActivity.this, FoodDetailActivity.class));
+                startActivity(new Intent(IntroActivity.this, MainActivity.class));
             }
         });
     }
 
+    public void toListOrder(View view) {
+        Intent intent = new Intent(IntroActivity.this, ListUserOrderActivity.class);
+        startActivity(intent);
+    }
 }
