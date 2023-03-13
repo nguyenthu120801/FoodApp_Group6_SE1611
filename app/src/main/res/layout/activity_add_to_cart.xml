@@ -41,8 +41,8 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="306dp"
 
+            android:layout_width="306dp"
             android:layout_height="wrap_content"
             android:text="Total:"
             android:textSize="20sp"
