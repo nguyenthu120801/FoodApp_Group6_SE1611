@@ -36,5 +36,5 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             super(itemView);
         }
     }
-
+    // đừng sửa gì hay xóa gì trong này nhé đức
 }
