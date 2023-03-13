@@ -14,8 +14,11 @@ public class Category {
         this.image = image;
     }
 
-    public Category(String name, int image) {
-        this.name = name;
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
         this.image = image;
     }
 
@@ -35,12 +38,6 @@ public class Category {
         this.name = name;
     }
 
-    public int getImage() {
-        return image;
-    }
 
-    public void setImage(int image) {
-        this.image = image;
-    }
 }
 

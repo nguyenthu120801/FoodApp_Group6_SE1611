@@ -26,19 +26,7 @@ public class View_ProductActivity extends AppCompatActivity {
     private final List<Category> listCategory = new ArrayList<>();
     private final DAOCategory daoCategory = new DAOCategory(this);
     private final DAOProduct daoProduct = new DAOProduct(this);
-    private void AddCategory(){
-        daoCategory.AddCategory(new Category("Hai san",0));
-        daoCategory.AddCategory(new Category("Pho",0));
-        daoCategory.AddCategory(new Category("Bun",0));
-        daoCategory.AddCategory(new Category("Com rang",0));
-    }
 
-    private void AddProduct(){
-        daoProduct.AddProduct(new Product("Oc huong",0,15.25,1,null));
-        daoProduct.AddProduct(new Product("Pho bo",1,13.75,2,""));
-        daoProduct.AddProduct(new Product("Bun oc",1,16.00,3,""));
-        daoProduct.AddProduct(new Product("Com rang cua",1,18.75,4,""));
-    }
 
     private void setMap(){
         for(Category category: listCategory){
