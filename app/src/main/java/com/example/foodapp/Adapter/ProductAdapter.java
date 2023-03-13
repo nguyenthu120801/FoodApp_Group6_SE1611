@@ -5,45 +5,36 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.R;
 
 import java.util.List;
 
-public class ProductAdapter extends BaseAdapter {
-    private final List<Product> list;
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    public ProductAdapter(List<Product> list) {
-        this.list = list;
+    @NonNull
+    @Override
+    public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public int getCount() {
-        return list.size();
+    public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
+
     }
 
     @Override
-    public Object getItem(int i) {
-        return list.get(i);
+    public int getItemCount() {
+        return 0;
     }
 
-    @Override
-    public long getItemId(int i) {
-        return list.get(i).getProductID();
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        // if not create view
-        if(view == null){
-            // create view
-            view = View.inflate(viewGroup.getContext(),R.layout.item_product,null);
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
-        Product product = (Product) getItem(i);
-        TextView textProductName = view.findViewById(R.id.text_product_name);
-        TextView textPrice = view.findViewById(R.id.text_price);
-        textProductName.setText(product.getProductName());
-         textPrice.setText(product.getPrice() + "$");
-        return view;
     }
+    // đừng sửa gì hay xóa gì trong này nhé đức
 }
