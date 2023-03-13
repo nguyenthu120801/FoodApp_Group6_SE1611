@@ -37,6 +37,7 @@ public class DAOCategory extends ConnectDatabase{
             Category category = new Category(ID,name,image);
             list.add(category);
         }
+        cursor.close();
         return list;
     }
 }

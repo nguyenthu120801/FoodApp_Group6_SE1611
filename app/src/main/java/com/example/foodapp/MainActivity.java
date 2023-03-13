@@ -12,11 +12,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.foodapp.Adapter.CategoryAdapter;
 import com.example.foodapp.Entity.Category;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.activity.ListUserOrderActivity;
 import com.example.foodapp.activity.OrderActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView img_user;
     LinearLayout logout;
     TextView tv_welcome;
+    List<Category> catList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        FloatingActionButton toOrderBtn = findViewById(R.id.to_order_btn);
+        toOrderBtn.setOnClickListener(view -> toOrder());
     }
 
 
@@ -68,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCategoryList = findViewById(R.id.rv_category);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
-        FloatingActionButton toOrderBtn = findViewById(R.id.to_order_btn);
-        toOrderBtn.setOnClickListener(view -> toOrder());
-        ArrayList<Category> categories = new ArrayList<>();
+        DAOCategory daoCategory = new DAOCategory(this);
+        catList = daoCategory.getAllCategory();
+        adapter = new CategoryAdapter(this, catList);
+        recyclerViewCategoryList.setAdapter(adapter);
     }
 
     public void toOrder(  ) {
