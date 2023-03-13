@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.btn_Login)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SessionManager sessionManager = new SessionManager(LoginActivity.this);
                 String username = edt_username.getText().toString().trim();
                 String password = edt_password.getText().toString().trim();
                 DAOUser daoUser = new DAOUser(LoginActivity.this);
@@ -56,11 +57,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if(user != null && user.getRoleName().equals(User.ROLE_CUSTOMER)){
                     Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
+                    sessionManager.createLoginSession(user.getUsername(), user.getPassword());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else if(user != null && user.getRoleName().equals(User.ROLE_SELLER)){
-
+                    Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
+                    sessionManager.createLoginSession(user.getUsername(), user.getPassword());
+                    Intent intent = new Intent(LoginActivity.this, View_ProductActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
