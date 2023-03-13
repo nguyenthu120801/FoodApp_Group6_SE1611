@@ -1,6 +1,7 @@
 package com.example.foodapp.Adapter;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import com.example.foodapp.R;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder {
     public TextView orderIdText,userIdText,addressText, orderDateText,shipDateText, statusText;
+    public Button cancelButton;
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
         orderIdText = itemView.findViewById(R.id.order_id_text);
@@ -18,6 +20,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         shipDateText = itemView.findViewById(R.id.ship_date_text);
         addressText = itemView.findViewById(R.id.address_text);
         statusText = itemView.findViewById(R.id.status_text);
+        cancelButton = itemView.findViewById(R.id.cancel_order_btn);
 
     }
 }
