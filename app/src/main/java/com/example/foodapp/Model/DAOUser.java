@@ -47,5 +47,22 @@ public class DAOUser extends ConnectDatabase {
         }
         return null;
     }
+
+    // Lấy ID từ bảng User dựa trên username và password
+    public int getUserId( String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {"ID"};
+        String selection = "username = ? AND password = ?";
+        String[] selectionArgs = { username, password };
+        Cursor cursor = db.query(
+                "User", projection, selection, selectionArgs, null, null, null);
+        int userId = -1;
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
+        }
+        cursor.close();
+        db.close();
+        return userId;
+    }
 }
 

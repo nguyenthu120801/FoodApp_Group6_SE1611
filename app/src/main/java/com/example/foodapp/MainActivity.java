@@ -77,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, FoodDetailActivity.class);
         startActivity(intent);
     }
-
+    public void toListOrder(View view) {
+        Intent intent = new Intent(MainActivity.this, ListUserOrderActivity.class);
+        startActivity(intent);
+    }
 
 }
