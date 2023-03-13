@@ -34,20 +34,30 @@ public class DAOUser extends ConnectDatabase {
         }
     }
 
-    public User getUser(String username, String password){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {"ID", "FullName", "Username", "Password", "RoleName", "Email", "Phone"};
+    public User getUser(String username, String password) {
+        User user = null;
+        SQLiteDatabase db = getReadableDatabase();
+        String[] projection = {
+                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName"};
         String selection = "Username = ? AND Password = ?";
-        String[] selectionArgs = {username, password};
-        Cursor cursor = db.query("User", columns, selection, selectionArgs, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            User user = new User(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
-            cursor.close();
-            return user;
+        String[] selectionArgs = { username, password };
+        Cursor cursor = db.query(
+                "User",
+                projection,
+                selection,
+                selectionArgs, null, null, null);
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
+            String fullName = cursor.getString(cursor.getColumnIndexOrThrow("FullName"));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow("Phone"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow( "Email"));
+            String gender = cursor.getString(cursor.getColumnIndexOrThrow("Gender"));
+            String roleName = cursor.getString(cursor.getColumnIndexOrThrow("RoleName"));
+            user = new User(id, fullName, phone, email, gender, username, password, roleName);
         }
-        return null;
+        cursor.close();
+        return user;
     }
-
     // Lấy ID từ bảng User dựa trên username và password
     public int getUserId( String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
