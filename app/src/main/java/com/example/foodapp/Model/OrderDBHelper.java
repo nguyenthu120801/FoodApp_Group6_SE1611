@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderDBHelper extends ConnectDatabase {
-    private static final String ORDER_TABLE = "Order";
+    private static final String ORDER_TABLE = "[Order]";
     private static final String ORDER_ID = "OrderID";
     private static final String ORDER_USERID = "UserID";
     private static final String ORDER_ADDRESS = "Address";
@@ -50,10 +50,9 @@ public class OrderDBHelper extends ConnectDatabase {
     @SuppressLint("Range")
     public Order searchOrder(String orderId) {
         SQLiteDatabase db = getReadableDatabase();
-        String[] columns = {ORDER_ID, ORDER_USERID, ORDER_ADDRESS, ORDER_ORDER_DATE, ORDER_SHIP_DATE, ORDER_STATUS};
         String selection = ORDER_ID + " = ?";
         String[] selectionArgs = {orderId};
-        Cursor cursor = db.query(ORDER_TABLE, columns, selection, selectionArgs, null, null, null);
+        Cursor cursor = db.query(ORDER_TABLE, null, selection, selectionArgs, null, null, null);
         Order order = null;
         if (cursor != null && cursor.moveToFirst()) {
             order = new Order();
@@ -74,6 +73,27 @@ public class OrderDBHelper extends ConnectDatabase {
         return order;
     }
 
+    @SuppressLint("Range")
+    public List<Order> searchOrder(int userId) {
+        SQLiteDatabase database = getReadableDatabase();
+        List<Order> orderList = new ArrayList<>();
+        Cursor cursor = database.query(ORDER_TABLE, null, ORDER_USERID + "=?", new String[]{String.valueOf(userId)}, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                Order order = new Order();
+                order.setOrderID(cursor.getInt(cursor.getColumnIndex(ORDER_ID)));
+                order.setUserID(cursor.getInt(cursor.getColumnIndex(ORDER_USERID)));
+                order.setOrderDate(cursor.getString(cursor.getColumnIndex(ORDER_ORDER_DATE)));
+                order.setShipDate(cursor.getString(cursor.getColumnIndex(ORDER_SHIP_DATE)));
+                order.setStatus(cursor.getString(cursor.getColumnIndex(ORDER_STATUS)));
+                order.setAddress(cursor.getString(cursor.getColumnIndex(ORDER_ADDRESS)));
+                orderList.add(order);
+            }
+            cursor.close();
+        }
+        return orderList;
+    }
+
     public void deleteOrder(String id) {
     }
 
@@ -82,7 +102,7 @@ public class OrderDBHelper extends ConnectDatabase {
         List<Order> orders = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM [" + ORDER_TABLE+"]";
+        String selectQuery = "SELECT * FROM " + ORDER_TABLE;
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
@@ -107,7 +127,7 @@ public class OrderDBHelper extends ConnectDatabase {
     public boolean removeOrder(int orderId) {
         SQLiteDatabase db = this.getWritableDatabase();
         Log.d("infoOrder", "begin call database");
-        int isSuccess = db.delete("["+ORDER_TABLE+"]", ORDER_ID + " = ?", new String[]{String.valueOf(orderId)});
+        int isSuccess = db.delete( ORDER_TABLE, ORDER_ID + " = ?", new String[]{String.valueOf(orderId)});
         Log.d("infoOrder", "end call database");
         db.close();
         return isSuccess != -1;

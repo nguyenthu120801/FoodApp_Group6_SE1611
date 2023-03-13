@@ -37,7 +37,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         Log.d("infoOrder", "vị trí : "+ position);
         Log.d("infoOrder", "order : "+ order);
         holder.orderIdText.setText("Order ID : " + order.getOrderID());
-        holder.userIdText.setText("User ID : " +order.getUserID());
         holder.orderDateText.setText("Order Date : " +order.getOrderDate());
         holder.shipDateText.setText("Ship Date : " +order.getShipDate());
         holder.addressText.setText("Address : " +order.getAddress());

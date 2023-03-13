@@ -39,7 +39,14 @@ public class ConnectDatabase extends SQLiteOpenHelper {
     private void InsertOrder(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert ={
                 "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(2,'2023-02-16','2023-02-16','Completed','7683 Ruskin Avenue')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n"
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(4,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(5,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(5,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);

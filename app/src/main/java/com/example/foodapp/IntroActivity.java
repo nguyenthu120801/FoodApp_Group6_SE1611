@@ -27,8 +27,5 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    public void toListOrder(View view) {
-        Intent intent = new Intent(IntroActivity.this, ListUserOrderActivity.class);
-        startActivity(intent);
-    }
+
 }
