@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Food;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.Model.DAOCart;
 
 import java.util.List;
 
@@ -27,15 +29,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
     public List<Product> productList;
     private onChangeItem onChangeItem;
 
+
     public FoodAdapter(List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
         this.cartList = cartList;
         this.total = total;
         this.productList = productList;
         this.onChangeItem = onChangeItem;
+
     }
-
-
-
 
     class FoodHolder extends RecyclerView.ViewHolder{
         public ImageView img;
@@ -61,6 +62,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                     tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
                     total += Double.parseDouble(tv_price.getText().toString());
                     onChangeItem.onPriceChange(total);
+
                 }
             });
 
@@ -79,6 +81,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 }
             });
 
+            itemView.findViewById(R.id.imv_delete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                     int id = itemView.getId();
+                     Log.d("index", String.valueOf(id+1) );
+                    int cartID = cartList.get(id+1).getCartID();
+                    onChangeItem.onDeleteItem(cartID);
+                }
+            });
 
         }
     }
@@ -96,7 +107,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         holder.tv_foodName.setText(productList.get(position).getProductName());
         holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
         holder.tv_TotlaPrice.setText(String.valueOf(
-                productList.get(position).getPrice() * Integer.parseInt(holder.tv_quantity.getText().toString())));
+                productList.get(position).getPrice() * cartList.get(position).getQuantity()));
         holder.tv_quantity.setText(String.valueOf(cartList.get(position).getQuantity()));
 
 
