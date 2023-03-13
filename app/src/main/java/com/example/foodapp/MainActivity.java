@@ -7,30 +7,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.foodapp.Adapter.CategoryAdapter;
+import com.example.foodapp.Adapter.PopularAdapter;
 import com.example.foodapp.Entity.Category;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCategory;
+import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.activity.ListUserOrderActivity;
-import com.example.foodapp.activity.OrderActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerViewCategoryList;
+    private RecyclerView.Adapter adapter, adapter1;
+    private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
     ImageView img_user;
     LinearLayout logout;
     TextView tv_welcome;
     List<Category> catList;
+    List<Product> productList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         img_user =  findViewById(R.id.img_user);
         tv_welcome = findViewById(R.id.tv_welcome);
         recyclerViewCategory();
+        recyclerViewPopular();
         // session
         SessionManager sessionManager = new SessionManager(MainActivity.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
@@ -79,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
         catList = daoCategory.getAllCategory();
         adapter = new CategoryAdapter(this, catList);
         recyclerViewCategoryList.setAdapter(adapter);
+    }
+
+    private void recyclerViewPopular(){
+        LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewPopularList = findViewById(R.id.rv_popular);
+        recyclerViewPopularList.setLayoutManager(linearLayoutManager);
+        DAOProduct daoProduct = new DAOProduct(this);
+        productList = daoProduct.get5Product();
+        adapter1 = new PopularAdapter(this, productList);
+        recyclerViewPopularList.setAdapter(adapter1);
     }
 
     public void toOrder(  ) {

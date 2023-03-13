@@ -10,12 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodapp.Entity.Cart;
-import com.example.foodapp.Entity.Food;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;

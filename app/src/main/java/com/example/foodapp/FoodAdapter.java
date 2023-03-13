@@ -1,12 +1,8 @@
 package com.example.foodapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foodapp.Entity.Cart;
-import com.example.foodapp.Entity.Food;
-import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
-import com.example.foodapp.Model.DAOCart;
 
 import java.util.List;
 

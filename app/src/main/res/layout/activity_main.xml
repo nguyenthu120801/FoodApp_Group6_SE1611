@@ -147,12 +147,13 @@
                 <androidx.recyclerview.widget.RecyclerView
 
                     android:id="@+id/rv_category"
-                    android:layout_width="395dp"
+                    android:layout_width="393dp"
 
 
-
-
-                    android:layout_height="157dp"
+                    android:layout_height="93dp"
+                    android:clipToPadding="false"
+                    android:paddingLeft="22dp"
+                    android:paddingRight="22dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -162,7 +163,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
                     android:text="Popular"
                     android:textColor="#000000"
                     android:textSize="18sp"
@@ -172,11 +172,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/rv_category" />
 
 
-
-
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="393dp"
-                    android:layout_height="136dp"
+                    android:id="@+id/rv_popular"
+                    android:layout_width="391dp"
+                    android:layout_height="240dp"
+                    android:paddingLeft="22dp"
+                    android:paddingRight="22dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_description" />
@@ -190,6 +191,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_welcome"
                     app:srcCompat="@drawable/baseline_account_circle_24" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="204dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="Show More >"
+                    android:textColor="#0000FF"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/rv_popular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_description"
+                    app:layout_constraintTop_toTopOf="@+id/tv_description"
+                    app:layout_constraintVertical_bias="1.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -337,7 +354,9 @@
             android:importantForAccessibility="no"
             android:src="@drawable/shopping_cart"
             app:backgroundTint="#ff5e00"
-            app:layout_anchor="@id/app_bar">
+            app:layout_anchor="@id/app_bar"
+            app:maxImageSize="30dp"
+            app:tint="#ffffff">
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
