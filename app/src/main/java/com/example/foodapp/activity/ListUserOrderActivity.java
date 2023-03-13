@@ -18,6 +18,7 @@ import com.example.foodapp.Entity.User;
 import com.example.foodapp.LoginActivity;
 import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
+import com.example.foodapp.OnRefreshViewListner;
 import com.example.foodapp.R;
 import com.example.foodapp.SessionManager;
 
@@ -26,7 +27,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class ListUserOrderActivity extends AppCompatActivity {
+public class ListUserOrderActivity extends AppCompatActivity implements OnRefreshViewListner {
     RecyclerView recyclerView;
     List<Order> orderList;
     OrderDBHelper orderDBHelper;
@@ -34,6 +35,7 @@ public class ListUserOrderActivity extends AppCompatActivity {
     DAOUser daoUser;
 
     private void LoadData() {
+
         orderDBHelper = new OrderDBHelper(ListUserOrderActivity.this);
         daoUser = new DAOUser(ListUserOrderActivity.this);
         sessionManager = new SessionManager(this);
@@ -64,4 +66,9 @@ public class ListUserOrderActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void refreshView() {
+        finish();
+        startActivity(getIntent());
+    }
 }
