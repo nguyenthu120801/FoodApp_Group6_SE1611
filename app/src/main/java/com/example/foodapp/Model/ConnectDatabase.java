@@ -80,12 +80,12 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertUser(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-         "INSERT INTO [dbo].[User]([FullName],[phone],[email],[gender],[username],[password],[RoleName])VALUES('Kirk Nelson','4533389559','oparagreen0@usnews.com','Female','Seller','999@','Seller')\n",
-         "INSERT INTO [dbo].[User]([FullName],[phone],[email],[gender],[username],[password],[RoleName])VALUES('Nguyen Thi Thu','4533389559','oparagreen0@usnews.com','Female','ThuThu','123@','Customer')\n",
-         "INSERT INTO [dbo].[User]([FullName],[phone],[email],[gender],[username],[password],[RoleName])VALUES('Nguyen Anh Tuan','6298446654','kfleet1@artisteer.com','Male','AnhTuan','123@','Customer')\n",
-         "INSERT INTO [dbo].[User]([FullName],[phone],[email],[gender],[username],[password],[RoleName])VALUES('Chu Quang Quan','8851738015','fellcock2@earthlink.net','Male','QuangQuan','123@','Customer')\n",
-         "INSERT INTO [dbo].[User]([FullName],[phone],[email],[gender],[username],[password],[RoleName])VALUES('Nguyen Minh Duc','5541282702','bkervin4@fotki.com','Male','MinhDuc','123@','Customer')\n",
-         "INSERT INTO [dbo].[User]([FullName],[phone],[email],[gender],[username],[password],[RoleName])VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer')\n"
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Kirk Nelson','4533389559','oparagreen0@usnews.com','Female','Kirk','999@','Seller')\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Thi Thu','4533389559','oparagreen0@usnews.com','Female','ThuThu','123@','Customer')\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Anh Tuan','6298446654','kfleet1@artisteer.com','Male','AnhTuan','123@','Customer')\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Chu Quang Quan','8851738015','fellcock2@earthlink.net','Male','QuangQuan','123@','Customer')\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Minh Duc','5541282702','bkervin4@fotki.com','Male','MinhDuc','123@','Customer')\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
