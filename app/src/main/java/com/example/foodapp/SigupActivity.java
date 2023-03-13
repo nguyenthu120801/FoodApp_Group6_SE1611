@@ -17,7 +17,7 @@ import java.util.Date;
 public class SigupActivity extends AppCompatActivity {
 
     private Button btn_Register;
-    EditText fullname, username, password, dob, email, phone;
+    EditText fullname, username, password, gender, email, phone;
     UserDBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class SigupActivity extends AppCompatActivity {
         fullname = findViewById(R.id.edt_fullname);
         username = findViewById(R.id.edt_username);
         password = findViewById(R.id.edt_password);
-        dob = findViewById(R.id.edt_dob);
+        gender = findViewById(R.id.edt_dob);
         email = findViewById(R.id.edt_email);
         phone = findViewById(R.id.edt_phone);
         DB = new UserDBHelper(this);
@@ -41,13 +41,12 @@ public class SigupActivity extends AppCompatActivity {
                 String fname = fullname.getText().toString();
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
-                String birth = dob.getText().toString();
-
+                String gen = gender.getText().toString();
                 String mail = email.getText().toString();
                 String phone_number = phone.getText().toString();
 
 
-                Boolean insert = DB.insertUser(fname,user,pass,birth,mail,phone_number);
+                Boolean insert = DB.insertUser(fname,user,pass,gen,mail,phone_number);
                 if(insert == true){
                     Toast.makeText(SigupActivity.this, "Register successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SigupActivity.this, LoginActivity.class);

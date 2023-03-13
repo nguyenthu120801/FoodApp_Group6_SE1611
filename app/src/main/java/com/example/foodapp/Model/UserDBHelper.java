@@ -17,6 +17,7 @@ public class UserDBHelper extends ConnectDatabase {
     private static final String USER_DOB ="Dob";
     private static final String USER_EMAIL ="Email";
     private static final String USER_PHONE ="Phone";
+    private static final String USER_GENDER ="Gender";
 
     public UserDBHelper( Context context) {
         super(context);
@@ -30,13 +31,13 @@ public class UserDBHelper extends ConnectDatabase {
         onCreate(sqLiteDatabase);
     }
 
-    public Boolean insertUser(String FullName, String Username, String Password, String DOB, String Email, String Phone){
+    public Boolean insertUser(String FullName, String Username, String Password, String Gender, String Email, String Phone){
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("FullName", FullName);
         contentValues.put("Username", Username);
         contentValues.put("Password", Password);
-        contentValues.put("DOB", DOB);
+        contentValues.put("Gender", Gender);
         contentValues.put("Email", Email);
         contentValues.put("Phone", Phone);
 

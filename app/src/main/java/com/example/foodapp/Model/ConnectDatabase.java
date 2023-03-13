@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class ConnectDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "PRM392_APP_FOOD";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String ORDER_TABLE ="Order";
     private static final String ORDER_ID ="OrderID";
@@ -30,7 +30,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tUsername TEXT NOT NULL,\n" +
                 "\tPassword TEXT NOT NULL,\n" +
                 "\tRoleName TEXT NOT NULL, \n" +
-                "\tDob TEXT NOT NULL,\n" +
+                "\tGender TEXT NOT NULL,\n" +
                 "\tEmail TEXT NOT NULL,\n" +
                 "\tPhone TEXT NOT NULL\n" +
                 ");";
