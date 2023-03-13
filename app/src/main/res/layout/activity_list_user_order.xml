@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.ListUserOrderActivity"
     android:orientation="vertical">
+
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_list_user_order"
     android:layout_width="match_parent"

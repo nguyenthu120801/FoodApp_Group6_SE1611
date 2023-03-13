@@ -78,8 +78,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void toListOrder(View view) {
-        Intent intent = new Intent(MainActivity.this, ListUserOrderActivity.class);
-        startActivity(intent);
-    }
+
 }
