@@ -105,7 +105,9 @@ public class Seller_AddProduct extends AppCompatActivity {
                 textMess.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
                     textMess.setText("You have to input product name");
-                }else if(Price.isEmpty()){
+                }else if(daoProduct.CheckProductExist(ProductName)){
+                    textMess.setText("Product existed");
+                } else if(Price.isEmpty()){
                     textMess.setText("You have to input price");
                 }else if(Double.parseDouble(Price) == 0){
                     textMess.setText("Price must be greater than 0");

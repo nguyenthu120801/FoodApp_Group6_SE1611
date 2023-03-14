@@ -19,6 +19,18 @@ public class DAOProduct extends ConnectDatabase{
 
     private static final int MAX_PRODUCT_IN_PAGE = 6;
 
+    public boolean CheckProductExist(String name){
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "select * from Product where ProductName = ?";
+        String [] selectionArgs = {name};
+        Cursor cursor = lite.rawQuery(sql, selectionArgs);
+        // if get data successful
+        if(cursor!= null && cursor.moveToNext()){
+            return true;
+        }
+        return false;
+    }
+
     public int getNumberOfPage(Integer CategoryID){
         SQLiteDatabase lite = getReadableDatabase();
         String sql;

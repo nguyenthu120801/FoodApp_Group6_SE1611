@@ -148,7 +148,9 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 textMessage.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
                     textMessage.setText("You have to input product name");
-                }else if(Price.isEmpty()){
+                }else if(daoProduct.CheckProductExist(ProductName) && !ProductName.equalsIgnoreCase(product.getProductName())){
+                    textMessage.setText("Product existed");
+                } else if(Price.isEmpty()){
                     textMessage.setText("You have to input price");
                 }else if(Double.parseDouble(Price) == 0){
                     textMessage.setText("Price must be greater than 0");
