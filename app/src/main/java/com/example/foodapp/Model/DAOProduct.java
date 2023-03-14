@@ -17,17 +17,63 @@ public class DAOProduct extends ConnectDatabase{
         super(context);
     }
 
-    public List<Product> getListProduct(Integer CategoryID){
+    private static final int MAX_PRODUCT_IN_PAGE = 6;
+
+    public boolean CheckProductExist(String name){
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "select * from Product where ProductName = ?";
+        String [] selectionArgs = {name};
+        Cursor cursor = lite.rawQuery(sql, selectionArgs);
+        // if get data successful
+        if(cursor!= null && cursor.moveToNext()){
+            return true;
+        }
+        return false;
+    }
+
+    public int getNumberOfPage(Integer CategoryID){
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql;
+        String [] selectionArgs;
+        if(CategoryID == null){
+            sql = "select count(ProductID) from Product";
+            selectionArgs = null;
+        }else{
+            sql = "select count(ProductID) from Product where CategoryID = ?";
+            selectionArgs = new String[]{CategoryID.toString()};
+        }
+        Cursor cursor = lite.rawQuery(sql,selectionArgs);
+        double number = 0;
+        if(cursor!= null && cursor.moveToNext()){
+            number = cursor.getInt(0);
+        }
+        if (number <= MAX_PRODUCT_IN_PAGE) {
+            return 1;
+        } else if ((number / MAX_PRODUCT_IN_PAGE) > (Math.round(number / MAX_PRODUCT_IN_PAGE))) {
+            number = Math.floor(number / MAX_PRODUCT_IN_PAGE) + 1;
+        } else {
+            number = Math.round(number / MAX_PRODUCT_IN_PAGE);
+
+        }
+        return (int) number;
+    }
+
+    public List<Product> getListProduct(int page,Integer CategoryID){
         List<Product> list = new ArrayList<>();
         SQLiteDatabase lite = getReadableDatabase();
         String sql;
         String [] selectionArgs;
         // if all product
         if(CategoryID == null){
-            sql = "select * from Product";
+            sql = "select * from Product\n"
+                    + "	order by ProductID" + "\n"
+                    + "LIMIT "+MAX_PRODUCT_IN_PAGE+" OFFSET " + MAX_PRODUCT_IN_PAGE + "*" + (page - 1);
             selectionArgs = null;
         }else{
-            sql = "select * from Product where CategoryID = ?";
+            sql = "select * from Product\n"
+                    + "     where CategoryID = ?" + "\n"
+                    + "	order by ProductID\n"
+                    + "LIMIT "+MAX_PRODUCT_IN_PAGE +" OFFSET " + MAX_PRODUCT_IN_PAGE + "*" + (page - 1);
             selectionArgs = new String[]{CategoryID.toString()};
         }
         Cursor cursor = lite.rawQuery(sql , selectionArgs);
@@ -85,6 +131,23 @@ public class DAOProduct extends ConnectDatabase{
             int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
             Product product = new Product(ID,ProductName,image,price);
+            list.add(product);
+        }
+        cursor.close();
+        return list;
+    }
+    public List<Product> ListProduct(){
+        List<Product> list = new ArrayList<>();
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "SELECT * FROM Product";
+        Cursor cursor = lite.rawQuery(sql , null);
+        while (cursor != null && cursor.moveToNext()){
+            int ID = cursor.getInt(0);
+            String ProductName = cursor.getString(1);
+            int image = cursor.getInt(2);
+            double price = cursor.getDouble(3);
+            int CategoryID = cursor.getInt(4);
+            Product product = new Product(ID,ProductName,image,price,CategoryID);
             list.add(product);
         }
         cursor.close();
