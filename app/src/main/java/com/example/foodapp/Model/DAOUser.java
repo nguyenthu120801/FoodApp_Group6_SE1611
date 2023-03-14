@@ -74,5 +74,21 @@ public class DAOUser extends ConnectDatabase {
         db.close();
         return userId;
     }
+
+    public int getIDUser( String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {"ID"};
+        String selection = "username = ?";
+        String[] selectionArgs = { username};
+        Cursor cursor = db.query(
+                "User", projection, selection, selectionArgs, null, null, null);
+        int userId = -1;
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
+        }
+        cursor.close();
+        db.close();
+        return userId;
+    }
 }
 

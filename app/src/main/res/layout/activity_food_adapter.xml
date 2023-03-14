@@ -9,23 +9,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imv_delete"
-            android:layout_width="38dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="370dp"
-            android:layout_marginEnd="5dp"
-            android:background="#DD1111"
-            android:src="@drawable/icon_delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:background="#CDFF5722">
 
@@ -106,14 +89,14 @@
             android:text="0"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/tv_txt"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
+            android:layout_marginStart="340dp"
             android:layout_marginTop="16dp"
             android:text="$"
             android:textSize="14sp"
@@ -121,10 +104,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/tv_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="290dp"
+            android:layout_marginStart="330dp"
             android:layout_marginTop="50dp"
             android:text="$"
             android:textSize="16sp"
