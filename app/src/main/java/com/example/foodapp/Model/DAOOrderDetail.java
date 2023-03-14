@@ -18,6 +18,18 @@ public class DAOOrderDetail extends ConnectDatabase{
         super(context);
     }
 
+    public boolean CheckProductExist(int ProductID){
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "select * from OrderDetail where ProductID = ?";
+        String [] selectionArgs = {ProductID + ""};
+        Cursor cursor = lite.rawQuery(sql, selectionArgs);
+        // if get data successful
+        if(cursor!= null && cursor.moveToNext()){
+            return true;
+        }
+        return false;
+    }
+
     public List<OrderDetail> getListOrderDetail(int orderID){
         List<OrderDetail> list = new ArrayList<>();
         SQLiteDatabase lite = getReadableDatabase();
