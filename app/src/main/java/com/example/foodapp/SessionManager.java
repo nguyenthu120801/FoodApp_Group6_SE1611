@@ -60,6 +60,9 @@ public class SessionManager {
 
     public int getUserID() {
         DAOUser daoUser = new DAOUser(context.getApplicationContext());
+        if (getUsername() == null || getPassword() == null) {
+            return -1;
+        }
         return daoUser.getUserId(getUsername(), getPassword());
 
     }

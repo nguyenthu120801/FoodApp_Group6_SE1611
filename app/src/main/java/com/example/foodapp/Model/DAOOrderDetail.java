@@ -1,5 +1,6 @@
 package com.example.foodapp.Model;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -72,5 +73,25 @@ public class DAOOrderDetail extends ConnectDatabase{
         String whereClause = "DetailID = ?";
         String[] whereArgs = {String.valueOf(detailID)};
         return lite.delete("OrderDetail",whereClause,whereArgs);
+    }
+    @SuppressLint("Range")
+    public List<OrderDetail> getOrderDetails(int orderId) {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String[] columns = { "DetailID", "OrderID", "ProductID", "quantity" };
+        String selection = "OrderID = ?";
+        String[] selectionArgs = { String.valueOf(orderId) };
+        Cursor cursor = db.query("OrderDetail", columns, selection, selectionArgs, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int detailId = cursor.getInt(cursor.getColumnIndex("DetailID"));
+                int productId = cursor.getInt(cursor.getColumnIndex("ProductID"));
+                int quantity = cursor.getInt(cursor.getColumnIndex("quantity"));
+                OrderDetail orderDetail = new OrderDetail(detailId, orderId, productId, quantity);
+                orderDetails.add(orderDetail);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return orderDetails;
     }
 }

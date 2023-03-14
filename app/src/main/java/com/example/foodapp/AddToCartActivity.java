@@ -25,6 +25,7 @@ import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
+import com.example.foodapp.activity.ListUserOrderActivity;
 import com.example.foodapp.activity.OrderActivity;
 
 import java.util.ArrayList;
@@ -100,26 +101,28 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         order.setOrderDate(new Date().toString());
         order.setStatus(Order.STATUS_IN_PROGRESS);
         order.setAddress("Fixed address");
-       boolean isSuccessOrder = orderDBHelper.insertOrder(order);
-       if (isSuccessOrder){
-           Toast.makeText(this, "insert order successful", Toast.LENGTH_SHORT).show();
-           cartList = new DAOCart(this).getListCart(2);
+       int orderid = orderDBHelper.insertOrder(order);
+       Log.d("infoOrder", "order id vừa insert là : "+orderid);
+       if (orderid != -1){
+           Log.d("infoOrder","insert order successful" );
+           cartList = new DAOCart(this).getListCart(sessionManager.getUserID());
+           Log.d("infoOrder", "Số lượng cart là : " + cartList.size());
            OrderDetail orderDetail = new OrderDetail();
            for (Cart cart : cartList){
-               orderDetail.setOrderID(order.getOrderID());
+               Log.d("infoOrder", "Cart : "+ cart);
+               orderDetail.setOrderID(orderid);
                orderDetail.setProductID(cart.getProductID());
                orderDetail.setQuantity(cart.getQuantity());
+               Log.d("infoOrder", "Order Detail add vào db : " + orderDetail);
+               daoOrderDetail.AddOrderDetail(orderDetail);
            }
 //        for (Product product: productList) {
 //            orderDetail.setOrderID(order.getOrderID());
 //            orderDetail.setProductID(product.getProductID());
 //        }
-          long isSuccessOrderDetails = daoOrderDetail.AddOrderDetail(orderDetail);
-          if(isSuccessOrderDetails != -1){
-              Log.d("infoOrder","insert order detail success" );
-          }else {
-              Log.d("infoOrder","insert order detail fail" );
-          }
+              Log.d("infoOrder","insert order detail successful" );
+              Intent intent = new Intent(this, ListUserOrderActivity.class);
+              startActivity(intent);
        }else {
            Log.d("infoOrder","insert order fail" );
        }
@@ -131,7 +134,6 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     public void onPriceChange(double price) {
         tv_total.setText("$" + price);
     }
-
 
 
     public void LoadRecyclerView(List<Cart> cartList, int id){
