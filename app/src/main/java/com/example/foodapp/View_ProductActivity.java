@@ -38,7 +38,6 @@ public class View_ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_product);
-        spinner = findViewById(R.id.spinner);
         setMap();
     }
 }

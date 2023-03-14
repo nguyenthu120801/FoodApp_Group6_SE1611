@@ -31,7 +31,7 @@ public class OrderDBHelper extends ConnectDatabase {
     }
 
 
-    public boolean insertOrder(Order order) {
+    public int insertOrder(Order order) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ORDER_USERID, order.getUserID());
@@ -40,9 +40,11 @@ public class OrderDBHelper extends ConnectDatabase {
         values.put(ORDER_SHIP_DATE, order.getShipDate());
         values.put(ORDER_STATUS, order.getStatus());
         Log.d("infoOrder", "value insert data : " + values);
-        long result = db.insert(ORDER_TABLE, null, values);
-        return result != -1;
+        int id =(int) db.insert(ORDER_TABLE, null, values);
+        return id;
     }
+
+
 
     public void updateOrder(Order order) {
     }
