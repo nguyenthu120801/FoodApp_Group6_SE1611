@@ -90,6 +90,23 @@ public class DAOProduct extends ConnectDatabase{
         cursor.close();
         return list;
     }
+    public List<Product> ListProduct(){
+        List<Product> list = new ArrayList<>();
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "SELECT * FROM Product";
+        Cursor cursor = lite.rawQuery(sql , null);
+        while (cursor != null && cursor.moveToNext()){
+            int ID = cursor.getInt(0);
+            String ProductName = cursor.getString(1);
+            int image = cursor.getInt(2);
+            double price = cursor.getDouble(3);
+            int CategoryID = cursor.getInt(4);
+            Product product = new Product(ID,ProductName,image,price,CategoryID);
+            list.add(product);
+        }
+        cursor.close();
+        return list;
+    }
 
     public int UpdateProduct(Product product){
         SQLiteDatabase lite = getWritableDatabase();
