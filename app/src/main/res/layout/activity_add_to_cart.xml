@@ -34,11 +34,12 @@
         android:id="@+id/liner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="400dp"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_category">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <TextView
             android:id="@+id/tv_txt"

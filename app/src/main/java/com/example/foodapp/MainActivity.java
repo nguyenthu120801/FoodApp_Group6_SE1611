@@ -24,7 +24,7 @@ import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.activity.ListUserOrderActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity implements onProductItemClick{
+public class MainActivity extends AppCompatActivity implements onProductItemClick {
     private RecyclerView.Adapter adapter, adapter1;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
     ImageView img_user;
@@ -32,20 +32,22 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
     TextView tv_welcome;
     List<Category> catList;
     List<Product> productList;
+    String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         logout = findViewById(R.id.LogOut);
-        img_user =  findViewById(R.id.img_user);
+        img_user = findViewById(R.id.img_user);
         tv_welcome = findViewById(R.id.tv_welcome);
         recyclerViewCategory();
         recyclerViewPopular();
         // session
         SessionManager sessionManager = new SessionManager(MainActivity.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
-        String username = user.get(SessionManager.KEY_USERNAME);
-        if(username != null) {
+        username = user.get(SessionManager.KEY_USERNAME);
+        if (username != null) {
             tv_welcome.setText("Welcome, " + username);
         }
         img_user.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
     }
 
 
-    private void recyclerViewCategory(){
-        LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+    private void recyclerViewCategory() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCategoryList = findViewById(R.id.rv_category);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
         DAOCategory daoCategory = new DAOCategory(this);
@@ -83,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
         recyclerViewCategoryList.setAdapter(adapter);
     }
 
-    private void recyclerViewPopular(){
-        LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+    private void recyclerViewPopular() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewPopularList = findViewById(R.id.rv_popular);
         recyclerViewPopularList.setLayoutManager(linearLayoutManager);
         DAOProduct daoProduct = new DAOProduct(this);
@@ -93,10 +95,15 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
         recyclerViewPopularList.setAdapter(adapter1);
     }
 
-    public void toOrder(  ) {
-        Intent intent = new Intent(MainActivity.this, AddToCartActivity.class);
-        startActivity(intent);
+    public void toOrder() {
+        if (username == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }else {
+            Intent intent = new Intent(MainActivity.this, AddToCartActivity.class);
+            startActivity(intent);
+        }
     }
+
     public void toListOrder(View view) {
         Intent intent = new Intent(MainActivity.this, ListUserOrderActivity.class);
         startActivity(intent);
@@ -104,14 +111,20 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
 
     @Override
     public void onProductClick(int id, String activity) {
-        if(activity.equals("AddToCart")){
-            Intent intent = new Intent(this, AddToCartActivity.class);
-            intent.putExtra("id", id);
-            startActivity(intent);
-        }else{
-            Intent intent = new Intent(this, FoodDetailActivity.class);
-            intent.putExtra("id", id);
-            startActivity(intent);
+        if (username == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        } else {
+            if (activity.equals("AddToCart")) {
+                Intent intent = new Intent(this, AddToCartActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
         }
+        if(activity.equals("FoodDetail")) {
+                Intent intent = new Intent(this, FoodDetailActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+
     }
 }

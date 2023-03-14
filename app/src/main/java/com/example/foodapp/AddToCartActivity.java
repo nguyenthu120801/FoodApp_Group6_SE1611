@@ -36,7 +36,7 @@ import java.util.List;
 public class AddToCartActivity extends AppCompatActivity implements onChangeItem {
     RecyclerView rcv;
     TextView tv_total;
-
+    ItemTouchHelper.SimpleCallback simpleCallback;
     List<Cart> cartList = new ArrayList<>();
     OrderDBHelper orderDBHelper;
     DAOOrderDetail daoOrderDetail;
@@ -54,15 +54,14 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         SessionManager sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         String username = user.get(SessionManager.KEY_USERNAME);
-        userID = 2;
-       // int userID = new DAOUser(this).getIDUser(username);
+        userID = new DAOUser(this).getIDUser(username);
         cartList = new DAOCart(this).getListCart(userID);
         rcv = findViewById(R.id.rv_category);
         int id = getIntent().getIntExtra("id", 0);
         LoadRecyclerView(cartList, id);
 
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+         simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -70,9 +69,17 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                new DAOCart(AddToCartActivity.this).DeleteCart(cartList.get(viewHolder.getAdapterPosition()).getCartID());
+                rcv.getAdapter();
+                int n = new DAOCart(AddToCartActivity.this).DeleteCart(cartList.get(viewHolder.getAdapterPosition()).getCartID());
+                if(n>0){
+                    Toast.makeText(AddToCartActivity.this, "Remove successfully", Toast.LENGTH_LONG).show();
+
+                }else{
+                    Toast.makeText(AddToCartActivity.this, "Remove Fail", Toast.LENGTH_LONG).show();
+                }
                 cartList.remove(viewHolder.getAdapterPosition());
                 adapter.notifyDataSetChanged();
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                 LoadRecyclerView( new DAOCart(AddToCartActivity.this).getListCart(userID), -1);
 
             }
@@ -136,6 +143,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     public void LoadRecyclerView(List<Cart> cartList, int id){
         double total = 0;
         int pID = 0;
+        int cartID = 0;
         List<Product> productList = new ArrayList<>();
         Product product = new DAOProduct(this).getProduct(id);
         if(product != null) {
@@ -145,11 +153,16 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
                     c.setQuantity(c.getQuantity() + 1);
                     int n = new DAOCart(this).UpdateCart(c);
                 }
+
             }
             if(pID != id){
-                cartList.add(new Cart(2, product.getProductID(), 1));
-                new DAOCart(this).AddCart(new Cart(2, product.getProductID(), 1));
+                long n = new DAOCart(this).AddCart(new Cart(userID, product.getProductID(), 1));
+                cartList.add(new Cart(new DAOCart(this).getMaxCartID(),userID, product.getProductID(), 1));
             }
+            for(int i =0; i< cartList.size(); i++) {
+                Log.d("CartID:", String.valueOf(cartList.get(i).getCartID()));
+            }
+
         }
         if(cartList.size() != 0) {
             for (Cart c : cartList) {
@@ -157,6 +170,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
                 total += p.getPrice() * c.getQuantity();
                 productList.add(p);
             }
+
             adapter = new FoodAdapter(cartList, total, productList, this);
             rcv.setLayoutManager(new LinearLayoutManager(this));
             rcv.setAdapter(adapter);
@@ -164,7 +178,9 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             ((ImageView)findViewById(R.id.imv_cartEmpty)).setVisibility(View.VISIBLE);
             ((Button)findViewById(R.id.btn_checkout)).setVisibility(View.GONE);
             tv_total.setText("$0");
+            rcv.setVisibility(View.GONE);
         }
+
 
 
     }
