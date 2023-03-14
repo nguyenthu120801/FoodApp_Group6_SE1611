@@ -19,7 +19,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Seller_Edit_DeleteProduct"
+            android:name=".activity.Seller_Edit_DeleteProduct"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -33,21 +33,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Seller_AddProduct"
+            android:name=".activity.OrderManageActivity$Seller_AddProduct"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Seller_ViewProduct"
+            android:name=".activity.Seller_ViewProduct"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShowAllProduct"
+            android:name=".activity.ShowAllProduct"
             android:exported="false" />
         <activity
 
@@ -58,40 +58,40 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".FoodAdapter"
+            android:name=".activity.FoodAdapter"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".FoodDetailActivity"
+            android:name=".activity.FoodDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddToCartActivity"
+            android:name=".activity.AddToCartActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SigupActivity"
+            android:name=".activity.SigupActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".View_ProductActivity"
+            android:name=".activity.View_ProductActivity"
             android:exported="false" />
         <activity
-            android:name=".IntroActivity"
+            android:name=".activity.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

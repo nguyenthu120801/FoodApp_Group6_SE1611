@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
-    tools:context=".FoodAdapter">
+    tools:context=".activity.FoodAdapter">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

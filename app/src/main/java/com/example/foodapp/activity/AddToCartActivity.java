@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,13 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +24,8 @@ import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
-import com.example.foodapp.activity.ListUserOrderActivity;
-import com.example.foodapp.activity.OrderActivity;
+import com.example.foodapp.R;
+import com.example.foodapp.onChangeItem;
 
 import java.util.ArrayList;
 import java.util.Date;
