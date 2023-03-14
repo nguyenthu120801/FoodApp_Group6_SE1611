@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_welcome;
     List<Category> catList;
     List<Product> productList;
+    TextView tv_showProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         logout = findViewById(R.id.LogOut);
         img_user =  findViewById(R.id.img_user);
         tv_welcome = findViewById(R.id.tv_welcome);
+        tv_showProduct = findViewById(R.id.tv_ShowProduct);
         recyclerViewCategory();
         recyclerViewPopular();
         // session
@@ -48,14 +50,22 @@ public class MainActivity extends AppCompatActivity {
         if(username != null) {
             tv_welcome.setText("Welcome, " + username);
         }
+        // request Login
         img_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
+        //request Show All Product
+        tv_showProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ShowAllProduct.class));
+            }
+        });
 
-        // when click button Logout
+        // Request LogOut
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

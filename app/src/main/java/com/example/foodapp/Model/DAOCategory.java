@@ -40,4 +40,17 @@ public class DAOCategory extends ConnectDatabase{
         cursor.close();
         return list;
     }
+
+    public String getCategoryName(Integer categoryID){
+        String categoryname="";
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "select Name from Category where ID=?";
+        Cursor cursor = lite.rawQuery(sql, new String[]{String.valueOf(categoryID)});
+        while (cursor != null && cursor.moveToNext()){
+            categoryname = cursor.getString(0);
+        }
+        cursor.close();
+        return categoryname;
+
+    }
 }

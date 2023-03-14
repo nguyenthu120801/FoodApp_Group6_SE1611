@@ -193,7 +193,7 @@
                     app:srcCompat="@drawable/baseline_account_circle_24" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tv_ShowProduct"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="204dp"

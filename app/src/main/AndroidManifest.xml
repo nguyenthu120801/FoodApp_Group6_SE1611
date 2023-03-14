@@ -12,13 +12,15 @@
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
         <activity
+            android:name=".ShowAllProduct"
+            android:exported="false" />
+        <activity
             android:name=".activity.ListUserOrderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".FoodAdapter"
             android:exported="false">
