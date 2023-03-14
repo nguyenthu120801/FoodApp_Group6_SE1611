@@ -1,28 +1,34 @@
 package com.example.foodapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.foodapp.Entity.Food;
+import com.example.foodapp.Entity.Cart;
+import com.example.foodapp.Entity.Product;
 
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
-    public List<Food> foodList;
+    public List<Cart> cartList;
+    public double total;
+    public List<Product> productList;
     private onChangeItem onChangeItem;
 
-    public FoodAdapter(List<Food> foodList, com.example.foodapp.onChangeItem onChangeItem) {
-        this.foodList = foodList;
+
+    public FoodAdapter(List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
+        this.cartList = cartList;
+        this.total = total;
+        this.productList = productList;
         this.onChangeItem = onChangeItem;
+
     }
 
     class FoodHolder extends RecyclerView.ViewHolder{
@@ -39,29 +45,35 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
             tv_price = itemView.findViewById(R.id.tv_foodPrice);
             tv_TotlaPrice = itemView.findViewById(R.id.tv_totalPriceFood);
             tv_quantity = itemView.findViewById(R.id.tv_quantity);
-
+            onChangeItem.onPriceChange(total);
 
             itemView.findViewById(R.id.plus).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) + 1;
                     tv_quantity.setText(String.valueOf(newQuantity));
-                    tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * newQuantity);
+                    tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
+                    total += Double.parseDouble(tv_price.getText().toString());
+                    onChangeItem.onPriceChange(total);
+
                 }
             });
+
+
 
             itemView.findViewById(R.id.minus).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) - 1;
-                    if(newQuantity <= 1){
-                        tv_quantity.setText("1");
-                    }else {
+                    if(Integer.parseInt(tv_quantity.getText().toString()) > 1) {
+                        int newQuantity = Integer.parseInt(tv_quantity.getText().toString()) - 1;
                         tv_quantity.setText(String.valueOf(newQuantity));
+                        tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
+                        total -= Double.parseDouble(tv_price.getText().toString());
+                        onChangeItem.onPriceChange(total);
                     }
-                    tv_TotlaPrice.setText("$" + Double.parseDouble(tv_price.getText().toString()) * Integer.parseInt(tv_quantity.getText().toString()));
                 }
             });
+
 
 
         }
@@ -76,15 +88,28 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FoodHolder holder, int position) {
-        holder.img.setImageResource(foodList.get(position).getImage());
-        holder.tv_foodName.setText(foodList.get(position).getFoodName());
-        holder.tv_price.setText(String.valueOf(foodList.get(position).getPrice()));
+        holder.img.setImageResource(productList.get(position).getImage());
+        holder.tv_foodName.setText(productList.get(position).getProductName());
+        holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
+        holder.tv_TotlaPrice.setText(String.valueOf(
+                productList.get(position).getPrice() * cartList.get(position).getQuantity()));
+        holder.tv_quantity.setText(String.valueOf(cartList.get(position).getQuantity()));
+
 
     }
 
     @Override
     public int getItemCount() {
-        return foodList.size();
+        if(cartList == null){
+            return 0;
+        }else{
+            return cartList.size();
+        }
+    }
+
+    public void removeItem(int position){
+        cartList.remove(position);
+        notifyItemRemoved(position);
     }
 
 

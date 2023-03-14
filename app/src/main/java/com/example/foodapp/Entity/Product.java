@@ -3,23 +3,44 @@ package com.example.foodapp.Entity;
 public class Product {
     private int ProductID;
     private String ProductName;
-    private String image;
+    private int image;
     private double price;
     private int CategoryID;
+    private String description;
 
     public Product() {
     }
 
-    public Product(int productID) {
-        ProductID = productID;
-    }
-
-    public Product(int productID, String productName, String image, double price, int categoryID) {
+    public Product(int productID, String productName, int image, double price, int categoryID, String description) {
         ProductID = productID;
         ProductName = productName;
         this.image = image;
         this.price = price;
         CategoryID = categoryID;
+        this.description = description;
+    }
+
+    public Product(String productName, int image, double price, int categoryID, String description) {
+        ProductName = productName;
+        this.image = image;
+        this.price = price;
+        CategoryID = categoryID;
+        this.description = description;
+    }
+
+    public Product(int productID, String productName, int image, double price, int categoryID) {
+        ProductID = productID;
+        ProductName = productName;
+        this.image = image;
+        this.price = price;
+        CategoryID = categoryID;
+    }
+
+    public Product(int productID, String productName, int image, double price) {
+        ProductID = productID;
+        ProductName = productName;
+        this.image = image;
+        this.price = price;
     }
 
     public int getProductID() {
@@ -38,11 +59,11 @@ public class Product {
         ProductName = productName;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
 
@@ -60,5 +81,13 @@ public class Product {
 
     public void setCategoryID(int categoryID) {
         CategoryID = categoryID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

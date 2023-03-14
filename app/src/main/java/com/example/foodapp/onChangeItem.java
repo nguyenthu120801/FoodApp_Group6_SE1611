@@ -1,5 +1,6 @@
 package com.example.foodapp;
 
 public interface onChangeItem {
-    void onPriceChange(int price);
+    void onPriceChange(double price);
+
 }

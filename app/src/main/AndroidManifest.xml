@@ -13,18 +13,61 @@
         tools:targetApi="31">
         <activity
 
-
-            android:name=".View_ProductActivity"
-
+            android:name=".activity.OrderDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
+            android:name=".Seller_Edit_DeleteProduct"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.OrderActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Seller_AddProduct"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Seller_ViewProduct"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ShowAllProduct"
+            android:exported="false" />
+        <activity
 
-            android:name=".SigupActivity"
 
+            android:name=".activity.ListUserOrderActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FoodAdapter"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FoodDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -32,7 +75,6 @@
         </activity>
         <activity
             android:name=".AddToCartActivity"
-
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -42,7 +84,13 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".SigupActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View_ProductActivity"
             android:exported="false" />
         <activity
             android:name=".IntroActivity"
@@ -53,6 +101,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
 
         <meta-data
             android:name="preloaded_fonts"

@@ -27,44 +27,17 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tv_welcome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="@font/lobster"
-                    android:text="Welcome to our restaurant"
-                    android:textColor="#dd3d00"
-                    android:textSize="20sp"
+                    android:layout_marginTop="16dp"
+                    android:text="Order &amp; Eat"
+                    android:textColor="#000000"
+                    android:textSize="26sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Order &amp; Eat"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView4"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <ImageView
-                    android:id="@+id/img_User"
-                    android:layout_width="67dp"
-                    android:layout_height="58dp"
-                    android:layout_marginEnd="32dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/profile" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName3"
@@ -84,7 +57,7 @@
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
@@ -172,33 +145,68 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rec_foodCart"
-                    android:layout_width="389dp"
-                    android:layout_height="157dp"
+
+                    android:id="@+id/rv_category"
+                    android:layout_width="393dp"
+
+
+                    android:layout_height="93dp"
+                    android:clipToPadding="false"
+                    android:paddingLeft="22dp"
+                    android:paddingRight="22dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/tv_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
                     android:text="Popular"
                     android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rec_foodCart" />
+
+                    app:layout_constraintTop_toBottomOf="@+id/rv_category" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="386dp"
-                    android:layout_height="124dp"
+                    android:id="@+id/rv_popular"
+                    android:layout_width="391dp"
+                    android:layout_height="240dp"
+                    android:paddingLeft="22dp"
+                    android:paddingRight="22dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.285"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+                <ImageView
+                    android:id="@+id/img_user"
+                    android:layout_width="54dp"
+                    android:layout_height="51dp"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_welcome"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_welcome"
+                    app:srcCompat="@drawable/baseline_account_circle_24" />
+
+                <TextView
+                    android:id="@+id/tv_ShowProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="204dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="Show More >"
+                    android:textColor="#0000FF"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/rv_popular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_description"
+                    app:layout_constraintTop_toTopOf="@+id/tv_description"
+                    app:layout_constraintVertical_bias="1.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -209,6 +217,7 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        app:layout_anchorGravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -258,7 +267,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:orientation="vertical">
+                    android:onClick="toListOrder"
+                    android:orientation="vertical"
+                    tools:ignore="TouchTargetSizeCheck">
 
                     <ImageView
                         android:id="@+id/imageView7"
@@ -271,7 +282,7 @@
                         android:id="@+id/textView15"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Food"
+                        android:text="Order"
                         android:textAlignment="center"
                         android:textColor="#676767"
                         android:textSize="12sp" />
@@ -296,19 +307,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/baseline_bookmark_border_24" />
+                        app:srcCompat="@drawable/round_switch_account_24" />
 
                     <TextView
                         android:id="@+id/textView16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Order"
+                        android:text="Accounts"
                         android:textAlignment="center"
                         android:textColor="#676767"
                         android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/LogOut"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -319,13 +331,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/btn4" />
+                        app:srcCompat="@drawable/baseline_logout_24" />
 
                     <TextView
                         android:id="@+id/textView11"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Settings"
+                        android:text="Log Out"
                         android:textAlignment="center"
                         android:textColor="#676767"
                         android:textSize="12sp" />
@@ -334,6 +346,7 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+           android:id="@+id/to_order_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#ff5e00"
@@ -342,7 +355,9 @@
             android:importantForAccessibility="no"
             android:src="@drawable/shopping_cart"
             app:backgroundTint="#ff5e00"
-            app:layout_anchor="@id/app_bar">
+            app:layout_anchor="@id/app_bar"
+            app:maxImageSize="30dp"
+            app:tint="#ffffff">
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
