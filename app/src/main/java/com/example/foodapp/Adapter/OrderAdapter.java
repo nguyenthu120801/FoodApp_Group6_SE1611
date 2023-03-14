@@ -36,11 +36,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
-        holder.orderIdText.setText("Order ID : " + order.getOrderID());
-        holder.orderDateText.setText("Order Date : " +order.getOrderDate());
-        holder.shipDateText.setText("Ship Date : " +order.getShipDate());
-        holder.addressText.setText("Address : " +order.getAddress());
-        holder.statusText.setText("Status : " +order.getStatus());
+        holder.orderIdText.setText(String.valueOf(order.getOrderID()));
+        holder.orderDateText.setText(order.getOrderDate());
+        holder.shipDateText.setText(order.getShipDate());
+        holder.addressText.setText(order.getAddress());
+        holder.statusText.setText(order.getStatus());
 
         holder.cancelButton.setOnClickListener(view -> cancelOrder(order.getOrderID()));
         holder.linearLayout.setOnClickListener(view -> toOrderDetail(order.getOrderID()));
