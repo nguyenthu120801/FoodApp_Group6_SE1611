@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,8 +36,7 @@ import java.util.List;
 public class AddToCartActivity extends AppCompatActivity implements onChangeItem {
     RecyclerView rcv;
     TextView tv_total;
-    TextView tv_notification;
-    List<Product> productList = new ArrayList<>();
+
     List<Cart> cartList = new ArrayList<>();
     OrderDBHelper orderDBHelper;
     DAOOrderDetail daoOrderDetail;
@@ -50,7 +50,6 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         setContentView(R.layout.activity_add_to_cart);
         sessionManager = new SessionManager(this);
         tv_total = findViewById(R.id.tv_totalPrice);
-        tv_notification = findViewById(R.id.tv_noti);
 
         SessionManager sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
@@ -73,9 +72,9 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 new DAOCart(AddToCartActivity.this).DeleteCart(cartList.get(viewHolder.getAdapterPosition()).getCartID());
                 cartList.remove(viewHolder.getAdapterPosition());
-                productList.clear();
-                LoadRecyclerView( new DAOCart(AddToCartActivity.this).getListCart(userID), -1);
                 adapter.notifyDataSetChanged();
+                LoadRecyclerView( new DAOCart(AddToCartActivity.this).getListCart(userID), -1);
+
             }
         };
 
@@ -137,7 +136,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     public void LoadRecyclerView(List<Cart> cartList, int id){
         double total = 0;
         int pID = 0;
-
+        List<Product> productList = new ArrayList<>();
         Product product = new DAOProduct(this).getProduct(id);
         if(product != null) {
             for (Cart c : cartList) {
@@ -162,12 +161,9 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             rcv.setLayoutManager(new LinearLayoutManager(this));
             rcv.setAdapter(adapter);
         }else{
-            tv_notification.setText("Cart is empty, please buy food to continues");
-            tv_notification.setVisibility(View.VISIBLE);
-            tv_notification.setTextColor(Color.RED);
+            ((ImageView)findViewById(R.id.imv_cartEmpty)).setVisibility(View.VISIBLE);
             ((Button)findViewById(R.id.btn_checkout)).setVisibility(View.GONE);
             tv_total.setText("$0");
-
         }
 
 

@@ -27,8 +27,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         tv_price = findViewById(R.id.tv_price);
         tv_description = findViewById(R.id.tv_description);
         imv = findViewById(R.id.img_food);
-        //int id = getIntent().getIntExtra("id", 0);
-        int id = 4;
+        int id = getIntent().getIntExtra("id", 0);
         Product product = new DAOProduct(this).getProduct(id);
         ((Button)findViewById(R.id.btn_Add)).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -24,7 +24,7 @@ import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.activity.ListUserOrderActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements onProductItemClick{
     private RecyclerView.Adapter adapter, adapter1;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
     ImageView img_user;
@@ -89,12 +89,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewPopularList.setLayoutManager(linearLayoutManager);
         DAOProduct daoProduct = new DAOProduct(this);
         productList = daoProduct.get5Product();
-        adapter1 = new PopularAdapter(this, productList);
+        adapter1 = new PopularAdapter(this, productList, this::onProductClick);
         recyclerViewPopularList.setAdapter(adapter1);
     }
 
     public void toOrder(  ) {
-        Intent intent = new Intent(MainActivity.this, FoodDetailActivity.class);
+        Intent intent = new Intent(MainActivity.this, AddToCartActivity.class);
         startActivity(intent);
     }
     public void toListOrder(View view) {
@@ -102,4 +102,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onProductClick(int id, String activity) {
+        if(activity.equals("AddToCart")){
+            Intent intent = new Intent(this, AddToCartActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this, FoodDetailActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        }
+    }
 }
