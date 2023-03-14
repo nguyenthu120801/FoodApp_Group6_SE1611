@@ -267,8 +267,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
+                    android:onClick="toListOrder"
                     android:orientation="vertical"
-                    android:onClick="toListOrder">
+                    tools:ignore="TouchTargetSizeCheck">
 
                     <ImageView
                         android:id="@+id/imageView7"

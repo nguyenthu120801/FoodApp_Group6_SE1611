@@ -74,15 +74,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                 }
             });
 
-            itemView.findViewById(R.id.imv_delete).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                     int id = itemView.getId();
-                     Log.d("index", String.valueOf(id+1) );
-                    int cartID = cartList.get(id+1).getCartID();
-                    onChangeItem.onDeleteItem(cartID);
-                }
-            });
+
 
         }
     }
@@ -108,7 +100,16 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        if(cartList == null){
+            return 0;
+        }else{
+            return cartList.size();
+        }
+    }
+
+    public void removeItem(int position){
+        cartList.remove(position);
+        notifyItemRemoved(position);
     }
 
 
