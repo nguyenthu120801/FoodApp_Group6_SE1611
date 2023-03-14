@@ -34,15 +34,17 @@
         android:id="@+id/liner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="400dp"
         android:orientation="horizontal"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_category">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <TextView
             android:id="@+id/tv_txt"
 
-            android:layout_width="306dp"
+            android:layout_width="296dp"
             android:layout_height="wrap_content"
             android:text="Total:"
             android:textSize="20sp"
@@ -72,18 +74,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/liner" />
 
-    <TextView
-        android:id="@+id/tv_noti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="TextView"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/imv_cartEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="291dp"
+        android:layout_marginTop="80dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:srcCompat="@drawable/cart_empty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
