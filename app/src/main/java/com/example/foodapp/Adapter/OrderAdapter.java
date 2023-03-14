@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Entity.Order;
+import com.example.foodapp.MainActivity;
 import com.example.foodapp.Model.OrderDBHelper;
+import com.example.foodapp.OnRefreshViewListner;
 import com.example.foodapp.R;
 
 import java.util.List;
@@ -19,10 +21,11 @@ import java.util.zip.Inflater;
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     private Context context;
     private List<Order> orderList;
-
+    private OnRefreshViewListner mRefreshListner;
     public OrderAdapter(Context context, List<Order> orderList) {
         this.context = context;
         this.orderList = orderList;
+        mRefreshListner = (OnRefreshViewListner)context;
     }
 
     @NonNull
@@ -48,6 +51,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         OrderDBHelper orderDBHelper = new OrderDBHelper(context);
         boolean isSuccess =  orderDBHelper.removeOrder(orderId);
         Log.d("infoOrder", "is success : " + isSuccess);
+        mRefreshListner.refreshView();
+
     }
     @Override
     public int getItemCount() {

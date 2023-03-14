@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
+import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
 
 import java.util.*;
@@ -70,6 +71,24 @@ public class DAOProduct extends ConnectDatabase{
             return product;
         }
         return null;
+    }
+
+    // this Thu write this functions
+    public List<Product> get5Product(){
+        List<Product> list = new ArrayList<>();
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "SELECT * FROM Product LIMIT 5";
+        Cursor cursor = lite.rawQuery(sql , null);
+        while (cursor != null && cursor.moveToNext()){
+            int ID = cursor.getInt(0);
+            String ProductName = cursor.getString(1);
+            int image = cursor.getInt(2);
+            double price = cursor.getDouble(3);
+            Product product = new Product(ID,ProductName,image,price);
+            list.add(product);
+        }
+        cursor.close();
+        return list;
     }
 
     public int UpdateProduct(Product product){

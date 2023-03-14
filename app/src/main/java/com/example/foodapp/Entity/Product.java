@@ -28,6 +28,13 @@ public class Product {
         this.description = description;
     }
 
+    public Product(int productID, String productName, int image, double price) {
+        ProductID = productID;
+        ProductName = productName;
+        this.image = image;
+        this.price = price;
+    }
+
     public int getProductID() {
         return ProductID;
     }
