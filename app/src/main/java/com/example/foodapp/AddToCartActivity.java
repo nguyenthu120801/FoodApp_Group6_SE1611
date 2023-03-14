@@ -1,6 +1,8 @@
 package com.example.foodapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,23 +12,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodapp.Entity.Cart;
-import com.example.foodapp.Entity.Food;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCart;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
+import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.activity.OrderActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class AddToCartActivity extends AppCompatActivity implements onChangeItem {
@@ -39,7 +42,8 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     DAOOrderDetail daoOrderDetail;
     Button checkoutBtn;
     SessionManager sessionManager;
-
+    FoodAdapter adapter;
+    int userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +51,35 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         sessionManager = new SessionManager(this);
         tv_total = findViewById(R.id.tv_totalPrice);
         tv_notification = findViewById(R.id.tv_noti);
-        List<Cart> cartList = new DAOCart(this).getListCart(2);
+
+        SessionManager sessionManager = new SessionManager(this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        String username = user.get(SessionManager.KEY_USERNAME);
+        userID = 2;
+       // int userID = new DAOUser(this).getIDUser(username);
+        cartList = new DAOCart(this).getListCart(userID);
         rcv = findViewById(R.id.rv_category);
         int id = getIntent().getIntExtra("id", 0);
         LoadRecyclerView(cartList, id);
+
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                new DAOCart(AddToCartActivity.this).DeleteCart(cartList.get(viewHolder.getAdapterPosition()).getCartID());
+                cartList.remove(viewHolder.getAdapterPosition());
+                productList.clear();
+                LoadRecyclerView( new DAOCart(AddToCartActivity.this).getListCart(userID), -1);
+                adapter.notifyDataSetChanged();
+            }
+        };
+
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(rcv);
 
         ((Button)findViewById(R.id.btn_checkout)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,13 +132,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         tv_total.setText("$" + price);
     }
 
-    @Override
-    public void onDeleteItem(int cartID) {
-        Log.d("size", String.valueOf(cartID));
-        new DAOCart(this).DeleteCart(cartID);
-        List<Cart> cartList = new DAOCart(this).getListCart(2);
-        LoadRecyclerView(cartList, -1);
-    }
+
 
     public void LoadRecyclerView(List<Cart> cartList, int id){
         double total = 0;
@@ -130,22 +153,23 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             }
         }
         if(cartList.size() != 0) {
-            for (Cart c : cartList){
+            for (Cart c : cartList) {
                 Product p = new DAOProduct(this).getProduct(c.getProductID());
                 total += p.getPrice() * c.getQuantity();
                 productList.add(p);
             }
-            FoodAdapter adapter = new FoodAdapter(cartList, total, productList, this);
+            adapter = new FoodAdapter(cartList, total, productList, this);
             rcv.setLayoutManager(new LinearLayoutManager(this));
             rcv.setAdapter(adapter);
         }else{
-
             tv_notification.setText("Cart is empty, please buy food to continues");
             tv_notification.setVisibility(View.VISIBLE);
             tv_notification.setTextColor(Color.RED);
             ((Button)findViewById(R.id.btn_checkout)).setVisibility(View.GONE);
-            tv_total.setVisibility(View.GONE);
-            ((TextView)findViewById(R.id.textView10)).setVisibility(View.GONE);
+            tv_total.setText("$0");
+
         }
+
+
     }
 }
