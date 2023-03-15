@@ -154,6 +154,11 @@ Button checkoutBtn;
         tv_total.setText("$" + price);
     }
 
+    @Override
+    public void onQuantityChange(int quantity) {
+
+    }
+
 
     public void LoadRecyclerView(List<Cart> cartList, int id){
         double total = 0;
@@ -186,7 +191,7 @@ Button checkoutBtn;
                 productList.add(p);
             }
 
-            adapter = new FoodAdapter(cartList, total, productList, this);
+            adapter = new FoodAdapter(this,cartList, total, productList, this);
             rcv.setLayoutManager(new LinearLayoutManager(this));
             rcv.setAdapter(adapter);
         }else{
