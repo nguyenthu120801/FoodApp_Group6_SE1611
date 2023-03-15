@@ -21,9 +21,9 @@ import com.example.foodapp.activity.OrderDetailActivity;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
-    private Context context;
-    private List<Order> orderList;
-    private OnRefreshViewListner mRefreshListner;
+    private final Context context;
+    private final List<Order> orderList;
+    private final OnRefreshViewListner mRefreshListner;
     public OrderAdapter(Context context, List<Order> orderList) {
         this.context = context;
         this.orderList = orderList;

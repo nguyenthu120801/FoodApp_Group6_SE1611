@@ -1,10 +1,9 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +12,9 @@ import android.widget.Toast;
 
 import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOUser;
-import com.example.foodapp.Model.UserDBHelper;
+
+import com.example.foodapp.R;
+
 
 public class LoginActivity extends AppCompatActivity {
     TextView tv_register;
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ((Button)findViewById(R.id.btn_Login)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_Login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionManager sessionManager = new SessionManager(LoginActivity.this);

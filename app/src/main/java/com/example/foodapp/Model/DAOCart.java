@@ -36,6 +36,22 @@ public class DAOCart extends ConnectDatabase{
         return list;
     }
 
+    public Cart getCart(int CartID){
+        Cart cart = new Cart();
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "Select * from Cart where CartID = ?";
+        String[] selectionArgs = {String.valueOf(CartID)};
+        Cursor cursor = lite.rawQuery(sql , selectionArgs);
+        while(cursor!= null && cursor.moveToNext()){
+            int cartID = cursor.getInt(0);
+            int userID = cursor.getInt(1);
+            int productId = cursor.getInt(2);
+            int quantity = cursor.getInt(3);
+            cart = new Cart(cartID, userID, productId, quantity);
+        }
+        return cart;
+    }
+
     public int getMaxCartID(){
         int maxCartID = 0;
         SQLiteDatabase lite = getReadableDatabase();

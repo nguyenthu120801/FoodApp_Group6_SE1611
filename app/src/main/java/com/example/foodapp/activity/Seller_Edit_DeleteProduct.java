@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -19,7 +19,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +33,7 @@ import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
+import com.example.foodapp.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

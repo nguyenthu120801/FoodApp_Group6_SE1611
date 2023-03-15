@@ -15,23 +15,20 @@ public class DAOUser extends ConnectDatabase {
         super(context);
     }
 
-    public Boolean insertUser(String FullName, String Username, String Password, String DOB, String Email, String Phone) {
+    public Boolean insertUser(String FullName, String Username, String Password, String Gender, String Email, String Phone, String RoleName) {
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("FullName", FullName);
         contentValues.put("Username", Username);
         contentValues.put("Password", Password);
-        contentValues.put("DOB", DOB);
+        contentValues.put("Gender", Gender);
         contentValues.put("Email", Email);
         contentValues.put("Phone", Phone);
+        contentValues.put("RoleName", RoleName);
 
         long result = MyDatabase.insert("User", null, contentValues);
 
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
 
     public User getUser(String username, String password) {

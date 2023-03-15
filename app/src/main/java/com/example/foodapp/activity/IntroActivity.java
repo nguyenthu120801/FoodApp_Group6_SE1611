@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -7,10 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+
 import com.example.foodapp.Entity.Category;
+import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.activity.ListUserOrderActivity;
+
+import com.example.foodapp.R;
+
 
 public class IntroActivity extends AppCompatActivity {
     private ConstraintLayout btn_start;
@@ -22,7 +27,7 @@ public class IntroActivity extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(IntroActivity.this, MainActivity.class));
+                startActivity(new Intent(IntroActivity.this, LoginActivity.class));
             }
         });
     }

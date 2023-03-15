@@ -2,8 +2,6 @@ package com.example.foodapp.Adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodapp.AddToCartActivity;
 import com.example.foodapp.Entity.Product;
-import com.example.foodapp.FoodDetailActivity;
-import com.example.foodapp.MainActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.onProductItemClick;
 
 import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     List<Product> productList;
     private onProductItemClick onProductItemClick;
 

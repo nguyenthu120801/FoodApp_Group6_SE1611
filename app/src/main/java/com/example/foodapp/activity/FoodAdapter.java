@@ -1,9 +1,9 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,23 +12,25 @@ import android.widget.TextView;
 
 import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.Model.DAOCart;
+import com.example.foodapp.R;
+import com.example.foodapp.onChangeItem;
 
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
-
+    private Context context;
     public List<Cart> cartList;
     public double total;
     public List<Product> productList;
-    private onChangeItem onChangeItem;
+    private com.example.foodapp.onChangeItem onChangeItem;
 
-
-    public FoodAdapter(List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
+    public FoodAdapter(Context context, List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
+        this.context = context;
         this.cartList = cartList;
         this.total = total;
         this.productList = productList;
         this.onChangeItem = onChangeItem;
-
     }
 
     class FoodHolder extends RecyclerView.ViewHolder{
@@ -37,6 +39,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         public TextView tv_price;
         public TextView tv_TotlaPrice;
         TextView tv_quantity;
+        TextView tv_id;
 
         public FoodHolder(@NonNull View itemView) {
             super(itemView);
@@ -45,6 +48,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
             tv_price = itemView.findViewById(R.id.tv_foodPrice);
             tv_TotlaPrice = itemView.findViewById(R.id.tv_totalPriceFood);
             tv_quantity = itemView.findViewById(R.id.tv_quantity);
+            tv_id = itemView.findViewById(R.id.txt_id);
             onChangeItem.onPriceChange(total);
 
             itemView.findViewById(R.id.plus).setOnClickListener(new View.OnClickListener() {
@@ -55,7 +59,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                     tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
                     total += Double.parseDouble(tv_price.getText().toString());
                     onChangeItem.onPriceChange(total);
-
+                    Cart c = new DAOCart(context).getCart(Integer.parseInt(tv_id.getText().toString()));
+                    new DAOCart(context).UpdateCart(new Cart(c.getCartID(), c.getUserID(), c.getProductID(), newQuantity));
                 }
             });
 
@@ -70,6 +75,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
                         tv_TotlaPrice.setText(String.valueOf(Double.parseDouble(tv_price.getText().toString()) * newQuantity));
                         total -= Double.parseDouble(tv_price.getText().toString());
                         onChangeItem.onPriceChange(total);
+                        Cart c = new DAOCart(context).getCart(Integer.parseInt(tv_id.getText().toString()));
+                        new DAOCart(context).UpdateCart(new Cart(c.getCartID(), c.getUserID(), c.getProductID(), newQuantity));
                     }
                 }
             });
@@ -94,7 +101,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         holder.tv_TotlaPrice.setText(String.valueOf(
                 productList.get(position).getPrice() * cartList.get(position).getQuantity()));
         holder.tv_quantity.setText(String.valueOf(cartList.get(position).getQuantity()));
-
+        holder.tv_id.setText(String.valueOf(cartList.get(position).getCartID()));
 
     }
 
@@ -107,10 +114,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         }
     }
 
-    public void removeItem(int position){
-        cartList.remove(position);
-        notifyItemRemoved(position);
-    }
+
 
 
 
