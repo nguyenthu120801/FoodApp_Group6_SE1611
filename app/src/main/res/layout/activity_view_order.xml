@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:paddingVertical="10dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="10dp"
     android:paddingHorizontal="20dp"
     android:background="@drawable/rounded_corner"
     android:orientation="vertical"
@@ -30,7 +31,8 @@
             <Button
                 android:id="@+id/cancel_order_btn"
                 android:layout_height="wrap_content"
-                android:minHeight="43dp"
+                android:minHeight="38dp"
+                android:textSize="11sp"
                 android:layout_width="wrap_content"
                 android:background="@drawable/rounded_textview"
                 android:paddingHorizontal="30dp"
@@ -50,6 +52,7 @@
             <TextView
                 android:id="@+id/address_text"
                 style="@style/orderView"
+                android:layout_weight="1"
                 android:text="Address" />
         </LinearLayout>
 
@@ -57,7 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2"
             >
 
             <ImageView
@@ -70,17 +72,24 @@
                 android:layout_weight="1"
                 android:text="Order Date" />
 
-            <ImageView
-                style="@style/imageOrderView"
-                android:src="@drawable/fast_delivery"
-                />
-            <TextView
-                android:id="@+id/ship_date_text"
-                style="@style/orderView"
-                android:layout_weight="1"
-                android:text="Ship Date" />
-        </LinearLayout>
 
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ship_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <ImageView
+            style="@style/imageOrderView"
+            android:src="@drawable/fast_delivery"
+            />
+        <TextView
+            android:id="@+id/ship_date_text"
+            style="@style/orderView"
+            android:layout_weight="1"
+            android:text="Ship Date" />
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,6 +102,7 @@
             <TextView
                 android:id="@+id/status_text"
                 style="@style/orderView"
+                android:layout_weight="1"
                 android:text="Status" />
         </LinearLayout>
 
