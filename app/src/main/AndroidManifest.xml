@@ -88,9 +88,6 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".View_ProductActivity"
-            android:exported="false" />
-        <activity
             android:name=".IntroActivity"
             android:exported="true">
             <intent-filter>
