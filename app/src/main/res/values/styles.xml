@@ -2,7 +2,7 @@
 <resources>
     <style name="orderView">
         <item name="android:padding">2dp</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:background">@drawable/rounded_textview</item>
         <item name="android:textColor">@color/black</item>

@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import com.example.foodapp.Model.DAOUser;
+import com.example.foodapp.R;
+
 
 public class SigupActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class SigupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sigup);
 
-        btn_Register = (Button) findViewById(R.id.btn_Register);
+        btn_Register = findViewById(R.id.btn_Register);
 
         fullname = findViewById(R.id.edt_fullname);
         username = findViewById(R.id.edt_username);

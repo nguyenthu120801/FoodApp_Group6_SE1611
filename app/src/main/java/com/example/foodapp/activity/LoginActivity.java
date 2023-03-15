@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOUser;
+
+import com.example.foodapp.R;
+
 
 public class LoginActivity extends AppCompatActivity {
     TextView tv_register;
@@ -33,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ((Button)findViewById(R.id.btn_Login)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_Login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionManager sessionManager = new SessionManager(LoginActivity.this);

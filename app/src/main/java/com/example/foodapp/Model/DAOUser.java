@@ -28,11 +28,7 @@ public class DAOUser extends ConnectDatabase {
 
         long result = MyDatabase.insert("User", null, contentValues);
 
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
 
     public User getUser(String username, String password) {

@@ -15,16 +15,19 @@ import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.R;
+import com.example.foodapp.onProductItemClick;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     List<Product> productList;
+    private onProductItemClick onProductItemClick;
 
-    public ProductAdapter(Context context, List<Product> productList) {
+    public ProductAdapter(Context context, List<Product> productList, onProductItemClick onProductItemClick) {
         this.context = context;
         this.productList = productList;
+        this.onProductItemClick = onProductItemClick;
     }
 
     @NonNull
@@ -60,6 +63,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             cateName = itemView.findViewById(R.id.tv_cateName);
             product_image = itemView.findViewById(R.id.pro_img);
             btn_addproduct = itemView.findViewById(R.id.btn_AddProduct);
+
+            btn_addproduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onProductItemClick.onProductClick(Integer.parseInt(tv_id.getText().toString()), "AddToCart");
+
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onProductItemClick.onProductClick(Integer.parseInt(tv_id.getText().toString()), "FoodDetail");
+                }
+            });
         }
     }
     // đừng sửa gì hay xóa gì trong này nhé đức

@@ -11,12 +11,10 @@ import android.widget.TextView;
 
 import com.example.foodapp.Adapter.OrderAdapter;
 import com.example.foodapp.Entity.Order;
-import com.example.foodapp.LoginActivity;
 import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.OnRefreshViewListner;
 import com.example.foodapp.R;
-import com.example.foodapp.SessionManager;
 
 import java.util.List;
 

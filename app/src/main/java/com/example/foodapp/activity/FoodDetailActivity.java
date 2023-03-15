@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOProduct;
+import com.example.foodapp.R;
 
 import java.util.HashMap;
 
@@ -31,7 +32,6 @@ public class FoodDetailActivity extends AppCompatActivity {
         imv = findViewById(R.id.img_food);
         int id = getIntent().getIntExtra("id", 0);
         Product product = new DAOProduct(this).getProduct(id);
-
         SessionManager sessionManager = new SessionManager(FoodDetailActivity.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         String username = user.get(SessionManager.KEY_USERNAME);
