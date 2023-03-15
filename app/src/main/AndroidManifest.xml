@@ -94,7 +94,6 @@
             android:exported="false" />
         <activity
 
-            android:name=".IntroActivity"
 
             android:name=".activity.View_ProductActivity"
             android:exported="false" />
