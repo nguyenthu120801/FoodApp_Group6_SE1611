@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.R;
 
@@ -47,10 +48,9 @@ public class ViewProductAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.viewImage);
         textName.setText(product.getProductName());
         textPrice.setText(product.getPrice() + "$");
-        image.setImageResource(product.getImage());
-        Drawable drawable = image.getDrawable();
-        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap() ;
-        image.setImageBitmap(bitmap);
+        Glide.with(viewGroup.getContext())
+                .load(product.getImage())
+                .into(image);
         return view;
     }
 }
