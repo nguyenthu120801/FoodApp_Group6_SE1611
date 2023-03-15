@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Entity.ManageOrder;
-import com.example.foodapp.MainActivity;
 import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.ConnectDatabase;
 import com.example.foodapp.Model.DAOManageOrder;
