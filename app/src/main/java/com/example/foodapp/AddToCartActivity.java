@@ -1,19 +1,20 @@
 package com.example.foodapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,9 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     List<Cart> cartList = new ArrayList<>();
     OrderDBHelper orderDBHelper;
     DAOOrderDetail daoOrderDetail;
-    Button checkoutBtn;
+    EditText addressText;
+DAOUser daoUser;
+Button checkoutBtn;
     SessionManager sessionManager;
     FoodAdapter adapter;
     int userID;
@@ -51,11 +54,12 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         setContentView(R.layout.activity_add_to_cart);
         sessionManager = new SessionManager(this);
         tv_total = findViewById(R.id.tv_totalPrice);
-
+        addressText = findViewById(R.id.input_address_text);
         SessionManager sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         String username = user.get(SessionManager.KEY_USERNAME);
-        userID = new DAOUser(this).getIDUser(username);
+        daoUser = new DAOUser(this);
+        userID = daoUser.getIDUser(username);
         cartList = new DAOCart(this).getListCart(userID);
         rcv = findViewById(R.id.rv_category);
         int id = getIntent().getIntExtra("id", 0);
@@ -102,11 +106,20 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     }
 
     private void checkout(){
+        if (addressText.getText().toString().trim().isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Thông báo");
+            builder.setMessage("Vui lòng nhập giá trị cho address");
+            builder.setPositiveButton("OK", null);
+            builder.show();
+            return;
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Order order = new Order();
-        order.setUserID(sessionManager.getUserID());
-        order.setOrderDate(new Date().toString());
+        order.setUserID(userID);
+        order.setOrderDate( dateFormat.format(new Date()));
         order.setStatus(Order.STATUS_IN_PROGRESS);
-        order.setAddress("Fixed address");
+        order.setAddress(addressText.getText().toString());
        int orderid = orderDBHelper.insertOrder(order);
        Log.d("infoOrder", "order id vừa insert là : "+orderid);
        if (orderid != -1){

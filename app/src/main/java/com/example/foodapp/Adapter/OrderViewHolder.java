@@ -13,7 +13,7 @@ import com.example.foodapp.R;
 public class OrderViewHolder extends RecyclerView.ViewHolder {
     public TextView orderIdText,addressText, orderDateText,shipDateText, statusText;
     public Button cancelButton;
-    public LinearLayout linearLayout;
+    public LinearLayout linearLayout,shipDateLayout;
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
         orderIdText = itemView.findViewById(R.id.order_id_text);
@@ -23,6 +23,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         statusText = itemView.findViewById(R.id.status_text);
         cancelButton = itemView.findViewById(R.id.cancel_order_btn);
         linearLayout = itemView.findViewById(R.id.order_all_view);
+        shipDateLayout = itemView.findViewById(R.id.ship_date_layout);
 
     }
 }
