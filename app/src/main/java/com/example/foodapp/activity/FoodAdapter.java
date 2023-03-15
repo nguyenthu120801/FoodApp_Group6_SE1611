@@ -1,9 +1,8 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.R;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
     public List<Cart> cartList;
     public double total;
     public List<Product> productList;
-    private onChangeItem onChangeItem;
+    private com.example.foodapp.onChangeItem onChangeItem;
 
 
     public FoodAdapter(List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {

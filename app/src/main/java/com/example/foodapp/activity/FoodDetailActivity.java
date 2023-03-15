@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOProduct;
+import com.example.foodapp.R;
 
 import java.util.HashMap;
 
