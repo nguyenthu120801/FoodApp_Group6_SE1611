@@ -93,10 +93,14 @@
             android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
+
+            android:name=".IntroActivity"
+
             android:name=".activity.View_ProductActivity"
             android:exported="false" />
         <activity
             android:name=".activity.IntroActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
