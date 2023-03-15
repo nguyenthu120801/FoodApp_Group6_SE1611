@@ -81,7 +81,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
 
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(rcv);
 
-        ((Button)findViewById(R.id.btn_checkout)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_checkout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddToCartActivity.this, OrderActivity.class);
@@ -165,7 +165,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             tv_notification.setText("Cart is empty, please buy food to continues");
             tv_notification.setVisibility(View.VISIBLE);
             tv_notification.setTextColor(Color.RED);
-            ((Button)findViewById(R.id.btn_checkout)).setVisibility(View.GONE);
+            findViewById(R.id.btn_checkout).setVisibility(View.GONE);
             tv_total.setText("$0");
 
         }

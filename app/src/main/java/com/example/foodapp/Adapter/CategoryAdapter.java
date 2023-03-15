@@ -18,7 +18,7 @@ import com.example.foodapp.R;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     List<Category> catList;
     public CategoryAdapter(Context context, List<Category> catList) {
         this.context = context;

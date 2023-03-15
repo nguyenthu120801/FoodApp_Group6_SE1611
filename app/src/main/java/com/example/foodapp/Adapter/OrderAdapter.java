@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
-    private Context context;
-    private List<Order> orderList;
-    private OnRefreshViewListner mRefreshListner;
+    private final Context context;
+    private final List<Order> orderList;
+    private final OnRefreshViewListner mRefreshListner;
     public OrderAdapter(Context context, List<Order> orderList) {
         this.context = context;
         this.orderList = orderList;

@@ -30,7 +30,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         //int id = getIntent().getIntExtra("id", 0);
         int id = 4;
         Product product = new DAOProduct(this).getProduct(id);
-        ((Button)findViewById(R.id.btn_Add)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_Add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FoodDetailActivity.this, AddToCartActivity.class);

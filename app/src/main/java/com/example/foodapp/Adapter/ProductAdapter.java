@@ -19,7 +19,7 @@ import com.example.foodapp.R;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     List<Product> productList;
 
     public ProductAdapter(Context context, List<Product> productList) {

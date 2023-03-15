@@ -18,7 +18,7 @@ import com.example.foodapp.R;
 import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     List<Product> productList;
 
     public PopularAdapter(Context context, List<Product> productList) {
