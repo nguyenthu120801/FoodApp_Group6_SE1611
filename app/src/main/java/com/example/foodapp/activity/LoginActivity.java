@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ((Button)findViewById(R.id.btn_Login)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_Login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionManager sessionManager = new SessionManager(LoginActivity.this);

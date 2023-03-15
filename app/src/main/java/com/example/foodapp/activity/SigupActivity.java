@@ -22,7 +22,7 @@ public class SigupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sigup);
 
-        btn_Register = (Button) findViewById(R.id.btn_Register);
+        btn_Register = findViewById(R.id.btn_Register);
 
         fullname = findViewById(R.id.edt_fullname);
         username = findViewById(R.id.edt_username);

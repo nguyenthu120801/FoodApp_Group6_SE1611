@@ -32,7 +32,6 @@ public class FoodDetailActivity extends AppCompatActivity {
         imv = findViewById(R.id.img_food);
         int id = getIntent().getIntExtra("id", 0);
         Product product = new DAOProduct(this).getProduct(id);
-
         SessionManager sessionManager = new SessionManager(FoodDetailActivity.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         String username = user.get(SessionManager.KEY_USERNAME);

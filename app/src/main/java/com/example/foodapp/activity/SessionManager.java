@@ -8,9 +8,9 @@ import com.example.foodapp.Model.DAOUser;
 import java.util.HashMap;
 
 public class SessionManager {
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
-    private Context context;
+    private final SharedPreferences pref;
+    private final SharedPreferences.Editor editor;
+    private final Context context;
 
     int PRIVATE_MODE = 0;
 
