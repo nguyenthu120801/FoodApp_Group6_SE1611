@@ -6,6 +6,16 @@ public class OrderDetail {
     private int ProductID;
     private int quantity;
 
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "DetailID=" + DetailID +
+                ", OrderID=" + OrderID +
+                ", ProductID=" + ProductID +
+                ", quantity=" + quantity +
+                '}';
+    }
+
     public OrderDetail() {
     }
 

@@ -80,4 +80,12 @@
         app:layout_constraintStart_toStartOf="@+id/product_img"
         app:layout_constraintTop_toBottomOf="@+id/tv_fee"
         tools:paddingEnd="15dp" />
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

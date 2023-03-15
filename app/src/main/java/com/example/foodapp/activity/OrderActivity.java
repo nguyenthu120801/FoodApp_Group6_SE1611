@@ -55,8 +55,8 @@ public class OrderActivity extends AppCompatActivity {
         order.setShipDate(orderDate.toString());
         order.setStatus(Order.STATUS_IN_PROGRESS);
         Log.d("infoOrder", "Begin call database");
-        boolean isSuccess = orderDBHelper.insertOrder(order);
-        Log.d("infoOrder", "End call database, is success : " + isSuccess);
+        int orderid = orderDBHelper.insertOrder(order);
+        Log.d("infoOrder", "End call database, is success : " + orderid);
     }
 
     private void searchOrder(String orderId) {

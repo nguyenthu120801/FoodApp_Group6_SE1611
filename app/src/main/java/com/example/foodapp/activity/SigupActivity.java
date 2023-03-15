@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.Model.UserDBHelper;
-
-import java.util.Date;
+import com.example.foodapp.R;
 
 public class SigupActivity extends AppCompatActivity {
 

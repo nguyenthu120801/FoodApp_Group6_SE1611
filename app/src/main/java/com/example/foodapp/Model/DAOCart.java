@@ -36,6 +36,17 @@ public class DAOCart extends ConnectDatabase{
         return list;
     }
 
+    public int getMaxCartID(){
+        int maxCartID = 0;
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "Select Max(CartID) from Cart";
+        Cursor cursor = lite.rawQuery(sql , null);
+        while(cursor!= null && cursor.moveToNext()){
+             maxCartID = cursor.getInt(0);
+        }
+        return maxCartID;
+    }
+
     public long AddCart (Cart cart){
         SQLiteDatabase lite = getWritableDatabase();
         ContentValues values = new ContentValues();

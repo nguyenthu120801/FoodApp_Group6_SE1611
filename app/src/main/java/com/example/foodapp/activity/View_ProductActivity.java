@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOProduct;
+import com.example.foodapp.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,6 @@ public class View_ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_product);
-        spinner = findViewById(R.id.spinner);
         setMap();
     }
 }
