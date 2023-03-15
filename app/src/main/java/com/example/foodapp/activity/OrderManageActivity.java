@@ -39,11 +39,7 @@ import java.util.Map;
 
 public class OrderManageActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_manage);
-    }
+
 
     public static class Seller_AddProduct extends AppCompatActivity {
         private final DAOProduct daoProduct = new DAOProduct(this);
