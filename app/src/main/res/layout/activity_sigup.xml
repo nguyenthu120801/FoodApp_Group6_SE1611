@@ -6,23 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".SigupActivity">
 
+
     <ImageView
         android:id="@+id/img_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAlignment="center"
         app:srcCompat="@drawable/background_intro"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="0dp" />
-
-    <RadioButton
-        android:id="@+id/rb_female"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
 
     <TextView
         android:id="@+id/textView9"
@@ -128,14 +120,38 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_password"
         app:layout_constraintWidth_percent=".8" />
 
-    <RadioButton
-        android:id="@+id/rb_male"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+    <RadioGroup
+        android:layout_width="343dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintStart_toStartOf="@+id/img_user"
+        app:layout_constraintTop_toBottomOf="@+id/edt_phone">
+
+        <RadioButton
+            android:id="@+id/rb_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="8dp"
+            android:text="Male"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
+
+        <RadioButton
+            android:id="@+id/rb_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="8dp"
+            android:text="Female"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
+
+    </RadioGroup>
 
     <Button
         android:id="@+id/btn_Register"
@@ -149,24 +165,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Male"
-        app:layout_constraintStart_toEndOf="@+id/rb_male"
-        app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Female"
-        app:layout_constraintStart_toEndOf="@+id/rb_female"
         app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
 
 

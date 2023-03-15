@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +54,9 @@ public class SigupActivity extends AppCompatActivity {
                 String mail = email.getText().toString();
                 String phone_number = phone.getText().toString();
 
-
+                if(TextUtils.isEmpty(fname) || TextUtils.isEmpty(user) ||TextUtils.isEmpty(pass) ||TextUtils.isEmpty(mail) ||TextUtils.isEmpty(phone_number) ){
+                    return;
+                }
                 Boolean insert = DB.insertUser(fname,user,pass,gt,mail,phone_number,"Customer");
                 if(insert == true){
                     Toast.makeText(SigupActivity.this, "Register successfully", Toast.LENGTH_LONG).show();
