@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCategory;
@@ -105,9 +106,9 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         product = daoProduct.getProduct(ProductID);
         editProductName.setText(product.getProductName());
         editPrice.setText(product.getPrice() + "");
-        Drawable drawable = getResources().getDrawable(product.getImage());
-        bit = ((BitmapDrawable) drawable).getBitmap() ;
-        image.setImageBitmap(bit);
+        Glide.with(this)
+                .load(product.getImage())
+                .into(image);
         editDes.setText(product.getDescription() == null ? "" : product.getDescription());
         setSelectedCategory();
         UploadImage();
@@ -155,7 +156,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 }else if(Double.parseDouble(Price) == 0){
                     textMessage.setText("Price must be greater than 0");
                 }else{
-                    int image = product.getImage();
+                    String image = product.getImage();
                     product = new Product(ProductID, ProductName,image,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){

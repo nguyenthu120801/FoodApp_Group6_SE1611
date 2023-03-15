@@ -7,18 +7,7 @@ import com.example.foodapp.R;
 import androidx.annotation.Nullable;
 
 public class ConnectDatabase extends SQLiteOpenHelper {
-
-
-
-    private static final String ORDER_TABLE ="Order";
-    private static final String ORDER_ID ="OrderID";
-    private static final String ORDER_USERID ="UserID";
-    private static final String ORDER_ADDRESS ="Address";
-    private static final String ORDER_ORDER_DATE ="OrderDate";
-    private static final String ORDER_SHIP_DATE ="ShipDate";
-    private static final String ORDER_STATUS ="Status";
-
-    private static final String DATABASE_NAME = "PRM392_FOOD_APP";
+    private static final String DATABASE_NAME = "Test";
     private static final int DATABASE_VERSION = 1;
     public ConnectDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -67,19 +56,19 @@ public class ConnectDatabase extends SQLiteOpenHelper {
     }
     private void InsertProduct(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert ={
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Ốc hương',"+ R.drawable.oc_huong+",15.25,1,'Ốc hương là loài thân mềm một mảnh vỏ, thịt thơm ngon, giàu chất dinh dưỡng. Từ lâu ốc hương đã được coi là món ngon hạng nhất trong những đặc sản biển. Loài ốc này ngay cả khi tươi sống đã tỏa ra hương thơm tự nhiên, hấp dẫn, đúng như tên của nó.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Hamburger',"+R.drawable.pop_2+",10.00,3,'With our innovative tools and resources crafting a compelling story, or creating a breathtaking piece of art, the possibilities are truly limitless. So why wait? Join us today and start exploring the world of endless creativity!')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Tôm hùm',"+R.drawable.tom_hum+",16.00,1,'Tôm hùm ở Bình Ba ngoài vị béo ngậy, ngọt lịm do tôm còn tươi khi ăn kèm muối ớt xanh ở đây càng quyện vào nhau hơn.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cá ngừ đại dương',"+R.drawable.ca_ngu_dai_duong+",12.25,1,'Cá ngừ đại dương là loại hải sản đặc biệt thơm ngon, mắt rất bổ, được chế biến thành nhiều loại món ăn ngon và tạo nguồn hàng xuất khẩu có giá trị.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Pizza',"+R.drawable.pop_1+",13.00,4,'Pizza is a beloved Italian dish that has become a global favorite. It typically consists of a thin, round crust made from flour, water, yeast, and salt. The crust is topped with a tomato-based sauce and a variety of toppings, which can include cheese, meats, vegetables, and herbs.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở cuốn',"+R.drawable.pho_cuon+",15.75,2,'Nhân cuốn bên trong phở rất đa dạng, có thể thay bằng tôm, chả chiên, thịt bò tùy theo sở thích của gia đình. Nhưng dù dùng phần nhân gì đây chăng nữa thì phở cuốn vẫn là món ngon cực phẩm, chinh phục được mọi thực khách.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở gà',"+R.drawable.pho_ga+",17.75,2,'Nước dùng phở gà có màu vàng nhạt nhưng vẫn giữ được độ trong chuẩn phở Việt. Bánh phở mềm, ngập trong nước dùng ngọt thanh, thơm mùi gừng, quế, hồi.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở xào',"+R.drawable.pho_xao+",16.75,2,'Phở xào với những miếng thịt bò mềm, ngọt, quyện cùng với cải thìa, cà rốt, hành tây, vừa tươi, vừa giòn, vừa ngọt, thêm một chút ngò rí, hành lá thơm lừng.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang cua',"+R.drawable.com_rang_cua+",18.75,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang lạp xưởng và tôm',"+R.drawable.com_rang_lap_xuong_va_tom+",12.75,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang kim chi',"+R.drawable.com_rang_kim_chi+",13.5,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún riêu cua',"+R.drawable.bun_rieu_cua+",16.00,3,'Nhắc đến bún riêu không ai là không nghĩ đến tô bún nóng hổi với nước dùng thanh ngọt, ăn cùng với chả riêu hấp béo mềm, dậy mùi thơm hấp dẫn của gạch cua.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún bò giò heo',"+R.drawable.bun_bo_gio_heo+",16.25,3,'Điểm đặc biệt của món ăn này là phần giò heo và bắp bò chín mềm, thấm đều gia vị. Khi ăn ta sẽ cảm nhận được vị giòn ngon của da heo được giữ trọn vẹn')\n"
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Ốc hương','https://toplist.vn/images/800px/oc-huong-tu-nhien-nha-trang-133352.jpg',15.25,1,'Ốc hương là loài thân mềm một mảnh vỏ, thịt thơm ngon, giàu chất dinh dưỡng. Từ lâu ốc hương đã được coi là món ngon hạng nhất trong những đặc sản biển. Loài ốc này ngay cả khi tươi sống đã tỏa ra hương thơm tự nhiên, hấp dẫn, đúng như tên của nó.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cua Năm Căn','https://toplist.vn/images/800px/cua-nam-can-ca-mau-133357.jpg',10.00,1,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Tôm hùm','https://toplist.vn/images/800px/tom-hum-binh-ba-khanh-hoa-133355.jpg',16.00,1,'Tôm hùm ở Bình Ba ngoài vị béo ngậy, ngọt lịm do tôm còn tươi khi ăn kèm muối ớt xanh ở đây càng quyện vào nhau hơn.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cá ngừ đại dương','https://toplist.vn/images/800px/ca-ngu-dai-duong-phu-yen-133360.jpg',12.25,1,'Cá ngừ đại dương là loại hải sản đặc biệt thơm ngon, mắt rất bổ, được chế biến thành nhiều loại món ăn ngon và tạo nguồn hàng xuất khẩu có giá trị.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bào ngư','https://toplist.vn/images/800px/bao-ngu-bach-long-vy-hai-phong-834994.jpg',13.00,1,'Đây là sản vật đặc trưng, loài đặc sản mang lại hiệu quả kinh tế cao của huyện đảo này, là nguồn thực phẩm bổ dưỡng, vị thuốc quý, được đánh giá là có chất lượng nhất và là một trong những đặc sản hải sản của Việt Nam sánh ngang với bào ngư nổi tiếng ở nhiều nước trên thế giới')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở cuốn','https://cdn.tgdd.vn/2021/06/content/phocuon-800x450.jpg',15.75,2,'Nhân cuốn bên trong phở rất đa dạng, có thể thay bằng tôm, chả chiên, thịt bò tùy theo sở thích của gia đình. Nhưng dù dùng phần nhân gì đây chăng nữa thì phở cuốn vẫn là món ngon cực phẩm, chinh phục được mọi thực khách.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở gà','https://cdn.tgdd.vn/2021/06/content/phoga-800x450.jpg',17.75,2,'Nước dùng phở gà có màu vàng nhạt nhưng vẫn giữ được độ trong chuẩn phở Việt. Bánh phở mềm, ngập trong nước dùng ngọt thanh, thơm mùi gừng, quế, hồi.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở xào','https://cdn.tgdd.vn/2021/06/content/phoxao-800x450.jpg',16.75,2,'Phở xào với những miếng thịt bò mềm, ngọt, quyện cùng với cải thìa, cà rốt, hành tây, vừa tươi, vừa giòn, vừa ngọt, thêm một chút ngò rí, hành lá thơm lừng.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang cua','https://toplist.vn/images/800px/com-rang-cua-26877.jpg',18.75,4,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang lạp xưởng và tôm','https://toplist.vn/images/800px/com-rang-lap-xuong-va-tom-836726.jpg',12.75,4,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang kim chi','https://toplist.vn/images/800px/com-rang-kim-chi-26882.jpg',13.5,4,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún riêu cua','https://cdn.tgdd.vn/2021/06/content/Bunrieucua-800x450.jpg',16.00,3,'Nhắc đến bún riêu không ai là không nghĩ đến tô bún nóng hổi với nước dùng thanh ngọt, ăn cùng với chả riêu hấp béo mềm, dậy mùi thơm hấp dẫn của gạch cua.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún bò giò heo','https://cdn.tgdd.vn/2021/06/content/Bungvh-800x450.jpg',16.25,3,'Điểm đặc biệt của món ăn này là phần giò heo và bắp bò chín mềm, thấm đều gia vị. Khi ăn ta sẽ cảm nhận được vị giòn ngon của da heo được giữ trọn vẹn')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -141,7 +130,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         String sqlProduct = "CREATE TABLE Product(\n" +
                 "\tProductID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tProductName TEXT NOT NULL ,\n" +
-                "\tImage INTEGER  NOT NULL,\n" +
+                "\tImage TEXT  NOT NULL,\n" +
                 "\tprice REAL NOT NULL,\n" +
                 "\tCategoryID INTEGER  NOT NULL,\n" +
                 "\tDescription TEXT ,\n" +

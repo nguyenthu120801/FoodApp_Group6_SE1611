@@ -80,7 +80,7 @@ public class DAOProduct extends ConnectDatabase{
         while(cursor!= null && cursor.moveToNext()){
             int ProductID = cursor.getInt(0);
             String ProductName = cursor.getString(1);
-            int image = cursor.getInt(2);
+            String image = cursor.getString(2);
             double price = cursor.getDouble(3);
             int categoryID = cursor.getInt(4);
             String description = cursor.getString(5);
@@ -109,7 +109,7 @@ public class DAOProduct extends ConnectDatabase{
         // if get data successful
         if(cursor!= null && cursor.moveToNext()){
             String ProductName = cursor.getString(1);
-            int image = cursor.getInt(2);
+            String image = cursor.getString(2);
             double price = cursor.getDouble(3);
             int CategoryID = cursor.getInt(4);
             String description = cursor.getString(5);
@@ -128,9 +128,11 @@ public class DAOProduct extends ConnectDatabase{
         while (cursor != null && cursor.moveToNext()){
             int ID = cursor.getInt(0);
             String ProductName = cursor.getString(1);
-            int image = cursor.getInt(2);
+            String image = cursor.getString(2);
             double price = cursor.getDouble(3);
-            Product product = new Product(ID,ProductName,image,price);
+            int CategoryID = cursor.getInt(4);
+            String description = cursor.getString(5);
+            Product product = new Product(ID, ProductName,image,price,CategoryID,description);
             list.add(product);
         }
         cursor.close();
@@ -144,10 +146,11 @@ public class DAOProduct extends ConnectDatabase{
         while (cursor != null && cursor.moveToNext()){
             int ID = cursor.getInt(0);
             String ProductName = cursor.getString(1);
-            int image = cursor.getInt(2);
+            String image = cursor.getString(2);
             double price = cursor.getDouble(3);
             int CategoryID = cursor.getInt(4);
-            Product product = new Product(ID,ProductName,image,price,CategoryID);
+            String description = cursor.getString(5);
+            Product product = new Product(ID,ProductName,image,price,CategoryID,description);
             list.add(product);
         }
         cursor.close();
