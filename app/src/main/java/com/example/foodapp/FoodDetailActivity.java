@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOProduct;
 
+import java.util.HashMap;
+
 public class FoodDetailActivity extends AppCompatActivity {
     TextView tv_foodName;
     TextView tv_price;
@@ -27,16 +29,24 @@ public class FoodDetailActivity extends AppCompatActivity {
         tv_price = findViewById(R.id.tv_price);
         tv_description = findViewById(R.id.tv_description);
         imv = findViewById(R.id.img_food);
-        //int id = getIntent().getIntExtra("id", 0);
-        int id = 4;
+        int id = getIntent().getIntExtra("id", 0);
         Product product = new DAOProduct(this).getProduct(id);
+
+        SessionManager sessionManager = new SessionManager(FoodDetailActivity.this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        String username = user.get(SessionManager.KEY_USERNAME);
+
         ((Button)findViewById(R.id.btn_Add)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FoodDetailActivity.this, AddToCartActivity.class);
-                int productID = product.getProductID();
-                intent.putExtra("id", productID);
-                startActivity(intent);
+                if (username == null) {
+                    startActivity(new Intent(FoodDetailActivity.this, LoginActivity.class));
+                }else {
+                    Intent intent = new Intent(FoodDetailActivity.this, AddToCartActivity.class);
+                    int productID = product.getProductID();
+                    intent.putExtra("id", productID);
+                    startActivity(intent);
+                }
             }
         });
 
