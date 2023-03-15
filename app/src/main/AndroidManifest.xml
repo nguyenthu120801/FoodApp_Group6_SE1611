@@ -93,8 +93,6 @@
             android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-
-
             android:name=".activity.View_ProductActivity"
             android:exported="false" />
         <activity
