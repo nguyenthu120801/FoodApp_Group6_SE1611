@@ -21,8 +21,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
     public double total;
     public List<Product> productList;
     private com.example.foodapp.onChangeItem onChangeItem;
-
-
     public FoodAdapter(List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
         this.cartList = cartList;
         this.total = total;

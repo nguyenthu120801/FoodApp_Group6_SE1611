@@ -92,7 +92,7 @@ Button checkoutBtn;
 
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(rcv);
 
-        ((Button)findViewById(R.id.btn_checkout)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_checkout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddToCartActivity.this, OrderActivity.class);
@@ -190,6 +190,7 @@ Button checkoutBtn;
             rcv.setLayoutManager(new LinearLayoutManager(this));
             rcv.setAdapter(adapter);
         }else{
+
             ((ImageView)findViewById(R.id.imv_cartEmpty)).setVisibility(View.VISIBLE);
             ((Button)findViewById(R.id.btn_checkout)).setVisibility(View.GONE);
             tv_total.setText("$0");
