@@ -39,11 +39,7 @@ import java.util.Map;
 
 public class OrderManageActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_manage);
-    }
+
 
     public static class Seller_AddProduct extends AppCompatActivity {
         private final DAOProduct daoProduct = new DAOProduct(this);
@@ -100,38 +96,38 @@ public class OrderManageActivity extends AppCompatActivity {
             setMap();
             BackToList();
             UploadImage();
-            AddProduct();
+            //AddProduct();
         }
 
-        private void AddProduct(){
-            buttonAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String ProductName = editProductName.getText().toString().trim();
-                    String Price = editPrice.getText().toString().trim();
-                    String des =  editDes.getText().toString().trim();
-                    int CategoryID= mapInt.get(spinner.getSelectedItem().toString());
-                    textMess.setTextColor(Color.RED);
-                    if(ProductName.isEmpty()){
-                        textMess.setText("You have to input product name");
-                    }else if(daoProduct.CheckProductExist(ProductName)){
-                        textMess.setText("Product existed");
-                    } else if(Price.isEmpty()){
-                        textMess.setText("You have to input price");
-                    }else if(Double.parseDouble(Price) == 0){
-                        textMess.setText("Price must be greater than 0");
-                    } else{
-                        int image = R.drawable.logo;
-                        Product product = new Product(ProductName,image,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
-                        long number = daoProduct.AddProduct(product);
-                        if(number > 0){
-                            textMess.setTextColor(Color.GREEN);
-                            textMess.setText("Add successful");
-                        }
-                    }
-                }
-            });
-        }
+//        private void AddProduct(){
+//            buttonAdd.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    String ProductName = editProductName.getText().toString().trim();
+//                    String Price = editPrice.getText().toString().trim();
+//                    String des =  editDes.getText().toString().trim();
+//                    int CategoryID= mapInt.get(spinner.getSelectedItem().toString());
+//                    textMess.setTextColor(Color.RED);
+//                    if(ProductName.isEmpty()){
+//                        textMess.setText("You have to input product name");
+//                    }else if(daoProduct.CheckProductExist(ProductName)){
+//                        textMess.setText("Product existed");
+//                    } else if(Price.isEmpty()){
+//                        textMess.setText("You have to input price");
+//                    }else if(Double.parseDouble(Price) == 0){
+//                        textMess.setText("Price must be greater than 0");
+//                    } else{
+//                        int image = R.drawable.logo;
+//                        Product product = new Product(ProductName,image,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+//                        long number = daoProduct.AddProduct(product);
+//                        if(number > 0){
+//                            textMess.setTextColor(Color.GREEN);
+//                            textMess.setText("Add successful");
+//                        }
+//                    }
+//                }
+//            });
+//        }
 
         private void UploadImage(){
             buttonUpload.setOnClickListener(new View.OnClickListener() {

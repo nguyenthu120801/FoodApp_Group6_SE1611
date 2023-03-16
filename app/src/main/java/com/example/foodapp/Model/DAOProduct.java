@@ -130,7 +130,9 @@ public class DAOProduct extends ConnectDatabase{
             String ProductName = cursor.getString(1);
             int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
-            Product product = new Product(ID,ProductName,image,price);
+            int CategoryID = cursor.getInt(4);
+            String description = cursor.getString(5);
+            Product product = new Product(ID, ProductName,image,price,CategoryID,description);
             list.add(product);
         }
         cursor.close();
@@ -147,7 +149,8 @@ public class DAOProduct extends ConnectDatabase{
             int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
             int CategoryID = cursor.getInt(4);
-            Product product = new Product(ID,ProductName,image,price,CategoryID);
+            String description = cursor.getString(5);
+            Product product = new Product(ID,ProductName,image,price,CategoryID,description);
             list.add(product);
         }
         cursor.close();

@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOUser;
+
 import com.example.foodapp.R;
+
 
 public class LoginActivity extends AppCompatActivity {
     TextView tv_register;
