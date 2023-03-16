@@ -24,6 +24,11 @@ public class Order {
         this.address = address;
     }
 
+    public Order(int orderID, String status) {
+        this.orderID = orderID;
+        this.status = status;
+    }
+
     public Order(int orderID, int userID, String orderDate, String shipDate, String status, String address) {
         this.orderID = orderID;
         this.userID = userID;

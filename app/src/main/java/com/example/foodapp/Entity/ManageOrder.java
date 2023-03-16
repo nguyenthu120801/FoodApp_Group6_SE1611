@@ -3,17 +3,14 @@ package com.example.foodapp.Entity;
 public class ManageOrder {
     private int OrderID;
     private String status;
-    private String ProductName;
-    private int quantity;
-    private int image;
+    private String FullName;
+    private String Address;
 
-
-    public ManageOrder(int orderID, String status, String productName, int quantity, int image) {
+    public ManageOrder(int orderID, String status, String fullName, String address) {
         OrderID = orderID;
         this.status = status;
-        ProductName = productName;
-        this.quantity = quantity;
-        this.image = image;
+        FullName = fullName;
+        Address = address;
     }
 
     public int getOrderID() {
@@ -24,35 +21,27 @@ public class ManageOrder {
         OrderID = orderID;
     }
 
-    public String getProductName() {
-        return ProductName;
-    }
-
-    public void setProductName(String productName) {
-        ProductName = productName;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getFullName() {
+        return FullName;
+    }
+
+    public void setFullName(String fullName) {
+        FullName = fullName;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 }

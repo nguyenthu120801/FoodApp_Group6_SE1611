@@ -23,32 +23,61 @@ public class DAOManageOrder extends ConnectDatabase {
     public List<ManageOrder> getAllManageOrder(){
         List<ManageOrder> list = new ArrayList<>();
         SQLiteDatabase lite = getReadableDatabase();
-        String sql = "select [Order].OrderID, [Order].status, Product.ProductName, OrderDetail.quantity, Product.Image from [Order] JOIN OrderDetail ON [Order].OrderID = OrderDetail.OrderID JOIN Product ON OrderDetail.ProductID = Product.ProductID";
+        String sql = "select [Order].OrderID, [Order].status, User.FullName,[Order].Address from [Order] " +
+                "INNER JOIN User ON [Order].UserID = User.ID ";
         Cursor cursor = lite.rawQuery(sql , null);
         while (cursor != null && cursor.moveToNext()){
             int orderId = cursor.getInt(0);
             String status = cursor.getString(1);
-            String productName = cursor.getString(2);
-            int quantity = cursor.getInt(3);
-            int image = cursor.getInt(4);
-            ManageOrder manageOrder = new ManageOrder(orderId,status,productName,quantity,image);
+            String fullName = cursor.getString(2);
+            String address = cursor.getString(3);
+            ManageOrder manageOrder = new ManageOrder(orderId,status,fullName,address);
             list.add(manageOrder);
         }
         cursor.close();
         return list;
     }
 
-    public int UpdateStatus(Order order){
+
+
+    public void UpdateStatus(int orderId, String status){
         SQLiteDatabase lite = getWritableDatabase();
         ContentValues values = new ContentValues();
-        String whereClause = "OrderID = ?";
-        String[] whereArgs = {String.valueOf(order.getOrderID())};
-        values.put("status",order.getStatus());
-        return lite.update("Order",values,whereClause,whereArgs);
+        String sql = "Update [Order] SET Status = ? WHERE OrderID = ?";
+        String[] strings = {status,String.valueOf(orderId)};
+        lite.rawQuery(sql, strings);
+        //Cursor cursor = lite.rawQuery(sql, strings);
+        //String whereClause = "OrderID = ?";
+        //String[] whereArgs = {String.valueOf(order.getOrderID())};
+        /*values.put("UserID",order.getUserID());
+        values.put("OrderDate",order.getOrderDate());
+        values.put("ShipDate",order.getShipDate());
+        values.put("Status",order.getStatus());
+        values.put("Address",order.getAddress());
+
+
+        return lite.update("Order",values,whereClause,whereArgs);*/
+
     }
 
+    public int getStatus(int orderId){
+        int status = 0;
+        SQLiteDatabase lite = getWritableDatabase();
+        String sql = "Select Status from [Order] where OrderID = ? ";
+        String[] strings = {String.valueOf(orderId)};
+        Cursor cursor = lite.rawQuery(sql, strings);
+        while (cursor != null && cursor.moveToNext()){
+            if(cursor.getString(0).equals("In progress")){
+                status = 1;
+            } else if (cursor.getString(0).equals("Cancel")) {
+                status = 2;
+            }
 
 
+        }
+        cursor.close();
+        return status;
+    }
 
 }
 

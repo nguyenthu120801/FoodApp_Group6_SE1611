@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +49,21 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.id.setText(String.valueOf(listManageOrder.get(position).getOrderID()));
-        holder.name.setText(listManageOrder.get(position).getProductName());
+        holder.name.setText(listManageOrder.get(position).getFullName());
 
         //holder.status.setText(listManageOrder.get(position).getStatus());
 
-        holder.quantity.setText(String.valueOf(listManageOrder.get(position).getQuantity()));
-        holder.img_Product.setImageResource(listManageOrder.get(position).getImage());
+        holder.address.setText(String.valueOf(listManageOrder.get(position).getAddress()));
+        holder.spin_status.setSelection(new DAOManageOrder(context).getStatus(listManageOrder.get(position).getOrderID()));
+        if(new DAOManageOrder(context).getStatus(listManageOrder.get(position).getOrderID()) == 0){
+            holder.spin_status.setVisibility(View.INVISIBLE);
+            holder.tv18.setVisibility(View.VISIBLE);
+        }
+        else if(new DAOManageOrder(context).getStatus(listManageOrder.get(position).getOrderID()) == 2){
+            holder.spin_status.setVisibility(View.INVISIBLE);
+            holder.tv18.setVisibility(View.VISIBLE);
+            holder.tv18.setText("Cancel");
+        }
     }
 
     @Override
@@ -63,8 +73,8 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        Context context;
-        TextView id, name, quantity;
+
+        TextView id, name, status, address, tv18;
         ImageView img_Product;
         Spinner spin_status;
 
@@ -75,17 +85,47 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
             id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
+
             //status = itemView.findViewById(R.id.status);
-            quantity = itemView.findViewById(R.id.quantity);
-            img_Product = itemView.findViewById(R.id.img_manageorder);
             //btn_update = itemView.findViewById(R.id.btn_update);
 
 
+
+            tv18 = itemView.findViewById(R.id.textView18);
+
+            spin_status = itemView.findViewById(R.id.spin_status);
+            address = itemView.findViewById(R.id.address);
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_item, new String[]{"Completed", "Cancel"});
+
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
             spin_status.setAdapter(adapter);
 
 
+
+
+
+            spin_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    DAOManageOrder dao = new DAOManageOrder(context);
+                    String selectedItem = adapterView.getItemAtPosition(i).toString();
+                    int idc = Integer.parseInt(id.getText().toString());
+                    dao.UpdateStatus(3, "selectedItem");
+
+                    //Order order = new Order(idc,7 ,"sdfsdfsdf","sdfsdf", "sdfsdf","sdfsdf");
+                    //Toast.makeText(itemView.getContext(),"Hello" + selectedItem + idc, Toast.LENGTH_LONG).show();
+
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
 
 
         }
