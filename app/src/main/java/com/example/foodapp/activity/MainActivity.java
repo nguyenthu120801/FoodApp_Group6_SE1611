@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
         DAOCategory daoCategory = new DAOCategory(this);
         catList = daoCategory.getAllCategory();
-        adapter = new CategoryAdapter(this, catList);
+        adapter = new CategoryAdapter(this, catList, this);
         recyclerViewCategoryList.setAdapter(adapter);
     }
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
         recyclerViewPopularList.setLayoutManager(linearLayoutManager);
         DAOProduct daoProduct = new DAOProduct(this);
         productList = daoProduct.get5Product();
-        adapter1 = new PopularAdapter(this, productList, this::onProductClick);
+        adapter1 = new PopularAdapter(this, productList, this);
         recyclerViewPopularList.setAdapter(adapter1);
     }
 
@@ -136,5 +136,12 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
                 startActivity(intent);
             }
 
+    }
+
+    @Override
+    public void onCategoryItemClick(int id) {
+        Intent intent = new Intent(MainActivity.this, ShowAllProduct.class);
+        intent.putExtra("cate_id", id);
+        startActivity(intent);
     }
 }

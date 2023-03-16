@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.foodapp.Adapter.ProductAdapter;
 import com.example.foodapp.Entity.Product;
@@ -21,22 +22,29 @@ public class ShowAllProduct extends AppCompatActivity implements onProductItemCl
     RecyclerView rv_allProduct;
     List<Product> productList;
     String username;
+    int id = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_product);
+        id = getIntent().getIntExtra("cate_id", -1);
         recyclerViewAllProduct();
         SessionManager sessionManager = new SessionManager(ShowAllProduct.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         username = user.get(SessionManager.KEY_USERNAME);
+
     }
     private void recyclerViewAllProduct(){
         LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv_allProduct = findViewById(R.id.rv_allProdcut);
         rv_allProduct.setLayoutManager(linearLayoutManager);
         DAOProduct daoProduct = new DAOProduct(this);
-        productList = daoProduct.ListProduct();
-        adapter = new ProductAdapter(this, productList, this::onProductClick);
+        if(id > 0){
+            productList = daoProduct.getProductByCategory(id);
+        }else {
+            productList = daoProduct.ListProduct();
+        }
+        adapter = new ProductAdapter(this, productList, this);
         rv_allProduct.setAdapter(adapter);
     }
 
@@ -56,5 +64,10 @@ public class ShowAllProduct extends AppCompatActivity implements onProductItemCl
             intent.putExtra("id", id);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onCategoryItemClick(int id) {
+
     }
 }

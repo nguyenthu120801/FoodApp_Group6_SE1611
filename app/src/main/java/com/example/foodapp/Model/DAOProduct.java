@@ -173,5 +173,25 @@ public class DAOProduct extends ConnectDatabase{
         String[] whereArgs = {String.valueOf(ProductID)};
         return lite.delete("Product",whereClause,whereArgs);
     }
+
+    public List<Product> getProductByCategory (int categoryID){
+        List<Product> list = new ArrayList<>();
+        SQLiteDatabase lite = getReadableDatabase();
+        String sql = "select * from Product where CategoryID = ?";
+        String[] selectionArgs = {String.valueOf(categoryID)};
+        Cursor cursor = lite.rawQuery(sql , selectionArgs);
+        // if get data successful
+        while (cursor!= null && cursor.moveToNext()){
+            int ProductID = cursor.getInt(0);
+            String ProductName = cursor.getString(1);
+            int image = cursor.getInt(2);
+            double price = cursor.getDouble(3);
+            String description = cursor.getString(5);
+            Product product = new Product(ProductID, ProductName,image,price,categoryID,description);
+            list.add(product);
+
+        }
+        return list;
+    }
 }
 
