@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.Nullable;
 
 import com.example.foodapp.Entity.Cart;
-import com.example.foodapp.Entity.OrderDetail;
 
 import java.util.ArrayList;
 import java.util.List;

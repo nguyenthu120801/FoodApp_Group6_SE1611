@@ -1,10 +1,7 @@
 package com.example.foodapp.Adapter;
 
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Entity.ManageOrder;
-import com.example.foodapp.ManageOrderActivity;
-import com.example.foodapp.Model.ConnectDatabase;
 import com.example.foodapp.Model.DAOManageOrder;
 import com.example.foodapp.R;
 

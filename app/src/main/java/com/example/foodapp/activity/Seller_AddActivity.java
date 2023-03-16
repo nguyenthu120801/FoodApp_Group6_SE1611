@@ -55,6 +55,7 @@ public class Seller_AddActivity extends AppCompatActivity {
     private Button buttonAdd;
     private Button buttonUpload;
     private TextView textMess;
+    private String imageURL;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -66,6 +67,7 @@ public class Seller_AddActivity extends AppCompatActivity {
                             return;
                         }
                         Uri uri = data.getData();
+                        imageURL = uri.toString();
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                             image.setImageBitmap(bitmap);
@@ -107,13 +109,14 @@ public class Seller_AddActivity extends AppCompatActivity {
                 textMess.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
                     textMess.setText("You have to input product name");
+                }else if(daoProduct.CheckProductExist(ProductName)){
+                    textMess.setText("Product existed");
                 }else if(Price.isEmpty()){
                     textMess.setText("You have to input price");
                 }else if(Double.parseDouble(Price) == 0){
                     textMess.setText("Price must be greater than 0");
                 } else{
-                    int image = R.drawable.logo;
-                    Product product = new Product(ProductName,image,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    Product product = new Product(ProductName,imageURL,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     long number = daoProduct.AddProduct(product);
                     if(number > 0){
                         textMess.setTextColor(Color.GREEN);
