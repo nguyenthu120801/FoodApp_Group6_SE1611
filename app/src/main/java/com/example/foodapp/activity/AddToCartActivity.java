@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -83,30 +84,34 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                rcv.getAdapter();
-                int n = new DAOCart(AddToCartActivity.this).DeleteCart(cartList.get(viewHolder.getAdapterPosition()).getCartID());
-                if (n > 0) {
-                    Toast.makeText(AddToCartActivity.this, "Remove successfully", Toast.LENGTH_LONG).show();
+                 new AlertDialog.Builder(AddToCartActivity.this)
+                        .setMessage("Do you want to delete this product!")
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                int n = new DAOCart(AddToCartActivity.this).DeleteCart(cartList.get(viewHolder.getAdapterPosition()).getCartID());
+                                if (n > 0) {
+                                    Toast.makeText(AddToCartActivity.this, "Remove successfully", Toast.LENGTH_LONG).show();
 
-                } else {
-                    Toast.makeText(AddToCartActivity.this, "Remove Fail", Toast.LENGTH_LONG).show();
-                }
-                cartList.remove(viewHolder.getAdapterPosition());
-                adapter.notifyDataSetChanged();
-                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                LoadRecyclerView(new DAOCart(AddToCartActivity.this).getListCart(userID), -1);
-
+                                } else {
+                                    Toast.makeText(AddToCartActivity.this, "Remove Fail", Toast.LENGTH_LONG).show();
+                                }
+                                cartList.remove(viewHolder.getAdapterPosition());
+                                adapter.notifyDataSetChanged();
+                                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                                LoadRecyclerView(new DAOCart(AddToCartActivity.this).getListCart(userID), -1);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                                LoadRecyclerView(new DAOCart(AddToCartActivity.this).getListCart(userID),-1);
+                            }
+                        }).show();
             }
         };
-
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(rcv);
 
-        findViewById(R.id.btn_checkout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddToCartActivity.this, OrderActivity.class);
-            }
-        });
+
         orderDBHelper = new OrderDBHelper(this);
         daoOrderDetail = new DAOOrderDetail(this);
         checkoutBtn = findViewById(R.id.btn_checkout);
@@ -163,16 +168,11 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         tv_total.setText("$" + price);
     }
 
-    @Override
-    public void onQuantityChange(int quantity) {
-
-    }
-
 
     public void LoadRecyclerView(List<Cart> cartList, int id) {
         double total = 0;
         int pID = 0;
-        int cartID = 0;
+
         List<Product> productList = new ArrayList<>();
         Product product = new DAOProduct(this).getProduct(id);
         if (product != null) {

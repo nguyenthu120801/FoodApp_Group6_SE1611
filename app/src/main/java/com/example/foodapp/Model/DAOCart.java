@@ -88,4 +88,11 @@ public class DAOCart extends ConnectDatabase{
         String[] whereArgs = {String.valueOf(cartID)};
         return lite.delete("Cart",whereClause,whereArgs);
     }
+
+    public void DeleteAllCart (){
+        SQLiteDatabase lite = getWritableDatabase();
+        String sql = "Delete from Cart";
+       lite.execSQL(sql);
+
+    }
 }

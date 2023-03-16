@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.R;
+import com.example.foodapp.onProductItemClick;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     private final Context context;
     List<Category> catList;
-    public CategoryAdapter(Context context, List<Category> catList) {
+    private onProductItemClick onProductItemClick;
+
+    public CategoryAdapter(Context context, List<Category> catList, onProductItemClick onProductItemClick) {
         this.context = context;
         this.catList = catList;
+        this.onProductItemClick = onProductItemClick;
     }
-
 
     @NonNull
     @Override
@@ -36,6 +39,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.categoryName.setText(catList.get(position).getName());
         holder.categoryimg.setImageResource(catList.get(position).getImage());
+        holder.tv_cate.setText(String.valueOf(catList.get(position).getID()));
     }
 
     @Override
@@ -44,7 +48,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView categoryName;
+        TextView categoryName, tv_cate;
         ImageView categoryimg;
         ConstraintLayout layout;
         public ViewHolder(@NonNull View itemView) {
@@ -52,6 +56,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             categoryName = itemView.findViewById(R.id.categoryName);
             categoryimg = itemView.findViewById(R.id.categoryImg);
             layout = itemView.findViewById(R.id.cat_layout);
+            tv_cate = itemView.findViewById(R.id.tv_cate);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onProductItemClick.onCategoryItemClick(Integer.parseInt(tv_cate.getText().toString()));
+                }
+            });
         }
     }
 }
