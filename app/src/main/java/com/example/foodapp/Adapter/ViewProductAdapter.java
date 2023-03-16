@@ -48,9 +48,7 @@ public class ViewProductAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.viewImage);
         textName.setText(product.getProductName());
         textPrice.setText(product.getPrice() + "$");
-        Glide.with(viewGroup.getContext())
-                .load(product.getImage())
-                .into(image);
+        image.setImageResource(product.getImage());
         return view;
     }
 }

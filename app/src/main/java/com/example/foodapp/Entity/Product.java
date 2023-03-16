@@ -3,7 +3,7 @@ package com.example.foodapp.Entity;
 public class Product {
     private int ProductID;
     private String ProductName;
-    private String image;
+    private int image;
     private double price;
     private int CategoryID;
     private String description;
@@ -11,7 +11,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productID, String productName, String image, double price, int categoryID, String description) {
+    public Product(int productID, String productName, int image, double price, int categoryID, String description) {
         ProductID = productID;
         ProductName = productName;
         this.image = image;
@@ -20,7 +20,7 @@ public class Product {
         this.description = description;
     }
 
-    public Product(String productName, String image, double price, int categoryID, String description) {
+    public Product(String productName, int image, double price, int categoryID, String description) {
         ProductName = productName;
         this.image = image;
         this.price = price;
@@ -44,11 +44,11 @@ public class Product {
         ProductName = productName;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
 

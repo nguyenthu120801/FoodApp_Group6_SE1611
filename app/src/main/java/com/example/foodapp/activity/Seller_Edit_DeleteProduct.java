@@ -106,9 +106,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         product = daoProduct.getProduct(ProductID);
         editProductName.setText(product.getProductName());
         editPrice.setText(product.getPrice() + "");
-        Glide.with(this)
-                .load(product.getImage())
-                .into(image);
+        image.setImageResource(product.getImage());
         editDes.setText(product.getDescription() == null ? "" : product.getDescription());
         setSelectedCategory();
         UploadImage();
@@ -156,7 +154,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 }else if(Double.parseDouble(Price) == 0){
                     textMessage.setText("Price must be greater than 0");
                 }else{
-                    String image = product.getImage();
+                    int image = product.getImage();
                     product = new Product(ProductID, ProductName,image,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){
