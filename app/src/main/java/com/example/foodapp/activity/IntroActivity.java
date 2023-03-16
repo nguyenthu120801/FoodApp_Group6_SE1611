@@ -8,12 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 
 
-import com.example.foodapp.Entity.Category;
-import com.example.foodapp.Entity.ManageOrder;
-import com.example.foodapp.Model.DAOCategory;
-import com.example.foodapp.Model.DAOProduct;
-import com.example.foodapp.activity.ListUserOrderActivity;
-
 import com.example.foodapp.R;
 
 

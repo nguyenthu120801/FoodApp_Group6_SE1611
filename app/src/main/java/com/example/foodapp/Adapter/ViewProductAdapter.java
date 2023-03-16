@@ -1,7 +1,5 @@
 package com.example.foodapp.Adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +46,7 @@ public class ViewProductAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.viewImage);
         textName.setText(product.getProductName());
         textPrice.setText(product.getPrice() + "$");
+        Drawable drawable = viewGroup.getContext().getDrawable(R.drawable.logo);
         Glide.with(viewGroup.getContext())
                 .load(product.getImage())
                 .into(image);

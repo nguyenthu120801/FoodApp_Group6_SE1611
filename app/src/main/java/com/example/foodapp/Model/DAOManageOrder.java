@@ -1,16 +1,12 @@
 package com.example.foodapp.Model;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
-import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.ManageOrder;
-import com.example.foodapp.Entity.Order;
-import com.example.foodapp.Entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;
