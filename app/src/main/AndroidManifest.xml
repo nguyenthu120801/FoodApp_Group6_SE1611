@@ -44,7 +44,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.OrderManageActivity$Seller_AddProduct"
+            android:name=".activity.OrderManageActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

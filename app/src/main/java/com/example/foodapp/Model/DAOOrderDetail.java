@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.Nullable;
 
 import com.example.foodapp.Entity.OrderDetail;
-import com.example.foodapp.Entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;

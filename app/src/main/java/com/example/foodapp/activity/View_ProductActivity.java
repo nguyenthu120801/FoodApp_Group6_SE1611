@@ -3,13 +3,11 @@ package com.example.foodapp.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.foodapp.Adapter.ProductAdapter;
 import com.example.foodapp.Entity.Category;
-import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.R;
