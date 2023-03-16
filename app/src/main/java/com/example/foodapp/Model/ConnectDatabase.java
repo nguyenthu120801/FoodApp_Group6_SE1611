@@ -7,7 +7,7 @@ import com.example.foodapp.R;
 import androidx.annotation.Nullable;
 
 public class ConnectDatabase extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "Test4";
+    private static final String DATABASE_NAME = "PRM392_APP_FOOD";
     private static final int DATABASE_VERSION = 1;
     public ConnectDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
