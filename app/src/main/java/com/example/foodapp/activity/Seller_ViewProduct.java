@@ -65,7 +65,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Seller_ViewProduct.this , OrderManageActivity.Seller_AddProduct.class));
+                startActivity(new Intent(Seller_ViewProduct.this , Seller_AddActivity.class));
             }
         });
     }

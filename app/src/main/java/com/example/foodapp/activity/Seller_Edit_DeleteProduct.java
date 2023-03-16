@@ -64,6 +64,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private TextView textMessage;
     private Bitmap bit;
     private boolean isChanged = false;
+    private String imageURL;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -75,6 +76,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                             return;
                         }
                         Uri uri = data.getData();
+                        imageURL = uri.toString();
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                             image.setImageBitmap(bitmap);
@@ -104,7 +106,9 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         product = daoProduct.getProduct(ProductID);
         editProductName.setText(product.getProductName());
         editPrice.setText(product.getPrice() + "");
-        image.setImageResource(product.getImage());
+        Glide.with(this)
+                .load(product.getImage())
+                .into(image);
         editDes.setText(product.getDescription() == null ? "" : product.getDescription());
         setSelectedCategory();
         UploadImage();
@@ -152,8 +156,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 }else if(Double.parseDouble(Price) == 0){
                     textMessage.setText("Price must be greater than 0");
                 }else{
-                    int image = product.getImage();
-                    product = new Product(ProductID, ProductName,image,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    product = new Product(ProductID, ProductName,imageURL,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){
                         textMessage.setTextColor(Color.GREEN);

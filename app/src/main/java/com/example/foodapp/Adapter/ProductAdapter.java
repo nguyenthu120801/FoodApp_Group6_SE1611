@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.R;
@@ -38,7 +39,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
         holder.tv_id.setText(String.valueOf(productList.get(position).getProductID()));
-        holder.product_image.setImageResource(productList.get(position).getImage());
+        Glide.with(holder.itemView.getContext()).load(productList.get(position).getImage()).into(holder.product_image);
         holder.ProductName.setText(productList.get(position).getProductName());
         holder.price.setText(String.valueOf(productList.get(position).getPrice()));
         holder.cateName.setText(new DAOCategory(context).getCategoryName(productList.get(position).getCategoryID()));
