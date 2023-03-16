@@ -38,6 +38,17 @@ public class DAOManageOrder extends ConnectDatabase {
         return list;
     }
 
+    public int UpdateStatus(Order order){
+        SQLiteDatabase lite = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        String whereClause = "OrderID = ?";
+        String[] whereArgs = {String.valueOf(order.getOrderID())};
+        values.put("status",order.getStatus());
+        return lite.update("Order",values,whereClause,whereArgs);
+    }
+
+
 
 
 }
+

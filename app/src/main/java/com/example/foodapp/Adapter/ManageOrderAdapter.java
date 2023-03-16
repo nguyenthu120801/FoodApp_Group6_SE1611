@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Entity.ManageOrder;
+import com.example.foodapp.Entity.Order;
 import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.ConnectDatabase;
 import com.example.foodapp.Model.DAOManageOrder;
@@ -61,9 +64,10 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         Context context;
-        TextView id, name, status, quantity;
+        TextView id, name, quantity;
         ImageView img_Product;
         Spinner spin_status;
+
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -71,37 +75,18 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
             id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
-            spin_status = itemView.findViewById(R.id.spin_status);
+            //status = itemView.findViewById(R.id.status);
             quantity = itemView.findViewById(R.id.quantity);
             img_Product = itemView.findViewById(R.id.img_manageorder);
+            //btn_update = itemView.findViewById(R.id.btn_update);
+
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_item, new String[]{"Completed", "Cancel"});
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spin_status.setAdapter(adapter);
 
 
 
-            spin_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                DAOManageOrder manageOrder = new DAOManageOrder(context);
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    DAOManageOrder dao = new DAOManageOrder(context);
-                    String selectedText = adapterView.getSelectedItem().toString();
-
-
-
-                    ContentValues values = new ContentValues();
-
-                    Toast.makeText(itemView.getContext(),"Hello" + selectedText, Toast.LENGTH_LONG).show();
-                    //UpdateManageOrder(selectedText);
-
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
 
         }
 
