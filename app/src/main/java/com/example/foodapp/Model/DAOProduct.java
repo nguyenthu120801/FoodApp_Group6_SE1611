@@ -79,7 +79,7 @@ public class DAOProduct extends ConnectDatabase{
         while(cursor!= null && cursor.moveToNext()){
             int ProductID = cursor.getInt(0);
             String ProductName = cursor.getString(1);
-            String image = cursor.getString(2);
+            int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
             int categoryID = cursor.getInt(4);
             String description = cursor.getString(5);
@@ -108,7 +108,7 @@ public class DAOProduct extends ConnectDatabase{
         // if get data successful
         if(cursor!= null && cursor.moveToNext()){
             String ProductName = cursor.getString(1);
-            String image = cursor.getString(2);
+            int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
             int CategoryID = cursor.getInt(4);
             String description = cursor.getString(5);
@@ -127,7 +127,7 @@ public class DAOProduct extends ConnectDatabase{
         while (cursor != null && cursor.moveToNext()){
             int ID = cursor.getInt(0);
             String ProductName = cursor.getString(1);
-            String image = cursor.getString(2);
+            int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
             int CategoryID = cursor.getInt(4);
             String description = cursor.getString(5);
@@ -145,7 +145,7 @@ public class DAOProduct extends ConnectDatabase{
         while (cursor != null && cursor.moveToNext()){
             int ID = cursor.getInt(0);
             String ProductName = cursor.getString(1);
-            String image = cursor.getString(2);
+            int image = cursor.getInt(2);
             double price = cursor.getDouble(3);
             int CategoryID = cursor.getInt(4);
             String description = cursor.getString(5);
