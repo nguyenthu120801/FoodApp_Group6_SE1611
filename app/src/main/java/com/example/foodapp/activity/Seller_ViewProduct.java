@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -40,6 +41,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
     private int numberPage;
     private Integer CategoryID = null;
     private Button buttonAdd;
+    private LinearLayout logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
         buttonNext = findViewById(R.id.btnNext);
         numberPage = daoProduct.getNumberOfPage(CategoryID);
         buttonAdd = findViewById(R.id.btnAdd);
+        logout = findViewById(R.id.LogOut);
         setDataSearch();
         setMap();
         DisplayListProduct(page,CategoryID);
@@ -59,6 +62,19 @@ public class Seller_ViewProduct extends AppCompatActivity {
         nextPage();
         setSelectedItem();
         AddProductActivity();
+        Logout();
+    }
+    private void Logout(){
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SessionManager sessionManager = new SessionManager(Seller_ViewProduct.this);
+                sessionManager.logoutUser();
+                Intent intent = new Intent(Seller_ViewProduct.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void AddProductActivity(){
