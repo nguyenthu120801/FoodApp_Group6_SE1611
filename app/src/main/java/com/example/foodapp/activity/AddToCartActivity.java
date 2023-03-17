@@ -68,7 +68,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         rcv = findViewById(R.id.rv_category);
         int id = getIntent().getIntExtra("id", 0);
         LoadRecyclerView(cartList, id);
-        homebtn = findViewById(R.id.homeBtn);
+        homebtn = findViewById(R.id.btn_homePage);
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

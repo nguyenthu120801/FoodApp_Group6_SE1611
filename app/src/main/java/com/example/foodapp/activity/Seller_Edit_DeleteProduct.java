@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -57,13 +58,14 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private EditText editPrice;
     private ImageView image;
     private EditText editDes;
-    private Button buttonBack;
     private Button buttonUpdate;
     private Button buttonDelete;
     private Button buttonUpload;
     private TextView textMessage;
-    private Bitmap bit;
+    private LinearLayout home;
+    private LinearLayout logout;
     private boolean isChanged = false;
+
     private String imageURL;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -99,8 +101,9 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         editPrice = findViewById(R.id.edit_price);
         image = findViewById(R.id.imageView);
         editDes = findViewById(R.id.edit_des);
-        buttonBack = findViewById(R.id.btnBackList);
         textMessage = findViewById(R.id.text_message);
+        home = findViewById(R.id.btn_homePage);
+        logout = findViewById(R.id.LogOut);
         setDataCategory();
         setMap();
         product = daoProduct.getProduct(ProductID);
@@ -112,9 +115,32 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         editDes.setText(product.getDescription() == null ? "" : product.getDescription());
         setSelectedCategory();
         UploadImage();
-        BackToList();
         Update();
         Delete();
+        Home();
+        Logout();
+    }
+
+    private void Logout(){
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SessionManager sessionManager = new SessionManager(Seller_Edit_DeleteProduct.this);
+                sessionManager.logoutUser();
+                Intent intent = new Intent(Seller_Edit_DeleteProduct.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void Home(){
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Seller_Edit_DeleteProduct.this, Seller_ViewProduct.class));
+            }
+        });
     }
 
     private void Delete(){
@@ -208,15 +234,6 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         activity.launch(Intent.createChooser(intent, "Select picture"));
-    }
-
-    private void BackToList(){
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Seller_Edit_DeleteProduct.this, Seller_ViewProduct.class));
-            }
-        });
     }
 
     private void setSelectedCategory(){
