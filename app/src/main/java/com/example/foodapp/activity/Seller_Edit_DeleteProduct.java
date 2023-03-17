@@ -156,7 +156,8 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 }else if(Double.parseDouble(Price) == 0){
                     textMessage.setText("Price must be greater than 0");
                 }else{
-                    product = new Product(ProductID, ProductName,imageURL,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    String image = product.getImage();
+                    product = new Product(ProductID, ProductName,imageURL == null ? image : imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){
                         textMessage.setTextColor(Color.GREEN);
