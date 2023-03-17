@@ -48,7 +48,7 @@ public class ViewProductAdapter extends BaseAdapter {
         textPrice.setText(product.getPrice() + "$");
         Drawable drawable = viewGroup.getContext().getDrawable(R.drawable.logo);
         Glide.with(viewGroup.getContext())
-                .load(product.getImage())
+                .load(product.getImage().trim())
                 .into(image);
         return view;
     }

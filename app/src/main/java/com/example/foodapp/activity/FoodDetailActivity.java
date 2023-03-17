@@ -50,10 +50,11 @@ public class FoodDetailActivity extends AppCompatActivity {
                 }
             }
         });
-
         tv_foodName.setText(product.getProductName());
         tv_price.setText("$" + product.getPrice());
         tv_description.setText(product.getDescription());
-        Glide.with(this).load(product.getImage()).into(imv);
+        Glide.with(this)
+                .load(product.getImage().trim())
+                .into(imv);
     }
 }

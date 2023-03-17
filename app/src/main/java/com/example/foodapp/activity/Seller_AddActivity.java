@@ -115,8 +115,10 @@ public class Seller_AddActivity extends AppCompatActivity {
                     textMess.setText("You have to input price");
                 }else if(Double.parseDouble(Price) == 0){
                     textMess.setText("Price must be greater than 0");
+                } else if(imageURL == null){
+                    textMess.setText("You have to upload image");
                 } else{
-                    Product product = new Product(ProductName,imageURL,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    Product product = new Product(ProductName,imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     long number = daoProduct.AddProduct(product);
                     if(number > 0){
                         textMess.setTextColor(Color.GREEN);
