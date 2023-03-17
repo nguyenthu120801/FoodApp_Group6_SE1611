@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.example.foodapp.Adapter.ViewProductAdapter;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.R;
@@ -42,6 +43,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
     private Integer CategoryID = null;
     private Button buttonAdd;
     private LinearLayout logout;
+    private LinearLayout managerOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
         numberPage = daoProduct.getNumberOfPage(CategoryID);
         buttonAdd = findViewById(R.id.btnAdd);
         logout = findViewById(R.id.LogOut);
+        managerOrder = findViewById(R.id.manage_order);
         setDataSearch();
         setMap();
         DisplayListProduct(page,CategoryID);
@@ -63,7 +66,18 @@ public class Seller_ViewProduct extends AppCompatActivity {
         setSelectedItem();
         AddProductActivity();
         Logout();
+        ManagerOrder();
     }
+    private void ManagerOrder(){
+        managerOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Seller_ViewProduct.this, ManageOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void Logout(){
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
