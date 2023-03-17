@@ -27,7 +27,7 @@
     <Spinner
         android:id="@+id/spin_status"
         android:layout_width="157dp"
-        android:layout_height="29dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="44dp"
         android:entries="@array/status_spin"

@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
@@ -64,8 +65,8 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private TextView textMessage;
     private LinearLayout home;
     private LinearLayout logout;
-    private boolean isChanged = false;
-
+    private LinearLayout managerOrder;
+    private boolean isUpdated = false;
     private String imageURL;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -104,6 +105,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         textMessage = findViewById(R.id.text_message);
         home = findViewById(R.id.btn_homePage);
         logout = findViewById(R.id.LogOut);
+        managerOrder = findViewById(R.id.manage_order);
         setDataCategory();
         setMap();
         product = daoProduct.getProduct(ProductID);
@@ -119,6 +121,17 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         Delete();
         Home();
         Logout();
+        ManagerOrder();
+    }
+
+    private void ManagerOrder(){
+        managerOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Seller_Edit_DeleteProduct.this, ManageOrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void Logout(){
@@ -241,11 +254,11 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String CategoryName;
-                if(isChanged){
+                if(isUpdated){
                     CategoryName = listName.get(i);
                 }else{
                     CategoryName = mapStr.get(product.getCategoryID());
-                    isChanged = true;
+                    isUpdated = true;
                 }
                 spinner.setSelection(adapterArr.getPosition(CategoryName));
 

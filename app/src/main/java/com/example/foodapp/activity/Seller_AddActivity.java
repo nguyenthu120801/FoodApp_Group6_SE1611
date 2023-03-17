@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.R;
@@ -58,6 +59,7 @@ public class Seller_AddActivity extends AppCompatActivity {
     private String imageURL;
     private LinearLayout home;
     private LinearLayout logout;
+    private LinearLayout managerOrder;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -94,6 +96,7 @@ public class Seller_AddActivity extends AppCompatActivity {
         textMess = findViewById(R.id.text_mess);
         home = findViewById(R.id.btn_homePage);
         logout = findViewById(R.id.LogOut);
+        managerOrder = findViewById(R.id.manage_order);
         setDataCategory();
         setMap();
         UploadImage();
@@ -101,6 +104,17 @@ public class Seller_AddActivity extends AppCompatActivity {
         Home();
         Logout();
     }
+
+    private void ManagerOrder(){
+        managerOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Seller_AddActivity.this, ManageOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void Logout(){
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
