@@ -23,6 +23,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".activity.UserInfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.OrderDetailActivity"
             android:exported="false">
             <meta-data
