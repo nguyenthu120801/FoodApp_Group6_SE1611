@@ -64,6 +64,15 @@ public class DAOManageOrder extends ConnectDatabase {
         return lite.update("Order",values,whereClause,whereArgs);*/
 
     }
+    public int Update1(Order order){
+        SQLiteDatabase lite = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        String whereClause = "OrderID = ?";
+        String[] whereArgs = {String.valueOf(order.getStatus())};
+        values.put("Status",order.getStatus());
+
+        return lite.update("Order",values,whereClause,whereArgs);
+    }
 
     public int getStatus(int orderId){
         int status = 0;
@@ -84,6 +93,8 @@ public class DAOManageOrder extends ConnectDatabase {
         cursor.close();
         return status;
     }
+
+
 
 }
 

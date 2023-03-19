@@ -20,7 +20,7 @@ import java.util.List;
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
     private final Context context;
     List<Product> productList;
-    private onProductItemClick onProductItemClick;
+    private final onProductItemClick onProductItemClick;
 
     public PopularAdapter(Context context, List<Product> productList, com.example.foodapp.onProductItemClick onProductItemClick) {
         this.context = context;

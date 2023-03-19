@@ -1,6 +1,8 @@
 package com.example.foodapp.Entity;
 
-public class ManageOrder {
+import java.io.Serializable;
+
+public class ManageOrder implements Serializable {
     private int OrderID;
     private String status;
     private String FullName;

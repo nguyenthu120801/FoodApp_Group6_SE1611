@@ -65,7 +65,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private TextView textMessage;
     private Bitmap bit;
     private boolean isChanged = false;
-    private ActivityResultLauncher<Intent> activity = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override

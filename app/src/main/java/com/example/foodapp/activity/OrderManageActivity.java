@@ -58,7 +58,7 @@ public class OrderManageActivity extends AppCompatActivity {
         private Button buttonAdd;
         private Button buttonUpload;
         private TextView textMess;
-        private ActivityResultLauncher<Intent> activity = registerForActivityResult(
+        private final ActivityResultLauncher<Intent> activity = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override

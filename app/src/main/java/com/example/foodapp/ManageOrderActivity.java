@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -11,11 +12,13 @@ import android.widget.Spinner;
 import com.example.foodapp.Adapter.ManageOrderAdapter;
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Model.DAOManageOrder;
+import com.example.foodapp.activity.UpdateManageOrder;
 
 import java.util.List;
 
-public class ManageOrderActivity extends AppCompatActivity {
+public class ManageOrderActivity extends AppCompatActivity implements OnClick {
     private RecyclerView.Adapter adapter;
+    private  ManageOrderAdapter manageOrderAdapter;
     List<ManageOrder> manageOrderList;
     RecyclerView manageorder;
     Spinner spin_status;
@@ -29,11 +32,18 @@ public class ManageOrderActivity extends AppCompatActivity {
         manageorder.setLayoutManager(linearLayoutManager);
         DAOManageOrder manageOrder = new DAOManageOrder(this);
         manageOrderList = manageOrder.getAllManageOrder();
-        adapter = new ManageOrderAdapter(this, manageOrderList);
+        adapter = new ManageOrderAdapter(this,this::clickItem , manageOrderList);
         manageorder.setAdapter(adapter);
-        String[] spin_status = {"Completed", "Cancel"};
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,spin_status );
 
 
+
+    }
+
+
+    @Override
+    public void clickItem(int id) {
+        Intent intent = new Intent(ManageOrderActivity.this, UpdateManageOrder.class);
+        intent.putExtra("ID", id);
+        startActivity(intent);
     }
 }

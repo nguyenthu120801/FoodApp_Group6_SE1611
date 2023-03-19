@@ -15,7 +15,7 @@ import com.example.foodapp.R;
 import java.util.List;
 
 public class ViewProductAdapter extends BaseAdapter {
-    private List<Product> list;
+    private final List<Product> list;
 
     public ViewProductAdapter(List<Product> list) {
         this.list = list;

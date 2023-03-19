@@ -205,8 +205,8 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             rcv.setAdapter(adapter);
         } else {
 
-            ((ImageView) findViewById(R.id.imv_cartEmpty)).setVisibility(View.VISIBLE);
-            ((Button) findViewById(R.id.btn_checkout)).setVisibility(View.GONE);
+            findViewById(R.id.imv_cartEmpty).setVisibility(View.VISIBLE);
+            findViewById(R.id.btn_checkout).setVisibility(View.GONE);
             tv_total.setText("$0");
             rcv.setVisibility(View.GONE);
         }

@@ -22,7 +22,7 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private final Context context;
     List<Product> productList;
-    private onProductItemClick onProductItemClick;
+    private final onProductItemClick onProductItemClick;
 
     public ProductAdapter(Context context, List<Product> productList, onProductItemClick onProductItemClick) {
         this.context = context;
