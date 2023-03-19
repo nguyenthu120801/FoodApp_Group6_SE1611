@@ -87,5 +87,47 @@ public class DAOUser extends ConnectDatabase {
         db.close();
         return userId;
     }
+
+    public int updateUser(User user) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("FullName", user.getFullName());
+        values.put("Phone", user.getPhone());
+        values.put("Email", user.getEmail());
+        values.put("Gender", user.getGender());
+
+        String selection = "ID" + " = ?";
+        String[] selectionArgs = { String.valueOf(user.getID()) };
+
+       return db.update("User", values, selection, selectionArgs);
+    }
+
+    public User getUser(String id) {
+        User user = null;
+        SQLiteDatabase db = getReadableDatabase();
+        String[] projection = {
+                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName"};
+        String selection = "ID = ?";
+        String[] selectionArgs = { id };
+        Cursor cursor = db.query(
+                "User",
+                projection,
+                selection,
+                selectionArgs, null, null, null);
+        if (cursor.moveToFirst()) {
+            int ID = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
+            String fullName = cursor.getString(cursor.getColumnIndexOrThrow("FullName"));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow("Phone"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow( "Email"));
+            String gender = cursor.getString(cursor.getColumnIndexOrThrow("Gender"));
+            String roleName = cursor.getString(cursor.getColumnIndexOrThrow("RoleName"));
+            String username = cursor.getString(cursor.getColumnIndexOrThrow("Username"));
+            String password = cursor.getString(cursor.getColumnIndexOrThrow("Password"));
+            user = new User(ID, fullName, phone, email, gender, username, password, roleName);
+        }
+        cursor.close();
+        return user;
+    }
 }
 

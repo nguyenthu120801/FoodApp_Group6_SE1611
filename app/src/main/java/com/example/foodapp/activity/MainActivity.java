@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
     private RecyclerView.Adapter adapter, adapter1;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
     ImageView img_user;
-    LinearLayout logout;
+    LinearLayout logout, accountNav;
     TextView tv_welcome;
     List<Category> catList;
     List<Product> productList;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         logout = findViewById(R.id.LogOut);
+        accountNav = findViewById(R.id.accountNav);
         img_user = findViewById(R.id.img_user);
         tv_welcome = findViewById(R.id.tv_welcome);
         tv_showProduct = findViewById(R.id.tv_ShowProduct);
@@ -80,10 +81,15 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
             }
         });
 
+        accountNav.setOnClickListener(view -> moveToUserInfoActivity(view));
+
         FloatingActionButton toOrderBtn = findViewById(R.id.to_order_btn);
         toOrderBtn.setOnClickListener(view -> toOrder());
     }
-
+    private void moveToUserInfoActivity(View view){
+        Intent intent = new Intent(view.getContext(), UserInfoActivity.class);
+        startActivity(intent);
+    }
 
     private void recyclerViewCategory() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
