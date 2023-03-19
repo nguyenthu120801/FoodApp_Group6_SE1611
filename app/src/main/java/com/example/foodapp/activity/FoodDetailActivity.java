@@ -37,7 +37,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         String username = user.get(SessionManager.KEY_USERNAME);
 
-        ((Button)findViewById(R.id.btn_Add)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_Add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (username == null) {
