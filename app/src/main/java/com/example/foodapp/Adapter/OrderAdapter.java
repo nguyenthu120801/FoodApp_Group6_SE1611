@@ -23,16 +23,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     private final Context context;
     private final List<Order> orderList;
     private final OnRefreshViewListner mRefreshListner;
+
     public OrderAdapter(Context context, List<Order> orderList) {
         this.context = context;
         this.orderList = orderList;
-        mRefreshListner = (OnRefreshViewListner)context;
+        mRefreshListner = (OnRefreshViewListner) context;
     }
 
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new OrderViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_view_order, parent,false));
+        return new OrderViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_view_order, parent, false));
     }
 
     @Override
@@ -40,28 +41,51 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         Order order = orderList.get(position);
         holder.orderIdText.setText("Mã đơn hàng : " + order.getOrderID());
         holder.orderDateText.setText(order.getOrderDate());
-        if(order.getShipDate() == null || order.getShipDate().trim().isEmpty()){
+        if (order.getShipDate() == null || order.getShipDate().trim().isEmpty()) {
             holder.shipDateLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             holder.shipDateText.setText(order.getShipDate());
         }
         holder.addressText.setText(order.getAddress());
-        holder.statusText.setText(order.getStatus());
-
-        holder.cancelButton.setOnClickListener(view -> cancelOrder(order.getOrderID()));
+        setDisplayStatus(order, holder);
+        setDisplayCancelButton(order, holder);
         holder.linearLayout.setOnClickListener(view -> toOrderDetail(order.getOrderID()));
     }
-    private void cancelOrder(int orderId){
+
+    private void setDisplayStatus(Order order, OrderViewHolder holder) {
+        if (order.getStatus().equals(Order.STATUS_REJECTED)) {
+            holder.statusImage.setImageResource(R.drawable.rejected);
+        } else if (order.getStatus().equals(Order.SHIPPING)) {
+            holder.statusImage.setImageResource(R.drawable.fast_shipping);
+        } else if (order.getStatus().equals(Order.STATUS_COMPLETED)) {
+            holder.statusImage.setImageResource(R.drawable.accept);
+        } else {
+            holder.statusImage.setImageResource(R.drawable.pending);
+        }
+        holder.statusText.setText(order.getStatus());
+    }
+
+    private void setDisplayCancelButton(Order order, OrderViewHolder holder) {
+        boolean displayCancelButton = order.getStatus().equals(Order.STATUS_COMPLETED) || order.getStatus().equals(Order.STATUS_REJECTED);
+        if (displayCancelButton) {
+            holder.cancelButton.setVisibility(View.GONE);
+        }else {
+            holder.cancelButton.setVisibility(View.VISIBLE);
+            holder.cancelButton.setOnClickListener(view -> cancelOrder(order.getOrderID()));
+        }
+    }
+
+    private void cancelOrder(int orderId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Xác nhận");
-        builder.setMessage("Bạn có muốn hủy đơn hàng số "+orderId+" không?");
+        builder.setMessage("Bạn có muốn hủy đơn hàng số " + orderId + " không?");
         builder.setPositiveButton("Không", (dialog, which) -> {
             // Xử lý sự kiện khi người dùng chọn nút Không
         });
         builder.setNegativeButton("Có", (dialog, which) -> {
             // Xử lý sự kiện khi người dùng chọn nút Có
             OrderDBHelper orderDBHelper = new OrderDBHelper(context);
-            boolean isSuccess =  orderDBHelper.removeOrder(orderId);
+            boolean isSuccess = orderDBHelper.removeOrder(orderId);
             Log.d("infoOrder", "is success : " + isSuccess);
             mRefreshListner.refreshView();
         });
@@ -71,12 +95,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
     }
 
-    private void toOrderDetail(int orderId){
+    private void toOrderDetail(int orderId) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
-        intent.putExtra("order_id",String.valueOf(orderId));
+        intent.putExtra("order_id", String.valueOf(orderId));
         Log.d("infoOrder", "Thực hiện hành động chuyển sang order detail activity");
         context.startActivity(intent);
     }
+
     @Override
     public int getItemCount() {
         return orderList.size();
