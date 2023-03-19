@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -45,7 +46,11 @@ public class DAOManageOrder extends ConnectDatabase {
         ContentValues values = new ContentValues();
         String sql = "Update [Order] SET Status = ? WHERE OrderID = ?";
         String[] strings = {status,String.valueOf(orderId)};
-        lite.rawQuery(sql, strings);
+        lite.execSQL(sql, strings);
+
+        //Toast.makeText(context,"Update success", Toast.LENGTH_LONG).show();
+
+
         //Cursor cursor = lite.rawQuery(sql, strings);
         //String whereClause = "OrderID = ?";
         //String[] whereArgs = {String.valueOf(order.getOrderID())};
@@ -67,11 +72,12 @@ public class DAOManageOrder extends ConnectDatabase {
         String[] strings = {String.valueOf(orderId)};
         Cursor cursor = lite.rawQuery(sql, strings);
         while (cursor != null && cursor.moveToNext()){
+            boolean check = false;
             if(cursor.getString(0).equals("In progress")){
                 status = 1;
-            } else if (cursor.getString(0).equals("Cancel")) {
+            } /*else if (cursor.getString(0).equals("Cancel")) {
                 status = 2;
-            }
+            }*/
 
 
         }

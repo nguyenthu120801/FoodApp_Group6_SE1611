@@ -59,11 +59,11 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
             holder.spin_status.setVisibility(View.INVISIBLE);
             holder.tv18.setVisibility(View.VISIBLE);
         }
-        else if(new DAOManageOrder(context).getStatus(listManageOrder.get(position).getOrderID()) == 2){
+        /*else if(new DAOManageOrder(context).getStatus(listManageOrder.get(position).getOrderID()) == 2){
             holder.spin_status.setVisibility(View.INVISIBLE);
             holder.tv18.setVisibility(View.VISIBLE);
             holder.tv18.setText("Cancel");
-        }
+        }*/
     }
 
     @Override
@@ -104,26 +104,30 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
 
 
-
+            //spin_status.setSelection(-1);
 
             spin_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    boolean check = false;
                     DAOManageOrder dao = new DAOManageOrder(context);
                     String selectedItem = adapterView.getItemAtPosition(i).toString();
                     int idc = Integer.parseInt(id.getText().toString());
-                    dao.UpdateStatus(3, "selectedItem");
+
+                    dao.UpdateStatus(idc, selectedItem);
+                    return;
+
 
                     //Order order = new Order(idc,7 ,"sdfsdfsdf","sdfsdf", "sdfsdf","sdfsdf");
-                    //Toast.makeText(itemView.getContext(),"Hello" + selectedItem + idc, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(itemView.getContext(),"Update success", Toast.LENGTH_LONG).show();
 
 
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-
+                    Log.d("Messsafa","ádasdasad" );
                 }
             });
 
