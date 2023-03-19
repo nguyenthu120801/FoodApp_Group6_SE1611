@@ -1,6 +1,5 @@
 package com.example.foodapp.Adapter;
 
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,10 +17,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.ManageOrderActivity;
@@ -31,6 +28,7 @@ import com.example.foodapp.OnClick;
 import com.example.foodapp.R;
 import com.example.foodapp.activity.UpdateManageOrder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.ViewHolder>  {
@@ -83,16 +81,20 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final Button btnUpdate;
-        TextView id, name, status, address, tv18;
+        private  Button btnUpdate;
+        TextView id, name, status, address, tv18,quantity;
         ImageView img_Product;
         Spinner spin_status;
 
+        private final List<String> listStatus = new ArrayList<>();
+        private boolean isUpdated = false;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            listStatus.add(Order.STATUS_IN_PROGRESS);
+            listStatus.add(Order.STATUS_COMPLETED);
+            listStatus.add(Order.STATUS_REJECTED);
             id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
 
@@ -115,18 +117,19 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
                 @Override
                 public void onClick(View view) {
                     onClick.clickItem(Integer.parseInt(id.getText().toString()));
+                    spin_status = itemView.findViewById(R.id.spin_status);
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_item, listStatus);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+                    //spin_status.setSelection(-1);
+
 
                 }
+
             });
-
-            //spin_status.setSelection(-1);
-
-
-
-
         }
-
-
 
 
 

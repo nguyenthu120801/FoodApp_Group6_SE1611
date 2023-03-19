@@ -78,7 +78,4 @@
         android:layout_centerVertical="true"
         android:text="Update"/>
 
-
-
-
 </RelativeLayout>

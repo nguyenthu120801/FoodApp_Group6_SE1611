@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.R;
 import com.example.foodapp.onProductItemClick;
@@ -38,7 +39,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull PopularAdapter.ViewHolder holder, int position) {
         holder.title.setText(productList.get(position).getProductName());
-        holder.product_img.setImageResource(productList.get(position).getImage());
+        Glide.with(holder.itemView.getContext()).load(productList.get(position).getImage().trim()).into(holder.product_img);
         holder.price.setText(String.valueOf(productList.get(position).getPrice()));
         holder.id.setText(String.valueOf(productList.get(position).getProductID()));
     }

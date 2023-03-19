@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(user != null && user.getRoleName().equals(User.ROLE_SELLER)){
                     Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     sessionManager.createLoginSession(user.getUsername(), user.getPassword());
-                    Intent intent = new Intent(LoginActivity.this, View_ProductActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, Seller_ViewProduct.class);
                     startActivity(intent);
                     finish();
                 }

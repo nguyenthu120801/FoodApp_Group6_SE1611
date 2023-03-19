@@ -18,7 +18,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +26,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.DAOCategory;
-import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.R;
 
@@ -42,32 +39,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Seller_Edit_DeleteProduct extends AppCompatActivity {
-    public static int ProductID = 0;
+public class Seller_AddActivity extends AppCompatActivity {
     private final DAOProduct daoProduct = new DAOProduct(this);
     private final DAOCategory daoCategory = new DAOCategory(this);
-    private final DAOOrderDetail daoDetail = new DAOOrderDetail(this);
     private final Map<String, Integer> mapInt = new HashMap<>();
-    private final Map<Integer,String> mapStr = new HashMap<>();
     private final List<String> listName = new ArrayList<>();
     private static final int MY_REQUEST_CODE = 10;
+    public static final String TAG = Seller_AddActivity.class.getName();
     private List<Category> listCategory;
     private Spinner spinner;
     private ArrayAdapter adapterArr;
-    private Product product;
     private EditText editProductName;
     private EditText editPrice;
     private ImageView image;
     private EditText editDes;
-    private Button buttonUpdate;
-    private Button buttonDelete;
+    private Button buttonAdd;
     private Button buttonUpload;
-    private TextView textMessage;
+    private TextView textMess;
+    private String imageURL;
     private LinearLayout home;
     private LinearLayout logout;
     private LinearLayout managerOrder;
-    private boolean isUpdated = false;
-    private String imageURL;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -93,42 +85,31 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_edit_delete_product);
-        buttonUpdate = findViewById(R.id.btnUpdate);
-        buttonDelete = findViewById(R.id.btnDelete);
-        buttonUpload = findViewById(R.id.btnUpload);
+        setContentView(R.layout.activity_seller_add);
         spinner = findViewById(R.id.spinner_category);
         editProductName = findViewById(R.id.edit_product_name);
         editPrice = findViewById(R.id.edit_price);
         image = findViewById(R.id.imageView);
         editDes = findViewById(R.id.edit_des);
-        textMessage = findViewById(R.id.text_message);
+        buttonAdd = findViewById(R.id.btnAddProduct);
+        buttonUpload = findViewById(R.id.btnUpload);
+        textMess = findViewById(R.id.text_mess);
         home = findViewById(R.id.btn_homePage);
         logout = findViewById(R.id.LogOut);
         managerOrder = findViewById(R.id.manage_order);
         setDataCategory();
         setMap();
-        product = daoProduct.getProduct(ProductID);
-        editProductName.setText(product.getProductName());
-        editPrice.setText(product.getPrice() + "");
-        Glide.with(this)
-                .load(product.getImage())
-                .into(image);
-        editDes.setText(product.getDescription() == null ? "" : product.getDescription());
-        setSelectedCategory();
         UploadImage();
-        Update();
-        Delete();
+        AddProduct();
         Home();
         Logout();
-        ManagerOrder();
     }
 
     private void ManagerOrder(){
         managerOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Seller_Edit_DeleteProduct.this, ManageOrderActivity.class);
+                Intent intent = new Intent(Seller_AddActivity.this, ManageOrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -138,9 +119,9 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SessionManager sessionManager = new SessionManager(Seller_Edit_DeleteProduct.this);
+                SessionManager sessionManager = new SessionManager(Seller_AddActivity.this);
                 sessionManager.logoutUser();
-                Intent intent = new Intent(Seller_Edit_DeleteProduct.this, LoginActivity.class);
+                Intent intent = new Intent(Seller_AddActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -148,64 +129,41 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     }
 
     private void Home(){
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Seller_Edit_DeleteProduct.this, Seller_ViewProduct.class));
-            }
-        });
+           home.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   startActivity(new Intent(Seller_AddActivity.this, Seller_ViewProduct.class));
+               }
+           });
     }
 
-    private void Delete(){
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean check = daoDetail.CheckProductExist(ProductID);
-                // if exist someone buy product
-                if(check){
-                    textMessage.setTextColor(Color.RED);
-                    textMessage.setText("This product exists person buying");
-                }else{
-                    int number = daoProduct.DeleteProduct(ProductID);
-                    // if delete successful
-                    if(number > 0){
-                        textMessage.setTextColor(Color.GREEN);
-                        textMessage.setText("Delete successful");
-                    }
-                }
-            }
-        });
-    }
-
-    private void Update(){
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+    private void AddProduct(){
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String ProductName = editProductName.getText().toString().trim();
                 String Price = editPrice.getText().toString().trim();
                 String des =  editDes.getText().toString().trim();
                 int CategoryID= mapInt.get(spinner.getSelectedItem().toString());
-                textMessage.setTextColor(Color.RED);
+                textMess.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
-                    textMessage.setText("You have to input product name");
-                }else if(daoProduct.CheckProductExist(ProductName) && !ProductName.equalsIgnoreCase(product.getProductName())){
-                    textMessage.setText("Product existed");
-                } else if(Price.isEmpty()){
-                    textMessage.setText("You have to input price");
+                    textMess.setText("You have to input product name");
+                }else if(daoProduct.CheckProductExist(ProductName)){
+                    textMess.setText("Product existed");
+                }else if(Price.isEmpty()){
+                    textMess.setText("You have to input price");
                 }else if(Double.parseDouble(Price) == 0){
-                    textMessage.setText("Price must be greater than 0");
-                }else{
-                    String image = product.getImage();
-                    product = new Product(ProductID, ProductName,imageURL == null ? image : imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
-                    int number = daoProduct.UpdateProduct(product);
+                    textMess.setText("Price must be greater than 0");
+                } else if(imageURL == null){
+                    textMess.setText("You have to upload image");
+                } else{
+                    Product product = new Product(ProductName,imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    long number = daoProduct.AddProduct(product);
                     if(number > 0){
-                        textMessage.setTextColor(Color.GREEN);
-                        textMessage.setText("Update successful");
-                    }else{
-                        textMessage.setText("");
+                        textMess.setTextColor(Color.GREEN);
+                        textMess.setText("Add successful");
                     }
                 }
-
             }
         });
     }
@@ -249,32 +207,9 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         activity.launch(Intent.createChooser(intent, "Select picture"));
     }
 
-    private void setSelectedCategory(){
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String CategoryName;
-                if(isUpdated){
-                    CategoryName = listName.get(i);
-                }else{
-                    CategoryName = mapStr.get(product.getCategoryID());
-                    isUpdated = true;
-                }
-                spinner.setSelection(adapterArr.getPosition(CategoryName));
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
-
     private void setMap(){
         for(Category category: listCategory){
             mapInt.put(category.getName(),category.getID());
-            mapStr.put(category.getID(),category.getName());
         }
     }
 

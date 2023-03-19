@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.Nullable;
 
 import com.example.foodapp.Entity.Cart;
-import com.example.foodapp.Entity.OrderDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,5 +87,12 @@ public class DAOCart extends ConnectDatabase{
         String whereClause = "CartID = ?";
         String[] whereArgs = {String.valueOf(cartID)};
         return lite.delete("Cart",whereClause,whereArgs);
+    }
+
+    public void DeleteAllCart (){
+        SQLiteDatabase lite = getWritableDatabase();
+        String sql = "Delete from Cart";
+       lite.execSQL(sql);
+
     }
 }

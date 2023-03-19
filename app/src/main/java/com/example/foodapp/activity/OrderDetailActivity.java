@@ -13,7 +13,6 @@ import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailActivity extends AppCompatActivity {
