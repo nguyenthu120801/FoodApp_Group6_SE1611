@@ -31,21 +31,20 @@ public class ListUserOrderActivity extends AppCompatActivity implements OnRefres
         daoUser = new DAOUser(ListUserOrderActivity.this);
         sessionManager = new SessionManager(this);
         int userID = sessionManager.getUserID();
-        if(userID == -1){
+        if (userID == -1) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
-            Log.d("infoOrder","Chưa đăng nhập, về trang login");
+            Log.d("infoOrder", "Chưa đăng nhập, về trang login");
             finish();
             return;
         }
-        Log.d("infoOrder","đã đăng nhập với userid : " + userID);
+        Log.d("infoOrder", "đã đăng nhập với userid : " + userID);
         orderList = orderDBHelper.searchOrder(userID);
         recyclerView = findViewById(R.id.rv_list_user_order);
         recyclerView.setLayoutManager(new LinearLayoutManager(ListUserOrderActivity.this));
         recyclerView.setAdapter(new OrderAdapter(ListUserOrderActivity.this, orderList));
-        TextView userIdText;
-        userIdText = findViewById(R.id.testUserId);
-        userIdText.setText("User Id: " + userID); }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

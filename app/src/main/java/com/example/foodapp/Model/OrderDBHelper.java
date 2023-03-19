@@ -5,69 +5,79 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.annotation.Nullable;
 
 import com.example.foodapp.Entity.Order;
+import com.example.foodapp.provider.OrderContentProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDBHelper extends ConnectDatabase {
-    private static final String ORDER_TABLE = "[Order]";
-    private static final String ORDER_ID = "OrderID";
-    private static final String ORDER_USERID = "UserID";
-    private static final String ORDER_ADDRESS = "Address";
-    private static final String ORDER_ORDER_DATE = "OrderDate";
-    private static final String ORDER_SHIP_DATE = "ShipDate";
-    private static final String ORDER_STATUS = "Status";
+    public static final String ORDER_TABLE = "[Order]";
+    public static final String ORDER_ID = "OrderID";
+    public static final String ORDER_USERID = "UserID";
+    public static final String ORDER_ADDRESS = "Address";
+    public static final String ORDER_ORDER_DATE = "OrderDate";
+    public static final String ORDER_SHIP_DATE = "ShipDate";
+    public static final String ORDER_STATUS = "Status";
+    private Context context;
 
     public OrderDBHelper(@Nullable Context context) {
         super(context);
+        this.context = context;
     }
-
 
     public int insertOrder(Order order) {
-        SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ORDER_USERID, order.getUserID());
-        values.put(ORDER_ADDRESS, order.getAddress());
-        values.put(ORDER_ORDER_DATE, order.getOrderDate());
-        values.put(ORDER_SHIP_DATE, order.getShipDate());
-        values.put(ORDER_STATUS, order.getStatus());
-        Log.d("infoOrder", "value insert data : " + values);
-        int id =(int) db.insert(ORDER_TABLE, null, values);
-        return id;
+        values.put(OrderDBHelper.ORDER_USERID, order.getUserID());
+        values.put(OrderDBHelper.ORDER_ADDRESS, order.getAddress());
+        values.put(OrderDBHelper.ORDER_ORDER_DATE, order.getOrderDate());
+        values.put(OrderDBHelper.ORDER_SHIP_DATE, order.getShipDate());
+        values.put(OrderDBHelper.ORDER_STATUS, order.getStatus());
+        Uri uri = context.getContentResolver().insert(OrderContentProvider.CONTENT_URI, values);
+        if (uri != null) {
+            Log.d("infoOrder", "Đã insert bằng content provider với order " + order);
+            return Integer.parseInt(uri.getLastPathSegment());
+        }
+        return -1;
     }
 
 
 
-    public void updateOrder(Order order) {
+    public boolean updateOrder(Order order) {
+        String selection = OrderDBHelper.ORDER_ID + "= ?";
+        String[] selectionArgs = {String.valueOf(order.getOrderID())};
+        ContentValues values = new ContentValues();
+        values.put(OrderDBHelper.ORDER_USERID, order.getUserID());
+        values.put(OrderDBHelper.ORDER_ADDRESS, order.getAddress());
+        values.put(OrderDBHelper.ORDER_ORDER_DATE, order.getOrderDate());
+        values.put(OrderDBHelper.ORDER_SHIP_DATE, order.getShipDate());
+        values.put(OrderDBHelper.ORDER_STATUS, order.getStatus());
+        int rowsUpdated = context.getContentResolver().update(OrderContentProvider.CONTENT_URI, values, selection, selectionArgs);
+        return rowsUpdated > 0;
     }
 
     @SuppressLint("Range")
     public Order searchOrder(String orderId) {
-        SQLiteDatabase db = getReadableDatabase();
-        String selection = ORDER_ID + " = ?";
-        String[] selectionArgs = {orderId};
-        Cursor cursor = db.query(ORDER_TABLE, null, selection, selectionArgs, null, null, null);
         Order order = null;
+        String[] projection = {OrderDBHelper.ORDER_ID, OrderDBHelper.ORDER_USERID, OrderDBHelper.ORDER_ADDRESS, OrderDBHelper.ORDER_ORDER_DATE, OrderDBHelper.ORDER_SHIP_DATE, OrderDBHelper.ORDER_STATUS};
+        String selection = OrderDBHelper.ORDER_ID + "=?";
+        String[] selectionArgs = {orderId};
+        Cursor cursor = context.getContentResolver().query(OrderContentProvider.CONTENT_URI, projection, selection, selectionArgs, null);
         if (cursor != null && cursor.moveToFirst()) {
-            order = new Order();
-            order.setOrderID(cursor.getInt(cursor.getColumnIndex(ORDER_ID)));
-            order.setUserID(cursor.getInt(cursor.getColumnIndex(ORDER_USERID)));
-            order.setAddress(cursor.getString(cursor.getColumnIndex(ORDER_ADDRESS)));
-            String orderDateString = cursor.getString(cursor.getColumnIndex(ORDER_ORDER_DATE));
-            order.setOrderDate(orderDateString);
-            String shipDateString = cursor.getString(cursor.getColumnIndex(ORDER_SHIP_DATE));
-            if (shipDateString != null) {
-                order.setShipDate(shipDateString);
-            }
-            order.setStatus(cursor.getString(cursor.getColumnIndex(ORDER_STATUS)));
-        }
-        if (cursor != null) {
+            int orderIdFromCursor = cursor.getInt(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ID));
+            int userId = cursor.getInt(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_USERID));
+            String address = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ADDRESS));
+            String orderDate = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ORDER_DATE));
+            String shipDate = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_SHIP_DATE));
+            String status = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_STATUS));
+            order = new Order(orderIdFromCursor, userId, orderDate, shipDate, status, address);
             cursor.close();
         }
         return order;
@@ -75,62 +85,56 @@ public class OrderDBHelper extends ConnectDatabase {
 
     @SuppressLint("Range")
     public List<Order> searchOrder(int userId) {
-        SQLiteDatabase database = getReadableDatabase();
-        List<Order> orderList = new ArrayList<>();
-        Cursor cursor = database.query(ORDER_TABLE, null, ORDER_USERID + "=?", new String[]{String.valueOf(userId)}, null, null, null);
+        List<Order> orders = new ArrayList<>();
+        String[] projection = {OrderDBHelper.ORDER_ID, OrderDBHelper.ORDER_USERID, OrderDBHelper.ORDER_ADDRESS, OrderDBHelper.ORDER_ORDER_DATE, OrderDBHelper.ORDER_SHIP_DATE, OrderDBHelper.ORDER_STATUS};
+        String selection = OrderDBHelper.ORDER_USERID + "=?";
+        String[] selectionArgs = {String.valueOf(userId)};
+        Cursor cursor = context.getContentResolver().query(OrderContentProvider.CONTENT_URI, projection, selection, selectionArgs, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                Order order = new Order();
-                order.setOrderID(cursor.getInt(cursor.getColumnIndex(ORDER_ID)));
-                order.setUserID(cursor.getInt(cursor.getColumnIndex(ORDER_USERID)));
-                order.setOrderDate(cursor.getString(cursor.getColumnIndex(ORDER_ORDER_DATE)));
-                order.setShipDate(cursor.getString(cursor.getColumnIndex(ORDER_SHIP_DATE)));
-                order.setStatus(cursor.getString(cursor.getColumnIndex(ORDER_STATUS)));
-                order.setAddress(cursor.getString(cursor.getColumnIndex(ORDER_ADDRESS)));
-                orderList.add(order);
+                int orderId = cursor.getInt(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ID));
+                int userIdFromCursor = cursor.getInt(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_USERID));
+                String address = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ADDRESS));
+                String orderDate = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ORDER_DATE));
+                String shipDate = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_SHIP_DATE));
+                String status = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_STATUS));
+                Order order = new Order(orderId, userIdFromCursor, orderDate, shipDate, status, address);
+                orders.add(order);
             }
             cursor.close();
         }
-        return orderList;
+        return orders;
     }
 
-    public void deleteOrder(String id) {
-    }
 
     @SuppressLint("Range")
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-
-        String selectQuery = "SELECT * FROM " + ORDER_TABLE;
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Order order = new Order();
-                order.setOrderID(cursor.getInt(cursor.getColumnIndex(ORDER_ID)));
-                order.setUserID(cursor.getInt(cursor.getColumnIndex(ORDER_USERID)));
-                order.setOrderDate(cursor.getString(cursor.getColumnIndex(ORDER_ORDER_DATE)));
-                order.setShipDate(cursor.getString(cursor.getColumnIndex(ORDER_SHIP_DATE)));
-                order.setStatus(cursor.getString(cursor.getColumnIndex(ORDER_STATUS)));
-                order.setAddress(cursor.getString(cursor.getColumnIndex(ORDER_ADDRESS)));
+        String[] projection = {OrderDBHelper.ORDER_ID, OrderDBHelper.ORDER_USERID, OrderDBHelper.ORDER_ADDRESS, OrderDBHelper.ORDER_ORDER_DATE, OrderDBHelper.ORDER_SHIP_DATE, OrderDBHelper.ORDER_STATUS};
+        Cursor cursor = context.getContentResolver().query(OrderContentProvider.CONTENT_URI, projection, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int orderId = cursor.getInt(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ID));
+                int userId = cursor.getInt(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_USERID));
+                String address = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ADDRESS));
+                String orderDate = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_ORDER_DATE));
+                String shipDate = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_SHIP_DATE));
+                String status = cursor.getString(cursor.getColumnIndexOrThrow(OrderDBHelper.ORDER_STATUS));
+                Order order = new Order(orderId, userId, orderDate, shipDate, status, address);
                 orders.add(order);
-            } while (cursor.moveToNext());
+            }
+            cursor.close();
         }
-
-        cursor.close();
-        db.close();
-
         return orders;
     }
 
     public boolean removeOrder(int orderId) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = OrderDBHelper.ORDER_ID + "= ?";
+        String[] selectionArgs = {String.valueOf(orderId)};
         Log.d("infoOrder", "begin call database");
-        int isSuccess = db.delete( ORDER_TABLE, ORDER_ID + " = ?", new String[]{String.valueOf(orderId)});
+        int rowsDeleted = context.getContentResolver().delete(OrderContentProvider.CONTENT_URI, selection, selectionArgs);
         Log.d("infoOrder", "end call database");
-        db.close();
-        return isSuccess != -1;
+        return rowsDeleted != -1;
     }
 
 

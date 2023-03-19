@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +33,7 @@ import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.R;
 import com.example.foodapp.onChangeItem;
+import com.example.foodapp.provider.OrderContentProvider;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -142,7 +145,6 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             Log.d("infoOrder", "Số lượng cart là : " + cartList.size());
             OrderDetail orderDetail = new OrderDetail();
             for (Cart cart : cartList) {
-                Log.d("infoOrder", "Cart : " + cart);
                 orderDetail.setOrderID(orderid);
                 orderDetail.setProductID(cart.getProductID());
                 orderDetail.setQuantity(cart.getQuantity());
@@ -154,6 +156,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
 //            orderDetail.setProductID(product.getProductID());
 //        }
             Log.d("infoOrder", "insert order detail successful");
+            orderDBHelper.getAllOrders();
             Intent intent = new Intent(this, ListUserOrderActivity.class);
             startActivity(intent);
         } else {
