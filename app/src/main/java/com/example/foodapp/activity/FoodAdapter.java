@@ -10,20 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOCart;
 import com.example.foodapp.R;
-import com.example.foodapp.onChangeItem;
 
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
-    private Context context;
+    private final Context context;
     public List<Cart> cartList;
     public double total;
     public List<Product> productList;
-    private com.example.foodapp.onChangeItem onChangeItem;
+    private final com.example.foodapp.onChangeItem onChangeItem;
 
     public FoodAdapter(Context context, List<Cart> cartList, double total, List<Product> productList, com.example.foodapp.onChangeItem onChangeItem) {
         this.context = context;
@@ -95,7 +95,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FoodHolder holder, int position) {
-        holder.img.setImageResource(productList.get(position).getImage());
+        Glide.with(holder.itemView.getContext()).load(productList.get(position).getImage().trim()).into(holder.img);
         holder.tv_foodName.setText(productList.get(position).getProductName());
         holder.tv_price.setText(String.valueOf(productList.get(position).getPrice()));
         holder.tv_TotlaPrice.setText(String.valueOf(

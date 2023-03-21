@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.R;
@@ -36,7 +37,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         String username = user.get(SessionManager.KEY_USERNAME);
 
-        ((Button)findViewById(R.id.btn_Add)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_Add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (username == null) {
@@ -49,10 +50,11 @@ public class FoodDetailActivity extends AppCompatActivity {
                 }
             }
         });
-
         tv_foodName.setText(product.getProductName());
         tv_price.setText("$" + product.getPrice());
         tv_description.setText(product.getDescription());
-        imv.setImageResource(product.getImage());
+        Glide.with(this)
+                .load(product.getImage().trim())
+                .into(imv);
     }
 }

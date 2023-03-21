@@ -13,8 +13,8 @@ import com.example.foodapp.R;
 import java.util.List;
 
 public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailViewHolder> {
-    private Context context;
-    private List<OrderDetail> orderDetails;
+    private final Context context;
+    private final List<OrderDetail> orderDetails;
 
     public OrderDetailAdapter(Context context, List<OrderDetail> orderDetails) {
         this.context = context;

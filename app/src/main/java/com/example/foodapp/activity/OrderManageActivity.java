@@ -1,3 +1,4 @@
+/*
 package com.example.foodapp.activity;
 
 import androidx.activity.result.ActivityResult;
@@ -193,4 +194,4 @@ public class OrderManageActivity extends AppCompatActivity {
             spinner.setAdapter(adapterArr);
         }
     }
-}
+}*/

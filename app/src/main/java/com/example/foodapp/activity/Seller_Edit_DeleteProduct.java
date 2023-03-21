@@ -13,8 +13,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,12 +23,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
@@ -59,13 +59,15 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private EditText editPrice;
     private ImageView image;
     private EditText editDes;
-    private Button buttonBack;
     private Button buttonUpdate;
     private Button buttonDelete;
     private Button buttonUpload;
     private TextView textMessage;
-    private Bitmap bit;
-    private boolean isChanged = false;
+    private LinearLayout home;
+    private LinearLayout logout;
+    private LinearLayout managerOrder;
+    private boolean isUpdated = false;
+    private String imageURL;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -77,6 +79,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                             return;
                         }
                         Uri uri = data.getData();
+                        imageURL = uri.toString();
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                             image.setImageBitmap(bitmap);
@@ -99,20 +102,58 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         editPrice = findViewById(R.id.edit_price);
         image = findViewById(R.id.imageView);
         editDes = findViewById(R.id.edit_des);
-        buttonBack = findViewById(R.id.btnBackList);
         textMessage = findViewById(R.id.text_message);
+        home = findViewById(R.id.btn_homePage);
+        logout = findViewById(R.id.LogOut);
+        managerOrder = findViewById(R.id.manage_order);
         setDataCategory();
         setMap();
         product = daoProduct.getProduct(ProductID);
         editProductName.setText(product.getProductName());
         editPrice.setText(product.getPrice() + "");
-        image.setImageResource(product.getImage());
+        Glide.with(this)
+                .load(product.getImage())
+                .into(image);
         editDes.setText(product.getDescription() == null ? "" : product.getDescription());
         setSelectedCategory();
         UploadImage();
-        BackToList();
         Update();
         Delete();
+        Home();
+        Logout();
+        ManagerOrder();
+    }
+
+    private void ManagerOrder(){
+        managerOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Seller_Edit_DeleteProduct.this, ManageOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void Logout(){
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SessionManager sessionManager = new SessionManager(Seller_Edit_DeleteProduct.this);
+                sessionManager.logoutUser();
+                Intent intent = new Intent(Seller_Edit_DeleteProduct.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void Home(){
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Seller_Edit_DeleteProduct.this, Seller_ViewProduct.class));
+            }
+        });
     }
 
     private void Delete(){
@@ -154,8 +195,8 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 }else if(Double.parseDouble(Price) == 0){
                     textMessage.setText("Price must be greater than 0");
                 }else{
-                    int image = product.getImage();
-                    product = new Product(ProductID, ProductName,image,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    String image = product.getImage();
+                    product = new Product(ProductID, ProductName,imageURL == null ? image : imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){
                         textMessage.setTextColor(Color.GREEN);
@@ -208,25 +249,16 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         activity.launch(Intent.createChooser(intent, "Select picture"));
     }
 
-    private void BackToList(){
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Seller_Edit_DeleteProduct.this, Seller_ViewProduct.class));
-            }
-        });
-    }
-
     private void setSelectedCategory(){
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String CategoryName;
-                if(isChanged){
+                if(isUpdated){
                     CategoryName = listName.get(i);
                 }else{
                     CategoryName = mapStr.get(product.getCategoryID());
-                    isChanged = true;
+                    isUpdated = true;
                 }
                 spinner.setSelection(adapterArr.getPosition(CategoryName));
 

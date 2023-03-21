@@ -10,6 +10,7 @@ public class Order {
     private String status;
     private String address;
     public static final String STATUS_IN_PROGRESS = "In progress";
+    public static final String SHIPPING = "Shipping";
     public static final String STATUS_COMPLETED = "Completed";
     public static final String STATUS_REJECTED = "Rejected";
 
@@ -22,6 +23,11 @@ public class Order {
         this.shipDate = shipDate;
         this.status = status;
         this.address = address;
+    }
+
+    public Order(int orderID, String status) {
+        this.orderID = orderID;
+        this.status = status;
     }
 
     public Order(int orderID, int userID, String orderDate, String shipDate, String status, String address) {
