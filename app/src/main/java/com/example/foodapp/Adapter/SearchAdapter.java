@@ -24,15 +24,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     private Context context;
     List<Product> productList;
     List<Product> productListOld;
-    private com.example.foodapp.onProductItemClick onProductItemClick;
+    private final onProductItemClick onProductItemClick;
     public SearchAdapter(Context context, List<Product> productList, com.example.foodapp.onProductItemClick onProductItemClick) {
         this.context = context;
         this.productList = productList;
         this.productListOld = new ArrayList<>(productList);
         this.onProductItemClick = onProductItemClick;
     }
-
-
 
     @NonNull
     @Override
