@@ -33,7 +33,7 @@ public class DAOCategory extends ConnectDatabase{
         while (cursor != null && cursor.moveToNext()){
             int ID = cursor.getInt(0);
             String name = cursor.getString(1);
-            int image = cursor.getInt(2);
+            String image = cursor.getString(2);
             Category category = new Category(ID,name,image);
             list.add(category);
         }

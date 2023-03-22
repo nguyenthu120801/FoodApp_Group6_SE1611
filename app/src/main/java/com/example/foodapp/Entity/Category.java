@@ -3,22 +3,22 @@ package com.example.foodapp.Entity;
 public class Category {
     private int ID;
     private String name;
-    private int image;
+    private String image;
 
     public Category() {
     }
 
-    public Category(int ID, String name, int image) {
+    public Category(int ID, String name, String image) {
         this.ID = ID;
         this.name = name;
         this.image = image;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOManageOrder;
@@ -47,7 +48,9 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
         //holder.status.setText(listManageOrder.get(position).getStatus());
 
         holder.quantity.setText(String.valueOf(listManageOrder.get(position).getQuantity()));
-        holder.img_Product.setImageResource(listManageOrder.get(position).getImage());
+        Glide.with(holder.itemView.getContext()).load(listManageOrder.get(position).getImage())
+                .into(holder.img_Product);
+        //holder.img_Product.setImageResource(listManageOrder.get(position).getImage());
     }
 
     @Override
