@@ -56,6 +56,7 @@ public class SigupActivity extends AppCompatActivity {
                 String phone_number = phone.getText().toString();
 
                 if(TextUtils.isEmpty(fname) || TextUtils.isEmpty(user) ||TextUtils.isEmpty(pass) ||TextUtils.isEmpty(mail) ||TextUtils.isEmpty(phone_number) ){
+                    Toast.makeText(SigupActivity.this, "Please Insert!", Toast.LENGTH_LONG).show();
                     return;
                 }
                 Boolean insert = DB.insertUser(fname,user,pass,gt,mail,phone_number,"Customer");

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 
+import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.R;
 
 
@@ -21,7 +22,7 @@ public class IntroActivity extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(IntroActivity.this, LoginActivity.class));
+                startActivity(new Intent(IntroActivity.this, MainActivity.class));
             }
         });
     }

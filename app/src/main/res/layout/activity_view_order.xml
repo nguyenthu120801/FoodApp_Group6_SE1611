@@ -96,6 +96,7 @@
             android:orientation="horizontal"
             >
             <ImageView
+                android:id="@+id/status_image"
                 style="@style/imageOrderView"
                 android:src="@drawable/accept"
                 />

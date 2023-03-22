@@ -24,10 +24,7 @@ public class DAOProduct extends ConnectDatabase{
         String [] selectionArgs = {name};
         Cursor cursor = lite.rawQuery(sql, selectionArgs);
         // if get data successful
-        if(cursor!= null && cursor.moveToNext()){
-            return true;
-        }
-        return false;
+        return cursor != null && cursor.moveToNext();
     }
 
     public int getNumberOfPage(Integer CategoryID){

@@ -15,16 +15,17 @@ import com.example.foodapp.Adapter.ManageOrderAdapter;
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOManageOrder;
+import com.example.foodapp.activity.UpdateManageOrder;
 import com.example.foodapp.activity.LoginActivity;
 import com.example.foodapp.activity.Seller_Edit_DeleteProduct;
 import com.example.foodapp.activity.Seller_ViewProduct;
 import com.example.foodapp.activity.SessionManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageOrderActivity extends AppCompatActivity {
+public class ManageOrderActivity extends AppCompatActivity implements OnClick {
     private RecyclerView.Adapter adapter;
+    private  ManageOrderAdapter manageOrderAdapter;
     List<ManageOrder> manageOrderList;
     RecyclerView manageorder;
     Spinner spin_status;
@@ -42,7 +43,7 @@ public class ManageOrderActivity extends AppCompatActivity {
         manageorder.setLayoutManager(linearLayoutManager);
         DAOManageOrder manageOrder = new DAOManageOrder(this);
         manageOrderList = manageOrder.getAllManageOrder();
-        adapter = new ManageOrderAdapter(this, manageOrderList);
+        adapter = new ManageOrderAdapter(this,this::clickItem , manageOrderList);
         manageorder.setAdapter(adapter);
         Logout();
         HomePage();
@@ -68,5 +69,13 @@ public class ManageOrderActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+
+    @Override
+    public void clickItem(int id) {
+        Intent intent = new Intent(ManageOrderActivity.this, UpdateManageOrder.class);
+        intent.putExtra("ID", id);
+        startActivity(intent);
     }
 }
