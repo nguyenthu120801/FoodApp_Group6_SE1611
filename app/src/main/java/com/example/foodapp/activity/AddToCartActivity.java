@@ -166,12 +166,16 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
                 Log.d("infoOrder", "Order Detail add vào db : " + orderDetail);
                 daoOrderDetail.AddOrderDetail(orderDetail);
             }
-            Log.d("infoOrder", "delete all cart");
             new DAOCart(this).DeleteAllCart();
-            Log.d("infoOrder", "insert order detail successful");
-            orderDBHelper.getAllOrders();
-            Intent intent = new Intent(this, ListUserOrderActivity.class);
-            startActivity(intent);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Notify");
+            builder.setMessage("Checkout success!");
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                Intent intent = new Intent(this, ListUserOrderActivity.class);
+                startActivity(intent);
+            });
+            builder.show();
+
         } else {
             Log.d("infoOrder", "insert order fail");
         }
