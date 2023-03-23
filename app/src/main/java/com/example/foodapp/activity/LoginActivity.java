@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(user != null && user.getRoleName().equals(User.ROLE_SELLER)){
                     Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     sessionManager.createLoginSession(user.getUsername(), user.getPassword());
-                    Intent intent = new Intent(LoginActivity.this, View_ProductActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, Seller_ViewProduct.class);
                     startActivity(intent);
                     finish();
                 }

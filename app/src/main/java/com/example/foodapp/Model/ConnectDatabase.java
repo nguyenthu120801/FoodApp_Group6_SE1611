@@ -7,7 +7,7 @@ import com.example.foodapp.R;
 import androidx.annotation.Nullable;
 
 public class ConnectDatabase extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "PRM392_APP_FOOD";
+    private static final String DATABASE_NAME = "PRM392_APP_FOOD_PROJECT";
     private static final int DATABASE_VERSION = 1;
     public ConnectDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,16 +39,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
     private void InsertOrder(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert ={
                 "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(2,'2023-02-16','2023-02-16','Completed','7683 Ruskin Avenue')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
                 "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(4,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(5,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(5,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -56,19 +47,19 @@ public class ConnectDatabase extends SQLiteOpenHelper {
     }
     private void InsertProduct(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert ={
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Ốc hương','https://toplist.vn/images/800px/oc-huong-tu-nhien-nha-trang-133352.jpg',15.25,1,'Ốc hương là loài thân mềm một mảnh vỏ, thịt thơm ngon, giàu chất dinh dưỡng. Từ lâu ốc hương đã được coi là món ngon hạng nhất trong những đặc sản biển. Loài ốc này ngay cả khi tươi sống đã tỏa ra hương thơm tự nhiên, hấp dẫn, đúng như tên của nó.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cua Năm Căn','https://toplist.vn/images/800px/cua-nam-can-ca-mau-133357.jpg',10.00,1,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Tôm hùm','https://toplist.vn/images/800px/tom-hum-binh-ba-khanh-hoa-133355.jpg',16.00,1,'Tôm hùm ở Bình Ba ngoài vị béo ngậy, ngọt lịm do tôm còn tươi khi ăn kèm muối ớt xanh ở đây càng quyện vào nhau hơn.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cá ngừ đại dương','https://toplist.vn/images/800px/ca-ngu-dai-duong-phu-yen-133360.jpg',12.25,1,'Cá ngừ đại dương là loại hải sản đặc biệt thơm ngon, mắt rất bổ, được chế biến thành nhiều loại món ăn ngon và tạo nguồn hàng xuất khẩu có giá trị.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bào ngư','https://toplist.vn/images/800px/bao-ngu-bach-long-vy-hai-phong-834994.jpg',13.00,1,'Đây là sản vật đặc trưng, loài đặc sản mang lại hiệu quả kinh tế cao của huyện đảo này, là nguồn thực phẩm bổ dưỡng, vị thuốc quý, được đánh giá là có chất lượng nhất và là một trong những đặc sản hải sản của Việt Nam sánh ngang với bào ngư nổi tiếng ở nhiều nước trên thế giới')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở cuốn','https://cdn.tgdd.vn/2021/06/content/phocuon-800x450.jpg',15.75,2,'Nhân cuốn bên trong phở rất đa dạng, có thể thay bằng tôm, chả chiên, thịt bò tùy theo sở thích của gia đình. Nhưng dù dùng phần nhân gì đây chăng nữa thì phở cuốn vẫn là món ngon cực phẩm, chinh phục được mọi thực khách.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở gà','https://cdn.tgdd.vn/2021/06/content/phoga-800x450.jpg',17.75,2,'Nước dùng phở gà có màu vàng nhạt nhưng vẫn giữ được độ trong chuẩn phở Việt. Bánh phở mềm, ngập trong nước dùng ngọt thanh, thơm mùi gừng, quế, hồi.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Phở xào','https://cdn.tgdd.vn/2021/06/content/phoxao-800x450.jpg',16.75,2,'Phở xào với những miếng thịt bò mềm, ngọt, quyện cùng với cải thìa, cà rốt, hành tây, vừa tươi, vừa giòn, vừa ngọt, thêm một chút ngò rí, hành lá thơm lừng.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang cua','https://toplist.vn/images/800px/com-rang-cua-26877.jpg',18.75,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang lạp xưởng và tôm','https://toplist.vn/images/800px/com-rang-lap-xuong-va-tom-836726.jpg',12.75,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Cơm rang kim chi','https://toplist.vn/images/800px/com-rang-kim-chi-26882.jpg',13.5,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún riêu cua','https://cdn.tgdd.vn/2021/06/content/Bunrieucua-800x450.jpg',16.00,3,'Nhắc đến bún riêu không ai là không nghĩ đến tô bún nóng hổi với nước dùng thanh ngọt, ăn cùng với chả riêu hấp béo mềm, dậy mùi thơm hấp dẫn của gạch cua.')\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Bún bò giò heo','https://cdn.tgdd.vn/2021/06/content/Bungvh-800x450.jpg',16.25,3,'Điểm đặc biệt của món ăn này là phần giò heo và bắp bò chín mềm, thấm đều gia vị. Khi ăn ta sẽ cảm nhận được vị giòn ngon của da heo được giữ trọn vẹn')\n"
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Nam Can crab','https://toplist.vn/images/800px/cua-nam-can-ca-mau-133357.jpg',10.00,1,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Lobster','https://toplist.vn/images/800px/tom-hum-binh-ba-khanh-hoa-133355.jpg',16.00,1,'Lobster in Binh Ba, in addition to the greasy and sweet taste, because the shrimp is still fresh when eaten with green chili salt here, it blends even more.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Tuna','https://toplist.vn/images/800px/ca-ngu-dai-duong-phu-yen-133360.jpg',12.25,1,'Tuna is a particularly delicious seafood, very nutritious, processed into a variety of delicious dishes and created a valuable source of export goods.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Abalone','https://toplist.vn/images/800px/bao-ngu-bach-long-vy-hai-phong-834994.jpg',13.00,1,'This is a typical product, a special species that brings high economic efficiency of this island district, is a source of nutritious food, a precious medicine, is considered the best quality and is one of the seafood specialties. of Vietnam is comparable to the famous abalone in many countries around the world')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Chicken noodle soup','https://cdn.tgdd.vn/2021/06/content/phoga-800x450.jpg',17.75,2,'Chicken pho broth has a light yellow color but still retains the level of Vietnamese pho standards. The noodle soup is soft, submerged in a sweet broth, fragrant with ginger, cinnamon, and anise.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Fried noodle','https://cdn.tgdd.vn/2021/06/content/phoxao-800x450.jpg',16.75,2,'Stir-fried Pho with soft, sweet pieces of beef, mixed with bok choy, carrots, onions, fresh, crispy and sweet, add a little cilantro, fragrant scallions.')\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Crab fried rice','https://toplist.vn/images/800px/com-rang-cua-26877.jpg',18.75,4,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Fried rice with sausage and shrimp','https://toplist.vn/images/800px/com-rang-lap-xuong-va-tom-836726.jpg',12.75,4,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Kimchi fried rice','https://toplist.vn/images/800px/com-rang-kim-chi-26882.jpg',13.5,4,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Orange juice','https://www.acouplecooks.com/wp-content/uploads/2021/02/Painkiller-Cocktail-008.jpg',6.25,5,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Coca cola','https://sieuthibianhap.vn/wp-content/uploads/2021/07/Coca-Cola-Nhat-Chai-300ml-Thung-24-Lon-2.jpg',5.75,5,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Milk tea','https://mccoffeetanphu.com/uploads/source/mccoffee/b45-3-min.jpg',5.55,5,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Lemon juice','https://static.toiimg.com/thumb/msid-74712583,imgsize-219657,width-400,resizemode-4/74712583.jpg',5.25,5,NULL)\n",
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -77,11 +68,11 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertCategory(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-                "INSERT INTO Category ([Name], Image) VALUES ('Seafood', "+R.drawable.seafood+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Phở',"+R.drawable.noodle+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Burger', "+R.drawable.cat_2+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Pizza',"+R.drawable.cat_1+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Drink', "+R.drawable.cat_4+")"
+               "INSERT INTO Category ([Name], Image) VALUES ('Seafood', 'https://www.foodandwine.com/thmb/PbFkIre5NuukQtjPcR2piP6P4cI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/seafood-blog618-f86e8baba8834537bbffa1d55e71c999.jpg')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Phở', 'https://www.bhg.com/thmb/zNkczGRSyoAiAWQOSRdzWp0BXwg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/RU279584-653582532e1c4ef29ebab0666c0a956c.jpg'\n)",
+               "INSERT INTO Category ([Name], Image) VALUES ('Burger', 'https://burgerking.vn/media/catalog/product/cache/1/small_image/316x/9df78eab33525d08d6e5fb8d27136e95/b/u/burger_ga_pho_mai_so_t_bbq.jpg')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Pizza','https://cdn.alongwalker.info/vn/wp-content/uploads/2022/02/08131916/image-top-12-quan-pizza-ngon-ha-noi-gia-re-phu-hop-moi-lua-tuoi-164427595631734.jpg')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Drink','https://www.acouplecooks.com/wp-content/uploads/2021/02/Painkiller-Cocktail-008.jpg')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -108,7 +99,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tFullName TEXT NOT NULL,\n" +
                 "\tPhone TEXT NOT NULL\n," +
                 "\tEmail TEXT, \n" +
-                "\tGender TEXT, \n" +
+                "\tGender TEXT NOT NULL, \n" +
                 "\tUsername TEXT NOT NULL,\n" +
                 "\tPassword TEXT NOT NULL,\n" +
                 "\tRoleName TEXT NOT NULL\n" +
@@ -117,7 +108,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         String sqlCategory = "CREATE TABLE Category(\n" +
                 "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tName TEXT NOT NULL,\n" +
-                "\tImage INTEGER);";
+                "\tImage TEXT NOT NULL);";
         String sqlOrder = "CREATE TABLE [Order](\n" +
                 "\tOrderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tUserID INTEGER  NOT NULL,\n" +

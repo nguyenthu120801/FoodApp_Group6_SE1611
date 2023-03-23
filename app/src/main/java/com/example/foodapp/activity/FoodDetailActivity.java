@@ -37,7 +37,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         String username = user.get(SessionManager.KEY_USERNAME);
 
-        ((Button)findViewById(R.id.btn_Add)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_Add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (username == null) {
@@ -50,10 +50,11 @@ public class FoodDetailActivity extends AppCompatActivity {
                 }
             }
         });
-
         tv_foodName.setText(product.getProductName());
         tv_price.setText("$" + product.getPrice());
         tv_description.setText(product.getDescription());
-        Glide.with(this).load(product.getImage()).into(imv);
+        Glide.with(this)
+                .load(product.getImage().trim())
+                .into(imv);
     }
 }

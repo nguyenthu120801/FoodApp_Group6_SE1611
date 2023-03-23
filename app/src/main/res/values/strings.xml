@@ -3,6 +3,6 @@
     <string-array name="status_spin">
         <item>Completed</item>
         <item>Cancel</item>
-        <item>Earth</item>
+
     </string-array>
 </resources>

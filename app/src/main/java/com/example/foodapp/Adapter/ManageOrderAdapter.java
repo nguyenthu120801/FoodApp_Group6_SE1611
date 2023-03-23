@@ -15,10 +15,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.ManageOrder;
+import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOManageOrder;
 import com.example.foodapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.ViewHolder>  {
@@ -45,7 +48,9 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
         //holder.status.setText(listManageOrder.get(position).getStatus());
 
         holder.quantity.setText(String.valueOf(listManageOrder.get(position).getQuantity()));
-        holder.img_Product.setImageResource(listManageOrder.get(position).getImage());
+        Glide.with(holder.itemView.getContext()).load(listManageOrder.get(position).getImage())
+                .into(holder.img_Product);
+        //holder.img_Product.setImageResource(listManageOrder.get(position).getImage());
     }
 
     @Override
@@ -54,42 +59,35 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         Context context;
         TextView id, name, status, quantity;
         ImageView img_Product;
         Spinner spin_status;
-
-
+        private final List<String> listStatus = new ArrayList<>();
+        private boolean isUpdated = false;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            listStatus.add(Order.STATUS_IN_PROGRESS);
+            listStatus.add(Order.STATUS_COMPLETED);
+            listStatus.add(Order.STATUS_REJECTED);
             id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
             spin_status = itemView.findViewById(R.id.spin_status);
             quantity = itemView.findViewById(R.id.quantity);
             img_Product = itemView.findViewById(R.id.img_manageorder);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_item, new String[]{"Completed", "Cancel"});
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_item, listStatus);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spin_status.setAdapter(adapter);
-
-
-
             spin_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 DAOManageOrder manageOrder = new DAOManageOrder(context);
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    String statusSelected;
                     DAOManageOrder dao = new DAOManageOrder(context);
-                    String selectedText = adapterView.getSelectedItem().toString();
-
-
-
-                    ContentValues values = new ContentValues();
-
-                    Toast.makeText(itemView.getContext(),"Hello" + selectedText, Toast.LENGTH_LONG).show();
+                   // String selectedText = adapterView.getSelectedItem().toString();
+                   // ContentValues values = new ContentValues();
+                   // Toast.makeText(itemView.getContext(),"Hello" + selectedText, Toast.LENGTH_LONG).show();
                     //UpdateManageOrder(selectedText);
-
-
                 }
 
                 @Override

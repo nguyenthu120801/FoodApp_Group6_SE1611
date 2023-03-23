@@ -22,11 +22,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.R;
@@ -51,11 +53,13 @@ public class Seller_AddActivity extends AppCompatActivity {
     private EditText editPrice;
     private ImageView image;
     private EditText editDes;
-    private Button buttonBack;
     private Button buttonAdd;
     private Button buttonUpload;
     private TextView textMess;
     private String imageURL;
+    private LinearLayout home;
+    private LinearLayout logout;
+    private LinearLayout managerOrder;
     private ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -87,15 +91,50 @@ public class Seller_AddActivity extends AppCompatActivity {
         editPrice = findViewById(R.id.edit_price);
         image = findViewById(R.id.imageView);
         editDes = findViewById(R.id.edit_des);
-        buttonBack = findViewById(R.id.btnBackList);
         buttonAdd = findViewById(R.id.btnAddProduct);
         buttonUpload = findViewById(R.id.btnUpload);
         textMess = findViewById(R.id.text_mess);
+        home = findViewById(R.id.btn_homePage);
+        logout = findViewById(R.id.LogOut);
+        managerOrder = findViewById(R.id.manage_order);
         setDataCategory();
         setMap();
-        BackToList();
         UploadImage();
         AddProduct();
+        Home();
+        Logout();
+    }
+
+    private void ManagerOrder(){
+        managerOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Seller_AddActivity.this, ManageOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void Logout(){
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SessionManager sessionManager = new SessionManager(Seller_AddActivity.this);
+                sessionManager.logoutUser();
+                Intent intent = new Intent(Seller_AddActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void Home(){
+           home.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   startActivity(new Intent(Seller_AddActivity.this, Seller_ViewProduct.class));
+               }
+           });
     }
 
     private void AddProduct(){
@@ -115,8 +154,10 @@ public class Seller_AddActivity extends AppCompatActivity {
                     textMess.setText("You have to input price");
                 }else if(Double.parseDouble(Price) == 0){
                     textMess.setText("Price must be greater than 0");
+                } else if(imageURL == null){
+                    textMess.setText("You have to upload image");
                 } else{
-                    Product product = new Product(ProductName,imageURL,Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    Product product = new Product(ProductName,imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     long number = daoProduct.AddProduct(product);
                     if(number > 0){
                         textMess.setTextColor(Color.GREEN);
@@ -164,15 +205,6 @@ public class Seller_AddActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         activity.launch(Intent.createChooser(intent, "Select picture"));
-    }
-
-    private void BackToList(){
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Seller_AddActivity.this, Seller_ViewProduct.class));
-            }
-        });
     }
 
     private void setMap(){

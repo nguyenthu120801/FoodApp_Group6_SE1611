@@ -24,10 +24,7 @@ public class DAOOrderDetail extends ConnectDatabase{
         String [] selectionArgs = {ProductID + ""};
         Cursor cursor = lite.rawQuery(sql, selectionArgs);
         // if get data successful
-        if(cursor!= null && cursor.moveToNext()){
-            return true;
-        }
-        return false;
+        return cursor != null && cursor.moveToNext();
     }
 
     public List<OrderDetail> getListOrderDetail(int orderID){

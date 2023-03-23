@@ -8,12 +8,6 @@
     android:padding="10dp"
     tools:context=".activity.ListUserOrderActivity">
 
-
-    <TextView
-        android:id="@+id/testUserId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Id" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_user_order"
         android:layout_width="match_parent"

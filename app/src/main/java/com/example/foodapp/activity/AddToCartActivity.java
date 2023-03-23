@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +34,7 @@ import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.R;
 import com.example.foodapp.onChangeItem;
+import com.example.foodapp.provider.OrderContentProvider;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,7 +72,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         rcv = findViewById(R.id.rv_category);
         int id = getIntent().getIntExtra("id", 0);
         LoadRecyclerView(cartList, id);
-        homebtn = findViewById(R.id.homeBtn);
+        homebtn = findViewById(R.id.btn_homePage);
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,7 +146,6 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             Log.d("infoOrder", "Số lượng cart là : " + cartList.size());
             OrderDetail orderDetail = new OrderDetail();
             for (Cart cart : cartList) {
-                Log.d("infoOrder", "Cart : " + cart);
                 orderDetail.setOrderID(orderid);
                 orderDetail.setProductID(cart.getProductID());
                 orderDetail.setQuantity(cart.getQuantity());
@@ -155,6 +157,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
 //            orderDetail.setProductID(product.getProductID());
 //        }
             Log.d("infoOrder", "insert order detail successful");
+            orderDBHelper.getAllOrders();
             Intent intent = new Intent(this, ListUserOrderActivity.class);
             startActivity(intent);
         } else {
@@ -203,8 +206,8 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             rcv.setAdapter(adapter);
         } else {
 
-            ((ImageView) findViewById(R.id.imv_cartEmpty)).setVisibility(View.VISIBLE);
-            ((Button) findViewById(R.id.btn_checkout)).setVisibility(View.GONE);
+            findViewById(R.id.imv_cartEmpty).setVisibility(View.VISIBLE);
+            findViewById(R.id.btn_checkout).setVisibility(View.GONE);
             tv_total.setText("$0");
             rcv.setVisibility(View.GONE);
         }

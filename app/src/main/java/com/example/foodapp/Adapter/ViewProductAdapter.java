@@ -14,7 +14,7 @@ import com.example.foodapp.R;
 import java.util.List;
 
 public class ViewProductAdapter extends BaseAdapter {
-    private List<Product> list;
+    private final List<Product> list;
 
     public ViewProductAdapter(List<Product> list) {
         this.list = list;
@@ -48,7 +48,7 @@ public class ViewProductAdapter extends BaseAdapter {
         textPrice.setText(product.getPrice() + "$");
         Drawable drawable = viewGroup.getContext().getDrawable(R.drawable.logo);
         Glide.with(viewGroup.getContext())
-                .load(product.getImage())
+                .load(product.getImage().trim())
                 .into(image);
         return view;
     }

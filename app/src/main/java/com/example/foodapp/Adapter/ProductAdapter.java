@@ -21,7 +21,7 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private final Context context;
     List<Product> productList;
-    private onProductItemClick onProductItemClick;
+    private final onProductItemClick onProductItemClick;
 
     public ProductAdapter(Context context, List<Product> productList, onProductItemClick onProductItemClick) {
         this.context = context;
@@ -39,7 +39,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
         holder.tv_id.setText(String.valueOf(productList.get(position).getProductID()));
-        Glide.with(holder.itemView.getContext()).load(productList.get(position).getImage()).into(holder.product_image);
+        Glide.with(holder.itemView.getContext()).load(productList.get(position).getImage().trim()).into(holder.product_image);
         holder.ProductName.setText(productList.get(position).getProductName());
         holder.price.setText(String.valueOf(productList.get(position).getPrice()));
         holder.cateName.setText(new DAOCategory(context).getCategoryName(productList.get(position).getCategoryID()));

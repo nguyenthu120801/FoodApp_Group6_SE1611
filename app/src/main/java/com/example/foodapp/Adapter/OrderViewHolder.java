@@ -2,6 +2,7 @@ package com.example.foodapp.Adapter;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
     public TextView orderIdText,addressText, orderDateText,shipDateText, statusText;
     public Button cancelButton;
     public LinearLayout linearLayout,shipDateLayout;
+    public ImageView statusImage;
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
         orderIdText = itemView.findViewById(R.id.order_id_text);
@@ -24,6 +26,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         cancelButton = itemView.findViewById(R.id.cancel_order_btn);
         linearLayout = itemView.findViewById(R.id.order_all_view);
         shipDateLayout = itemView.findViewById(R.id.ship_date_layout);
+        statusImage = itemView.findViewById(R.id.status_image);
 
     }
 }
