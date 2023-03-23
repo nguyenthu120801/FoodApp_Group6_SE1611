@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodapp.Adapter.FoodAdapter;
 import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Entity.OrderDetail;
@@ -187,9 +188,6 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             if (pID != id) {
                 long n = new DAOCart(this).AddCart(new Cart(userID, product.getProductID(), 1));
                 cartList.add(new Cart(new DAOCart(this).getMaxCartID(), userID, product.getProductID(), 1));
-            }
-            for (int i = 0; i < cartList.size(); i++) {
-                Log.d("CartID:", String.valueOf(cartList.get(i).getCartID()));
             }
 
         }
