@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.UpdateManageOrder"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <TextView
@@ -30,7 +31,7 @@
     android:layout_height="29dp"
     android:layout_marginTop="32dp"
     android:layout_marginEnd="36dp"
-
+    android:layout_marginStart="120dp"
     android:entries="@array/status_spin"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
@@ -42,9 +43,14 @@
         android:layout_height="54dp"
         android:layout_marginTop="88dp"
         android:text="Update"
+        android:layout_marginStart="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/orderlogin"/>
 
 
 </LinearLayout>
