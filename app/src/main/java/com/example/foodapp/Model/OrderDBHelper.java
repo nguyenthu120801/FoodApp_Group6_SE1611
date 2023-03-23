@@ -26,7 +26,7 @@ public class OrderDBHelper extends ConnectDatabase {
     public static final String ORDER_ORDER_DATE = "OrderDate";
     public static final String ORDER_SHIP_DATE = "ShipDate";
     public static final String ORDER_STATUS = "Status";
-    private Context context;
+    private final Context context;
 
     public OrderDBHelper(@Nullable Context context) {
         super(context);
