@@ -22,7 +22,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private EditText genderEditText;
     private EditText roleNameEditText;
     private SessionManager sessionManager;
-
+    private Button buttonRecharge;
     private DAOUser daoUser;
 
     @Override
@@ -32,6 +32,7 @@ public class UserInfoActivity extends AppCompatActivity {
         daoUser = new DAOUser(this);
         sessionManager = new SessionManager(this);
         int userID = sessionManager.getUserID();
+        buttonRecharge = findViewById(R.id.recharge);
         if (userID == -1) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -56,6 +57,18 @@ public class UserInfoActivity extends AppCompatActivity {
 
         Button updateButton = findViewById(R.id.updateUser);
         updateButton.setOnClickListener(view -> updateUserInfo(view, userID));
+        Recharge(userID);
+    }
+
+    private void Recharge(int userID){
+        buttonRecharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RechargeActivity.UserID = userID;
+                Intent intent = new Intent(UserInfoActivity.this, RechargeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateUserInfo(View view, int userID) {

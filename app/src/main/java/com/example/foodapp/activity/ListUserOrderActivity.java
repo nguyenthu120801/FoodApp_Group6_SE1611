@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
-import com.example.foodapp.Adapter.OrderAdapter;
+import com.example.foodapp.Entity.Adapter.OrderAdapter;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;

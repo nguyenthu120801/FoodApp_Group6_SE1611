@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.foodapp.Adapter.ViewProductAdapter;
+import com.example.foodapp.Entity.Adapter.ViewProductAdapter;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.ManageOrderActivity;

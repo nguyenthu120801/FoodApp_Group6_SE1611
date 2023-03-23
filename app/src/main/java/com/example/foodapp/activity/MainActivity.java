@@ -17,9 +17,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.foodapp.Adapter.CategoryAdapter;
-import com.example.foodapp.Adapter.PopularAdapter;
-import com.example.foodapp.Adapter.SearchAdapter;
+import com.example.foodapp.Entity.Adapter.CategoryAdapter;
+import com.example.foodapp.Entity.Adapter.PopularAdapter;
+import com.example.foodapp.Entity.Adapter.SearchAdapter;
 import com.example.foodapp.Entity.Category;
 
 import java.util.HashMap;

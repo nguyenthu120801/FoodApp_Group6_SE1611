@@ -1,4 +1,4 @@
-package com.example.foodapp.Adapter;
+package com.example.foodapp.Entity.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.R;
 import com.example.foodapp.onProductItemClick;
@@ -39,7 +38,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.categoryName.setText(catList.get(position).getName());
-        Glide.with(holder.itemView.getContext()).load(catList.get(position).getImage()).into(holder.categoryimg);
+        holder.categoryimg.setImageResource(catList.get(position).getImage());
+        //Glide.with(holder.itemView.getContext()).load(catList.get(position).getImage()).into(holder.categoryimg);
         holder.tv_cate.setText(String.valueOf(catList.get(position).getID()));
     }
 

@@ -1,7 +1,6 @@
-package com.example.foodapp.Adapter;
+package com.example.foodapp.Entity.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
