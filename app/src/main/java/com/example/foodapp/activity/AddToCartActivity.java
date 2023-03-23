@@ -145,6 +145,8 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             return;
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        user.setMoney(user.getMoney()- totalPrice);
+        daoUser.updateUser(user);
         Order order = new Order();
         order.setUserID(userID);
         order.setOrderDate(dateFormat.format(new Date()));
