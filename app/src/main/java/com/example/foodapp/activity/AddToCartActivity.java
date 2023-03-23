@@ -136,7 +136,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         Order order = new Order();
         order.setUserID(userID);
         order.setOrderDate(dateFormat.format(new Date()));
-        order.setStatus(Order.STATUS_IN_PROGRESS);
+        order.setStatus(Order.STATUS_NEW);
         order.setAddress(addressText.getText().toString());
         int orderid = orderDBHelper.insertOrder(order);
         Log.d("infoOrder", "order id vừa insert là : " + orderid);

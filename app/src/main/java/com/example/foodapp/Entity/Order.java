@@ -9,10 +9,12 @@ public class Order {
     private String shipDate;
     private String status;
     private String address;
-    public static final String STATUS_IN_PROGRESS = "In progress";
-    public static final String SHIPPING = "Shipping";
+
+    public static final String STATUS_NEW = "New";
+    public static final String STATUS_IS_PAID = "isPaid";
+    public static final String STATUS_SHIPPING = "Shipping";
     public static final String STATUS_COMPLETED = "Completed";
-    public static final String STATUS_REJECTED = "Rejected";
+    public static final String STATUS_CANCELLED = "Cancelled";
 
     public Order() {
     }
