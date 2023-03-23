@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.foodapp.Entity.Adapter.ManageOrderAdapter;
+import com.example.foodapp.Adapter.ManageOrderAdapter;
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOManageOrder;

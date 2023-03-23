@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodapp.Entity.Adapter.FoodAdapter;
+import com.example.foodapp.Adapter.FoodAdapter;
 import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Entity.OrderDetail;

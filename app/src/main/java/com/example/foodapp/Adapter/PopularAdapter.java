@@ -1,4 +1,4 @@
-package com.example.foodapp.Entity.Adapter;
+package com.example.foodapp.Adapter;
 
 
 import android.content.Context;
