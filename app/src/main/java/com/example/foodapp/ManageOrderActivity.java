@@ -23,7 +23,8 @@ import com.example.foodapp.activity.SessionManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageOrderActivity extends AppCompatActivity implements OnClick {
+public class ManageOrderActivity extends AppCompatActivity implements OnClick, OnUpdateStatus {
+    private static  final int MY_REQUEST_CODE = 10;
     private RecyclerView.Adapter adapter;
     private  ManageOrderAdapter manageOrderAdapter;
     List<ManageOrder> manageOrderList;
@@ -43,7 +44,7 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick {
         manageorder.setLayoutManager(linearLayoutManager);
         DAOManageOrder manageOrder = new DAOManageOrder(this);
         manageOrderList = manageOrder.getAllManageOrder();
-        adapter = new ManageOrderAdapter(this,this::clickItem , manageOrderList);
+        adapter = new ManageOrderAdapter(this,this::clickItem ,this::clickUpdate , manageOrderList);
         manageorder.setAdapter(adapter);
         Logout();
         HomePage();
@@ -76,6 +77,21 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick {
     public void clickItem(int id) {
         Intent intent = new Intent(ManageOrderActivity.this, UpdateManageOrder.class);
         intent.putExtra("ID", id);
+        startActivity(intent);
+    }
+
+
+    /*public void clickUpdate(ManageOrder manageOrder){
+        Intent intent = new Intent(ManageOrderActivity.this, UpdateManageOrder.class);
+        String status = manageOrder.getStatus();
+        intent.putExtra("status", status);
+        startActivity(intent);
+    }*/
+
+    @Override
+    public void clickUpdate(String status) {
+        Intent intent = new Intent(ManageOrderActivity.this, UpdateManageOrder.class);
+        intent.putExtra("status", status);
         startActivity(intent);
     }
 }

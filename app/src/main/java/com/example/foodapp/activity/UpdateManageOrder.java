@@ -34,9 +34,22 @@ public class UpdateManageOrder extends AppCompatActivity {
         btnUpdateStatus = findViewById(R.id.btn_updateStatus);
 
 
+        /*String status = getIntent().getStringExtra("status");
+        int status_number = -1;
+
+        if(status.equals("New")){
+            status_number = 0;
+        } else if (status.equals("Completed")) {
+            status_number = 1;
+        }
+
+        spinStatus.setSelection(status_number);*/
+
+
+
         int id = getIntent().getIntExtra("ID", 0);
 
-        spinStatus.setSelection(new DAOManageOrder(this).getStatus(id));
+        //spinStatus.setSelection(new DAOManageOrder(this).getStatus(id));
 
 
 
