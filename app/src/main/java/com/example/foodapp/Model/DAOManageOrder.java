@@ -21,15 +21,16 @@ public class DAOManageOrder extends ConnectDatabase {
     public List<ManageOrder> getAllManageOrder(){
         List<ManageOrder> list = new ArrayList<>();
         SQLiteDatabase lite = getReadableDatabase();
-        String sql = "select [Order].OrderID, [Order].status, User.FullName,[Order].Address from [Order] " +
+        String sql = "select  [Order].OrderID,[Order].OrderDate, [Order].status, User.FullName,[Order].Address from [Order] " +
                 "INNER JOIN User ON [Order].UserID = User.ID ";
         Cursor cursor = lite.rawQuery(sql , null);
         while (cursor != null && cursor.moveToNext()){
             int orderId = cursor.getInt(0);
-            String status = cursor.getString(1);
-            String fullName = cursor.getString(2);
-            String address = cursor.getString(3);
-            ManageOrder manageOrder = new ManageOrder(orderId,status,fullName,address);
+            String orderDate = cursor.getString(1);
+            String status = cursor.getString(2);
+            String fullName = cursor.getString(3);
+            String address = cursor.getString(4);
+            ManageOrder manageOrder = new ManageOrder(orderId, orderDate, status,fullName,address);
             list.add(manageOrder);
         }
         cursor.close();
@@ -73,9 +74,9 @@ public class DAOManageOrder extends ConnectDatabase {
             boolean check = false;
             if(cursor.getString(0).equals("In progress")){
                 status = 1;
-            } /*else if (cursor.getString(0).equals("Cancel")) {
+            } else if (cursor.getString(0).equals("Cancel")) {
                 status = 2;
-            }*/
+            }
 
 
         }
