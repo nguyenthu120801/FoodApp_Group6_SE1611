@@ -81,12 +81,12 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertUser(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Kirk Nelson','4533389559','oparagreen0@usnews.com','Female','Kirk','999@','Seller')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Thi Thu','4533389559','oparagreen0@usnews.com','Female','ThuThu','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Anh Tuan','6298446654','kfleet1@artisteer.com','Male','AnhTuan','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Chu Quang Quan','8851738015','fellcock2@earthlink.net','Male','QuangQuan','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Minh Duc','5541282702','bkervin4@fotki.com','Male','MinhDuc','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer')\n"
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Kirk Nelson','4533389559','oparagreen0@usnews.com','Female','Kirk','999@','Seller',123.5)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nguyen Thi Thu','4533389559','oparagreen0@usnews.com','Female','ThuThu','123@','Customer',130)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nguyen Anh Tuan','6298446654','kfleet1@artisteer.com','Male','AnhTuan','123@','Customer',150.5)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Chu Quang Quan','8851738015','fellcock2@earthlink.net','Male','QuangQuan','123@','Customer',140)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nguyen Minh Duc','5541282702','bkervin4@fotki.com','Male','MinhDuc','123@','Customer',200)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer',1000)\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -102,9 +102,9 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tGender TEXT NOT NULL, \n" +
                 "\tUsername TEXT NOT NULL,\n" +
                 "\tPassword TEXT NOT NULL,\n" +
-                "\tRoleName TEXT NOT NULL\n" +
+                "\tRoleName TEXT NOT NULL,\n" +
+                "\tMoney REAL NOT NULL\n" +
                 ");";
-
         String sqlCategory = "CREATE TABLE Category(\n" +
                 "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tName TEXT NOT NULL,\n" +
