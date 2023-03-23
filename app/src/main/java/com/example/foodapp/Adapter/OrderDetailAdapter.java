@@ -39,9 +39,9 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailViewHold
         Product product = daoProduct.getProduct(orderDetail.getProductID());
         holder.productText.setText(product.getProductName());
         holder.quantityText.setText("Quantity : " + orderDetail.getQuantity());
-        holder.productPriceOneText.setText("Product Price : "  + product.getPrice());
+        holder.productPriceOneText.setText(product.getPrice()+"/1 product");
         double totalPriceOneProduct = product.getPrice()*orderDetail.getQuantity();
-        holder.producPriceTotalOnceText.setText("Tổng giá : " + totalPriceOneProduct);
+        holder.producPriceTotalOnceText.setText("Price : " + totalPriceOneProduct);
     }
 
     @Override

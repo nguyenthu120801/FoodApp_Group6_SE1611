@@ -48,7 +48,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             recyclerView.setAdapter(orderDetailAdapter);
             totalPriceText = findViewById(R.id.total_price);
             double total = orderDetailAdapter.getTotalPrice();
-            totalPriceText.setText("Thành tiền : " + total);
+            totalPriceText.setText("Total Price : " + total);
         } else {
             Log.d("infoOrder", "Không lấy được order id từ activity trước");
         }
