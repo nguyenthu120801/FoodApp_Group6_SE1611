@@ -1,4 +1,4 @@
-package com.example.foodapp.activity;
+package com.example.foodapp.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
