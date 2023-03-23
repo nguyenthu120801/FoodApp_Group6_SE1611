@@ -10,6 +10,7 @@ public class User {
     private String username;
     private String password;
     private String RoleName;
+    private double  money;
     public static final String ROLE_CUSTOMER = "Customer";
     public static final String ROLE_SELLER = "Seller";
     public static final String GENDER_MALE = "Male";
@@ -28,7 +29,17 @@ public class User {
         this.password = password;
         this.RoleName = RoleName;
     }
-
+    public User(int ID, String FullName, String phone, String email, String gender, String username, String password, String RoleName, double money) {
+        this.ID = ID;
+        this.FullName = FullName;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.username = username;
+        this.password = password;
+        this.RoleName = RoleName;
+        this.money = money;
+    }
     public User(String FullName, String phone, String email, String gender, String username, String password, String RoleName) {
         this.FullName = FullName;
         this.phone = phone;
@@ -103,4 +114,11 @@ public class User {
         this.RoleName = RoleName;
     }
 
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
 }

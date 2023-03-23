@@ -21,7 +21,7 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     private final Context context;
     List<Category> catList;
-    private onProductItemClick onProductItemClick;
+    private final onProductItemClick onProductItemClick;
 
     public CategoryAdapter(Context context, List<Category> catList, onProductItemClick onProductItemClick) {
         this.context = context;
