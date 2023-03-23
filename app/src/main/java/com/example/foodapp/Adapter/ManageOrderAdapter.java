@@ -43,11 +43,11 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.id.setText(String.valueOf(listManageOrder.get(position).getOrderID()));
-        holder.name.setText(listManageOrder.get(position).getProductName());
+        holder.name.setText(listManageOrder.get(position).getFullName());
 
         //holder.status.setText(listManageOrder.get(position).getStatus());
 
-        holder.quantity.setText(String.valueOf(listManageOrder.get(position).getQuantity()));
+        holder.quantity.setText(String.valueOf(listManageOrder.get(position).()));
         Glide.with(holder.itemView.getContext()).load(listManageOrder.get(position).getImage())
                 .into(holder.img_Product);
         //holder.img_Product.setImageResource(listManageOrder.get(position).getImage());
