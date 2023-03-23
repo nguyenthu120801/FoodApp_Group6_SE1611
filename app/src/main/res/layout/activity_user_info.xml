@@ -18,28 +18,28 @@
     </ImageView>
 
     <LinearLayout
+        android:id="@+id/add_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
-        >
+        android:weightSum="3">
+
         <Button
+            android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Money"
             android:layout_weight="1"
-            />
+            android:text="Add Money" />
 
         <TextView
             android:id="@+id/user_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="24sp"
-            android:layout_marginStart="30dp"
             android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
             android:text="Money"
-            />
+            android:textSize="24sp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -141,11 +141,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update" />
-
-    <Button
-        android:id="@+id/recharge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RECHARGE" />
 
 </LinearLayout>

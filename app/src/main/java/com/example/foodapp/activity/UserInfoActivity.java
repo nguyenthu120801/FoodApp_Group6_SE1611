@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOUser;
@@ -24,7 +26,8 @@ public class UserInfoActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private Button buttonRecharge;
     private DAOUser daoUser;
-
+    public static  String money = "";
+    private TextView moneyTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,8 @@ public class UserInfoActivity extends AppCompatActivity {
         daoUser = new DAOUser(this);
         sessionManager = new SessionManager(this);
         int userID = sessionManager.getUserID();
-        buttonRecharge = findViewById(R.id.recharge);
+        buttonRecharge = findViewById(R.id.btnAdd);
+        moneyTxt = findViewById(R.id.user_money);
         if (userID == -1) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -50,7 +54,7 @@ public class UserInfoActivity extends AppCompatActivity {
         phoneEditText.setText(userLoggedIn.getPhone());
         emailEditText.setText(userLoggedIn.getEmail());
         genderEditText.setText(userLoggedIn.getGender());
-
+        moneyTxt.setText(money);
 
         Button updateButton = findViewById(R.id.updateUser);
         updateButton.setOnClickListener(view -> updateUserInfo(view, userID));
