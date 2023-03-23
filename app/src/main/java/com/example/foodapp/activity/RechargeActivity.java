@@ -2,6 +2,7 @@ package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,6 +67,8 @@ public class RechargeActivity extends AppCompatActivity {
                    int number = dao.UpdateMoney(user.getMoney() , user.getID());
                    if(number > 0){
                        Toast.makeText(RechargeActivity.this, "Recharge successful",Toast.LENGTH_SHORT).show();
+                       UserInfoActivity.money = user.getMoney() + "";
+                       startActivity(new Intent(RechargeActivity.this,UserInfoActivity.class));
                    }
                }
            }
