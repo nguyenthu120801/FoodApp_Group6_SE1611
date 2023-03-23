@@ -8,46 +8,32 @@
     android:padding="16dp"
     tools:context=".activity.FoodDetailActivity">
 
+    <Button
+        android:id="@+id/btn_Add"
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/orange_button"
+        android:text="+Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+
     <ImageView
         android:id="@+id/img_food"
         android:layout_width="409dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="310dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/pizza" />
 
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="32dp"
-        android:text="Ốc hương là loài thân mềm một mảnh vỏ, thịt thơm ngon, giàu chất dinh dưỡng. Từ lâu ốc hương đã được coi là món ngon hạng nhất trong những đặc sản biển. Loài ốc này ngay cả khi tươi sống đã tỏa ra hương thơm tự nhiên, hấp dẫn, đúng như tên của nó."
-        android:textColor="#F3191818"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/btn_Add"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="105dp"
-        android:background="@drawable/orange_button"
-        android:text="AddToCart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,11 +41,15 @@
 
         <TextView
             android:id="@+id/tv_foodName"
-            android:layout_width="346dp"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:inputType="textCapWords"
-
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:inputType="textEnableTextConversionSuggestions|textCapWords"
+            android:isScrollContainer="false"
+            android:overScrollMode="always"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollHorizontally="false"
             android:text="Ốc hương"
             android:textColor="#100F0F"
             android:textSize="24sp"
@@ -67,14 +57,95 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="59dp"
+            android:id="@+id/textView20"
+            android:layout_width="15dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="$0"
+            android:text="$"
+            android:textColor="#EC0505"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="51dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="0"
             android:textColor="#0C0C0C"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="#E6FFFFFF"
+        android:contentDescription="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbars="vertical"
+            android:text="Ốc hương là loài thân mềm một mảnh vỏ, thịt thơm ngon, giàu chất dinh dưỡng. Từ lâu ốc hương đã được coi là món ngon hạng nhất trong những đặc sản biển. Loài ốc này ngay cả khi tươi sống đã tỏa ra hương thơm tự nhiên, hấp dẫn, đúng như tên của nó."
+            android:textColor="#F3191818"
+            android:textSize="22sp" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="115dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4">
+
+        <ImageView
+            android:id="@+id/minus2"
+            android:layout_width="41dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            app:srcCompat="@drawable/minus" />
+
+        <TextView
+            android:id="@+id/tv_quantity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:text="1"
             android:textSize="24sp" />
 
+        <ImageView
+            android:id="@+id/plus2"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:srcCompat="@drawable/plus" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
