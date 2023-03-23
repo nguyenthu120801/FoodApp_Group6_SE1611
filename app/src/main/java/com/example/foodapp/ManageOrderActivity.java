@@ -14,6 +14,7 @@ import com.example.foodapp.Adapter.ManageOrderAdapter;
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOManageOrder;
+import com.example.foodapp.activity.DetailManageOrder;
 import com.example.foodapp.activity.UpdateManageOrder;
 import com.example.foodapp.activity.LoginActivity;
 import com.example.foodapp.activity.Seller_ViewProduct;
@@ -21,7 +22,7 @@ import com.example.foodapp.activity.SessionManager;
 
 import java.util.List;
 
-public class ManageOrderActivity extends AppCompatActivity implements OnClick, OnUpdateStatus {
+public class ManageOrderActivity extends AppCompatActivity implements OnClick, OnUpdateStatus, OnDetail {
     private static  final int MY_REQUEST_CODE = 10;
     private RecyclerView.Adapter adapter;
     private  ManageOrderAdapter manageOrderAdapter;
@@ -42,7 +43,7 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
         manageorder.setLayoutManager(linearLayoutManager);
         DAOManageOrder manageOrder = new DAOManageOrder(this);
         manageOrderList = manageOrder.getAllManageOrder();
-        adapter = new ManageOrderAdapter(this,this::clickItem ,this::clickUpdate , manageOrderList);
+        adapter = new ManageOrderAdapter(this,this::clickItem ,this::OnDetail ,this::clickUpdate , manageOrderList);
         manageorder.setAdapter(adapter);
         Logout();
         HomePage();
@@ -95,5 +96,13 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
         Intent intent = new Intent(ManageOrderActivity.this, UpdateManageOrder.class);
         intent.putExtra("status", status);
         startActivity(intent);
+    }
+
+    @Override
+    public void OnDetail(int OrderID) {
+        Intent intent = new Intent(ManageOrderActivity.this, DetailManageOrder.class);
+        intent.putExtra("Detail", OrderID);
+        startActivity(intent);
+
     }
 }

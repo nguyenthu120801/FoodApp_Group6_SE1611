@@ -35,7 +35,7 @@ public class DAOUser extends ConnectDatabase {
         User user = null;
         SQLiteDatabase db = getReadableDatabase();
         String[] projection = {
-                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName"};
+                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName", "Money"};
         String selection = "Username = ? AND Password = ?";
         String[] selectionArgs = { username, password };
         Cursor cursor = db.query(
