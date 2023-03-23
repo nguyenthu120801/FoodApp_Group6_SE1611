@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +26,12 @@ import com.example.foodapp.ManageOrderActivity;
 import com.example.foodapp.Model.ConnectDatabase;
 import com.example.foodapp.Model.DAOManageOrder;
 import com.example.foodapp.OnClick;
+import com.example.foodapp.OnDetail;
 import com.example.foodapp.OnUpdateStatus;
 import com.example.foodapp.R;
+import com.example.foodapp.activity.DetailManageOrder;
+import com.example.foodapp.activity.OrderDetailActivity;
+import com.example.foodapp.activity.SigupActivity;
 import com.example.foodapp.activity.UpdateManageOrder;
 
 import java.util.ArrayList;
@@ -35,15 +40,18 @@ import java.util.List;
 public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.ViewHolder>  {
     private final Context context;
     private final OnClick onClick;
+    private final OnDetail onDetail;
+
     private final OnUpdateStatus onUpdateStatus;
     List<ManageOrder> listManageOrder;
     public interface IClickItemManageOrder{
         void updateManageOrder(ManageOrder manageOrder);
     }
 
-    public ManageOrderAdapter(Context context, OnClick onClick, OnUpdateStatus onUpdateStatus, List<ManageOrder> listManageOrder) {
+    public ManageOrderAdapter(Context context, OnClick onClick, OnDetail onDetail, OnUpdateStatus onUpdateStatus, List<ManageOrder> listManageOrder) {
         this.context = context;
         this.onClick = onClick;
+        this.onDetail = onDetail;
         this.onUpdateStatus = onUpdateStatus;
         this.listManageOrder = listManageOrder;
     }
@@ -59,14 +67,15 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ManageOrder manageOrder = listManageOrder.get(position);
         holder.id.setText(String.valueOf(listManageOrder.get(position).getOrderID()));
-        holder.name.setText(listManageOrder.get(position).getFullName());
+        holder.orderDate.setText(String.valueOf(listManageOrder.get(position).getOrderDate()));
 
+        holder.fullname.setText(listManageOrder.get(position).getFullName());
+
+        holder.shipDate.setText(listManageOrder.get(position).getShipDate());
         //holder.status.setText(listManageOrder.get(position).getStatus());
-
         holder.address.setText(String.valueOf(listManageOrder.get(position).getAddress()));
         holder.status.setText(String.valueOf(listManageOrder.get(position).getStatus()));
 
-        holder.orderDate.setText(String.valueOf(listManageOrder.get(position).getOrderDate()));
 
 
         /*if(new DAOManageOrder(context).getStatus(listManageOrder.get(position).getOrderID()) == 0){
@@ -96,12 +105,13 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
 
 
-        TextView id, name, status, address, tv18,quantity;
+        TextView id, fullname, status, address, tv18,quantity;
         //UPDATE-23/3/2023
-        TextView fullname, orderDate;
+        TextView orderDate, shipDate, last;
 
         ImageView img_Product;
         Spinner spin_status;
+        LinearLayout linear;
         private final List<String> listStatus = new ArrayList<>();
         private final boolean isUpdated = false;
 
@@ -114,17 +124,16 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
             listStatus.add(Order.STATUS_COMPLETED);
             listStatus.add(Order.STATUS_CANCELLED);
             id = itemView.findViewById(R.id.id);
-            name = itemView.findViewById(R.id.name);
+            fullname = itemView.findViewById(R.id.fullname);
             status = itemView.findViewById(R.id.status);
             address = itemView.findViewById(R.id.address);
+            shipDate = itemView.findViewById(R.id.shipDate);
             orderDate = itemView.findViewById(R.id.orderDate);
-
             //status = itemView.findViewById(R.id.status);
             btnUpdate = itemView.findViewById(R.id.btn_update);
+            linear = itemView.findViewById(R.id.ClickItem);
 
-
-            Log.d("name", name.getText().toString());
-            if(name.getText().equals("Completed")){
+            if(status.getText().equals("Completed")){
                 btnUpdate.setVisibility(View.INVISIBLE);
             }
 
@@ -156,6 +165,23 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
                 }
 
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    onClick.clickItem(Integer.parseInt(id.getText().toString()));
+                    Intent intent = new Intent(context, DetailManageOrder.class);
+                    onDetail.OnDetail(Integer.parseInt(id.getText().toString()));
+
+                    //Log.d("aaaaa", id.getText().toString());
+                    //Intent intent = new Intent(context, OrderDetailActivity.class);
+                    //intent.putExtra("order_id", String.valueOf(orderId));
+                    //Log.d("infoOrder", "Thực hiện hành động chuyển sang order detail activity");
+                    //context.startActivity(intent);
+
+                }
             });
         }
 
