@@ -53,7 +53,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     Button checkoutBtn;
     SessionManager sessionManager;
     FoodAdapter adapter;
-    int userID;
+    int userID, quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         cartList = new DAOCart(this).getListCart(userID);
         rcv = findViewById(R.id.rv_category);
         int id = getIntent().getIntExtra("id", 0);
+         quantity = getIntent().getIntExtra("quantity", 1);
         LoadRecyclerView(cartList, id);
         homebtn = findViewById(R.id.btn_homePage);
         homebtn.setOnClickListener(new View.OnClickListener() {
@@ -180,14 +181,14 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             for (Cart c : cartList) {
                 if (c.getProductID() == id) {
                     pID = id;
-                    c.setQuantity(c.getQuantity() + 1);
+                    c.setQuantity(c.getQuantity() + quantity);
                     int n = new DAOCart(this).UpdateCart(c);
                 }
 
             }
             if (pID != id) {
-                long n = new DAOCart(this).AddCart(new Cart(userID, product.getProductID(), 1));
-                cartList.add(new Cart(new DAOCart(this).getMaxCartID(), userID, product.getProductID(), 1));
+                long n = new DAOCart(this).AddCart(new Cart(userID, product.getProductID(), quantity));
+                cartList.add(new Cart(new DAOCart(this).getMaxCartID(), userID, product.getProductID(), quantity));
             }
 
         }
