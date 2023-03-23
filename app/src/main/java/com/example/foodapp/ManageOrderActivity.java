@@ -32,6 +32,7 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
     Spinner spin_status;
     private LinearLayout homePage;
     private LinearLayout logout;
+    private final DAOManageOrder dao = new DAOManageOrder(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +77,11 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
     public void clickItem(int id) {
         Intent intent = new Intent(ManageOrderActivity.this, UpdateManageOrder.class);
         intent.putExtra("ID", id);
-        startActivity(intent);
+        Order order = dao.getOrder(id);
+        if(!order.getStatus().equalsIgnoreCase(Order.STATUS_COMPLETED) && !order.getStatus().equalsIgnoreCase(Order.STATUS_CANCELLED)){
+            startActivity(intent);
+        }
+
     }
 
 
