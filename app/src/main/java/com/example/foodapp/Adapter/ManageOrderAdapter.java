@@ -1,30 +1,20 @@
 package com.example.foodapp.Adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
-import com.example.foodapp.ManageOrderActivity;
-import com.example.foodapp.Model.ConnectDatabase;
-import com.example.foodapp.Model.DAOManageOrder;
 import com.example.foodapp.OnClick;
 import com.example.foodapp.OnDetail;
 import com.example.foodapp.OnUpdateStatus;

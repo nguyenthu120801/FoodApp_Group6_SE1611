@@ -7,33 +7,97 @@
     android:paddingHorizontal="30dp"
     android:layout_gravity="center"
     tools:context=".activity.UserInfoActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginBottom="30dp"
+        >
 
-    <TextView
+    </ImageView>
+
+    <LinearLayout
+        android:id="@+id/add_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Full Name" />
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-    <EditText
-        android:id="@+id/fullNameEditText"
-        android:textSize="22sp"
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add Money" />
+
+        <TextView
+            android:id="@+id/user_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:text="Money"
+            android:textSize="24sp" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:paddingVertical="15dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Full Name" />
 
+        <EditText
+            android:id="@+id/fullNameEditText"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_no_underline"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="15dp"
+        android:weightSum="5"
+        >
     <TextView
+        android:layout_weight="4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Phone" />
 
     <EditText
         android:id="@+id/phoneEditText"
+        android:layout_weight="1"
         android:textSize="22sp"
+        android:inputType="number"
+        android:background="@drawable/edittext_no_underline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        />
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingVertical="15dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        >
     <TextView
         android:layout_width="match_parent"
+        android:layout_weight="4"
         android:layout_height="wrap_content"
         android:text="Email"
         />
@@ -41,38 +105,39 @@
     <EditText
         android:id="@+id/emailEditText"
         android:textSize="22sp"
+        android:layout_weight="1"
+        android:background="@drawable/edittext_no_underline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
+    </LinearLayout>
+    <LinearLayout
+        android:paddingVertical="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        >
     <TextView
         android:layout_width="match_parent"
+        android:layout_weight="4"
         android:layout_height="wrap_content"
         android:text="Gender" />
 
     <EditText
         android:id="@+id/genderEditText"
+        android:layout_weight="1"
+        android:background="@drawable/edittext_no_underline"
         android:textSize="22sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
          />
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Role Name" />
-
-    <EditText
-        android:id="@+id/roleNameEditText"
-        android:textSize="22sp"
-        android:inputType="none"
-        android:focusable="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
     <Button
         android:id="@+id/updateUser"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update" />

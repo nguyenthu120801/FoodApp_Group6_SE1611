@@ -1,7 +1,5 @@
 package com.example.foodapp.Adapter;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,7 +14,6 @@ import com.example.foodapp.Model.DAOCategory;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
 import com.example.foodapp.R;
-import com.example.foodapp.activity.Seller_Edit_DeleteProduct;
 import com.example.foodapp.activity.Seller_ViewProduct;
 
 import java.util.List;
