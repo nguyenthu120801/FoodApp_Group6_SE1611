@@ -32,7 +32,6 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
     Spinner spin_status;
     private LinearLayout homePage;
     private LinearLayout logout;
-    private final List<String> listStatus = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

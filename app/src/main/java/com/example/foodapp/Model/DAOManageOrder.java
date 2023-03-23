@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.foodapp.Entity.ManageOrder;
+import com.example.foodapp.Entity.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +83,24 @@ public class DAOManageOrder extends ConnectDatabase {
         }
         cursor.close();
         return status;
+    }
+
+    public Order getOrder(int OrderID){
+        SQLiteDatabase lite = getWritableDatabase();
+        String sql = "Select * from [Order] where OrderID = ?";
+        String[] selectionArgs = {OrderID + ""};
+        Cursor cursor = lite.rawQuery(sql, selectionArgs);
+        while (cursor != null && cursor.moveToNext()){
+              int UserID = cursor.getInt(1);
+              String OrderDate = cursor.getString(2);
+              String ShipDate = cursor.getString(3);
+              String status = cursor.getString(4);
+              String address = cursor.getString(5);
+              Order order = new Order(OrderID,UserID,OrderDate,ShipDate,status,address);
+              return order;
+        }
+        cursor.close();
+        return null;
     }
 
 
