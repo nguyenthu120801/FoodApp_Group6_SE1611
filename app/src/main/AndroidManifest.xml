@@ -16,10 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
-        <provider
-            android:name=".provider.OrderContentProvider"
-            android:authorities="com.example.foodapp.provider"
-            android:exported="false" />
+
         <activity
             android:name=".activity.UpdateManageOrder"
             android:exported="false" />

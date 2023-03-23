@@ -34,7 +34,6 @@ import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.R;
 import com.example.foodapp.onChangeItem;
-import com.example.foodapp.provider.OrderContentProvider;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -152,10 +151,8 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
                 Log.d("infoOrder", "Order Detail add vào db : " + orderDetail);
                 daoOrderDetail.AddOrderDetail(orderDetail);
             }
-//        for (Product product: productList) {
-//            orderDetail.setOrderID(order.getOrderID());
-//            orderDetail.setProductID(product.getProductID());
-//        }
+            Log.d("infoOrder", "delete all cart");
+            new DAOCart(this).DeleteAllCart();
             Log.d("infoOrder", "insert order detail successful");
             orderDBHelper.getAllOrders();
             Intent intent = new Intent(this, ListUserOrderActivity.class);

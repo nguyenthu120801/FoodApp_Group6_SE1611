@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements onProductItemClic
         SessionManager sessionManager = new SessionManager(MainActivity.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         username = user.get(SessionManager.KEY_USERNAME);
-        if (username != null) {
+        if (user != null) {
             tv_welcome.setText("Welcome, " + username);
         }
         // request Login
