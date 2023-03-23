@@ -54,7 +54,7 @@ public class ViewProductAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.viewImage);
         TextView category = view.findViewById(R.id.tv_category);
         textName.setText(product.getProductName().length() <= 26 ? product.getProductName() : product.getProductName().substring(0,26) + "...");
-        textPrice.setText(product.getPrice() + "$");
+        textPrice.setText(product.getPrice() + "");
         DAOCategory dao = new DAOCategory(viewGroup.getContext());
         String CategoryName = dao.getCategoryName(product.getCategoryID());
         category.setText(CategoryName);
