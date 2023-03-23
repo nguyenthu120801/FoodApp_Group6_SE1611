@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.foodapp.Entity.ManageOrder;
+import com.example.foodapp.Entity.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +22,16 @@ public class DAOManageOrder extends ConnectDatabase {
     public List<ManageOrder> getAllManageOrder(){
         List<ManageOrder> list = new ArrayList<>();
         SQLiteDatabase lite = getReadableDatabase();
-        String sql = "select [Order].OrderID, [Order].status, User.FullName,[Order].Address from [Order] " +
+        String sql = "select  [Order].OrderID,[Order].OrderDate, [Order].status, User.FullName,[Order].Address from [Order] " +
                 "INNER JOIN User ON [Order].UserID = User.ID ";
         Cursor cursor = lite.rawQuery(sql , null);
         while (cursor != null && cursor.moveToNext()){
             int orderId = cursor.getInt(0);
-            String status = cursor.getString(1);
-            String fullName = cursor.getString(2);
-            String address = cursor.getString(3);
-            ManageOrder manageOrder = new ManageOrder(orderId,status,fullName,address);
+            String orderDate = cursor.getString(1);
+            String status = cursor.getString(2);
+            String fullName = cursor.getString(3);
+            String address = cursor.getString(4);
+            ManageOrder manageOrder = new ManageOrder(orderId, orderDate, status,fullName,address);
             list.add(manageOrder);
         }
         cursor.close();
@@ -73,14 +75,32 @@ public class DAOManageOrder extends ConnectDatabase {
             boolean check = false;
             if(cursor.getString(0).equals("In progress")){
                 status = 1;
-            } /*else if (cursor.getString(0).equals("Cancel")) {
+            } else if (cursor.getString(0).equals("Cancel")) {
                 status = 2;
-            }*/
+            }
 
 
         }
         cursor.close();
         return status;
+    }
+
+    public Order getOrder(int OrderID){
+        SQLiteDatabase lite = getWritableDatabase();
+        String sql = "Select * from [Order] where OrderID = ?";
+        String[] selectionArgs = {OrderID + ""};
+        Cursor cursor = lite.rawQuery(sql, selectionArgs);
+        while (cursor != null && cursor.moveToNext()){
+              int UserID = cursor.getInt(1);
+              String OrderDate = cursor.getString(2);
+              String ShipDate = cursor.getString(3);
+              String status = cursor.getString(4);
+              String address = cursor.getString(5);
+              Order order = new Order(OrderID,UserID,OrderDate,ShipDate,status,address);
+              return order;
+        }
+        cursor.close();
+        return null;
     }
 
 

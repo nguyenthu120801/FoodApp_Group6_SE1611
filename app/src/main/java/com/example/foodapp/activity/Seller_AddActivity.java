@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodapp.Entity.Category;
 import com.example.foodapp.Entity.Product;
@@ -149,21 +150,21 @@ public class Seller_AddActivity extends AppCompatActivity {
                 int CategoryID= mapInt.get(spinner.getSelectedItem().toString());
                 textMess.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
-                    textMess.setText("You have to input product name");
+                    Toast.makeText(Seller_AddActivity.this, "You have to input product name",Toast.LENGTH_SHORT);
                 }else if(daoProduct.CheckProductExist(ProductName)){
-                    textMess.setText("Product existed");
+                    Toast.makeText(Seller_AddActivity.this, "Product existed",Toast.LENGTH_SHORT);
                 }else if(Price.isEmpty()){
-                    textMess.setText("You have to input price");
+                    Toast.makeText(Seller_AddActivity.this, "You have to input price",Toast.LENGTH_SHORT);
                 }else if(Double.parseDouble(Price) == 0){
-                    textMess.setText("Price must be greater than 0");
+                    Toast.makeText(Seller_AddActivity.this, "Price must be greater than 0",Toast.LENGTH_SHORT);
                 } else if(imageURL == null){
-                    textMess.setText("You have to upload image");
+                    Toast.makeText(Seller_AddActivity.this, "You have to upload image",Toast.LENGTH_SHORT);
                 } else{
                     Product product = new Product(ProductName,imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     long number = daoProduct.AddProduct(product);
                     if(number > 0){
                         textMess.setTextColor(Color.GREEN);
-                        textMess.setText("Add successful");
+                        Toast.makeText(Seller_AddActivity.this, "Add successful",Toast.LENGTH_SHORT);
                     }
                 }
             }
@@ -205,7 +206,7 @@ public class Seller_AddActivity extends AppCompatActivity {
     private void openGallery(){
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_CREATE_DOCUMENT);
         activity.launch(Intent.createChooser(intent, "Select picture"));
     }
 

@@ -8,11 +8,14 @@ public class ManageOrder implements Serializable {
     private String FullName;
     private String Address;
 
-    public ManageOrder(int orderID, String status, String fullName, String address) {
+    private String orderDate;
+
+    public ManageOrder(int orderID, String status, String fullName, String address, String orderDate) {
         OrderID = orderID;
         this.status = status;
         FullName = fullName;
         Address = address;
+        this.orderDate = orderDate;
     }
 
     public int getOrderID() {
@@ -45,5 +48,13 @@ public class ManageOrder implements Serializable {
 
     public void setAddress(String address) {
         Address = address;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 }
