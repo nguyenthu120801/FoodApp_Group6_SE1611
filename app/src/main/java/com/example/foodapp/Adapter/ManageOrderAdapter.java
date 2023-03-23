@@ -81,13 +81,13 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private  Button btnUpdate;
+        private final Button btnUpdate;
         TextView id, name, status, address, tv18,quantity;
         ImageView img_Product;
         Spinner spin_status;
 
         private final List<String> listStatus = new ArrayList<>();
-        private boolean isUpdated = false;
+        private final boolean isUpdated = false;
 
 
         public ViewHolder(@NonNull View itemView) {

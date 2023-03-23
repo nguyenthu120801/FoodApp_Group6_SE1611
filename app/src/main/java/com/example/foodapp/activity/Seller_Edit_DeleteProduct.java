@@ -68,7 +68,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private LinearLayout managerOrder;
     private boolean isUpdated = false;
     private String imageURL;
-    private ActivityResultLauncher<Intent> activity = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override

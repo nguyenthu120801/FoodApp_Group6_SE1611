@@ -60,7 +60,7 @@ public class Seller_AddActivity extends AppCompatActivity {
     private LinearLayout home;
     private LinearLayout logout;
     private LinearLayout managerOrder;
-    private ActivityResultLauncher<Intent> activity = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
