@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> implements Filterable {
-    private Context context;
+    private final Context context;
     List<Product> productList;
     List<Product> productListOld;
     private final onProductItemClick onProductItemClick;

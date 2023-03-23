@@ -85,8 +85,12 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+
         private  TextView btnUpdate;
         //private  Button btnUpdate;
+
+
+
 
         TextView id, name, status, address, tv18,quantity;
         //UPDATE-23/3/2023
@@ -95,14 +99,16 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
         ImageView img_Product;
         Spinner spin_status;
         private final List<String> listStatus = new ArrayList<>();
-        private boolean isUpdated = false;
+        private final boolean isUpdated = false;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            listStatus.add(Order.STATUS_IN_PROGRESS);
+            listStatus.add(Order.STATUS_NEW);
+            listStatus.add(Order.STATUS_SHIPPING);
+            listStatus.add(Order.STATUS_IS_PAID);
             listStatus.add(Order.STATUS_COMPLETED);
-            listStatus.add(Order.STATUS_REJECTED);
+            listStatus.add(Order.STATUS_CANCELLED);
             id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
             //status = itemView.findViewById(R.id.status);

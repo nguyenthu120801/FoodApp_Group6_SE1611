@@ -46,21 +46,19 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     public static int ProductID = 0;
     private final DAOProduct daoProduct = new DAOProduct(this);
     private final DAOCategory daoCategory = new DAOCategory(this);
-    private final DAOOrderDetail daoDetail = new DAOOrderDetail(this);
     private final Map<String, Integer> mapInt = new HashMap<>();
     private final Map<Integer,String> mapStr = new HashMap<>();
     private final List<String> listName = new ArrayList<>();
     private static final int MY_REQUEST_CODE = 10;
     private List<Category> listCategory;
     private Spinner spinner;
-    private ArrayAdapter adapterArr;
+    private ArrayAdapter<String> adapterArr;
     private Product product;
     private EditText editProductName;
     private EditText editPrice;
     private ImageView image;
     private EditText editDes;
     private Button buttonUpdate;
-    private Button buttonDelete;
     private Button buttonUpload;
     private TextView textMessage;
     private LinearLayout home;
@@ -68,7 +66,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private LinearLayout managerOrder;
     private boolean isUpdated = false;
     private String imageURL;
-    private ActivityResultLauncher<Intent> activity = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> activity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -95,7 +93,6 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_edit_delete_product);
         buttonUpdate = findViewById(R.id.btnUpdate);
-        buttonDelete = findViewById(R.id.btnDelete);
         buttonUpload = findViewById(R.id.btnUpload);
         spinner = findViewById(R.id.spinner_category);
         editProductName = findViewById(R.id.edit_product_name);
@@ -118,7 +115,6 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         setSelectedCategory();
         UploadImage();
         Update();
-        Delete();
         Home();
         Logout();
         ManagerOrder();
@@ -155,7 +151,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
             }
         });
     }
-
+/*
     private void Delete(){
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +172,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
             }
         });
     }
-
+*/
     private void Update(){
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +192,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                     textMessage.setText("Price must be greater than 0");
                 }else{
                     String image = product.getImage();
-                    product = new Product(ProductID, ProductName,imageURL == null ? image : imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
+                    product = new Product(ProductID, ProductName,imageURL == null ? image : imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des.trim());
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){
                         textMessage.setTextColor(Color.GREEN);

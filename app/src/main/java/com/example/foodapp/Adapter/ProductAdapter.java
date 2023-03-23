@@ -57,11 +57,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_id = itemView.findViewById(R.id.tv_id);
-            ProductName = itemView.findViewById(R.id.tv_proName);
-            price = itemView.findViewById(R.id.tv_pprice);
-            cateName = itemView.findViewById(R.id.tv_cateName);
-            product_image = itemView.findViewById(R.id.pro_img);
-            btn_addproduct = itemView.findViewById(R.id.btn_AddProduct);
+            ProductName = itemView.findViewById(R.id.tv_product_name);
+            price = itemView.findViewById(R.id.tv_product_price);
+            cateName = itemView.findViewById(R.id.tv_category);
+            product_image = itemView.findViewById(R.id.viewImage);
+            btn_addproduct = itemView.findViewById(R.id.btn_Delete);
 
             btn_addproduct.setOnClickListener(new View.OnClickListener() {
                 @Override
