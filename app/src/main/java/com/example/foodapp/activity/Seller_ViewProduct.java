@@ -2,6 +2,7 @@ package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Seller_ViewProduct extends AppCompatActivity {
-    private ListView listView;
+    public static ListView listView;
     private Spinner spinnerSearch;
     private ViewProductAdapter adapter;
     private final Map<String, Integer> map = new HashMap<>();
@@ -35,11 +36,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
     private final List<String> listName = new ArrayList<>();
     private final DAOCategory daoCategory = new DAOCategory(this);
     private final DAOProduct daoProduct = new DAOProduct(this);
-    private ArrayAdapter adapterArr;
-    private Button buttonNext;
-    private Button buttonBack;
-    private int page = 1;
-    private int numberPage;
+    private ArrayAdapter<String> adapterArr;
     private Integer CategoryID = null;
     private Button buttonAdd;
     private LinearLayout logout;
@@ -50,19 +47,13 @@ public class Seller_ViewProduct extends AppCompatActivity {
         setContentView(R.layout.activity_seller_view_product);
         listView = findViewById(R.id.list);
         spinnerSearch = findViewById(R.id.spinner_search);
-        numberPage = daoProduct.getNumberOfPage(null);
-        buttonBack = findViewById(R.id.btnBack);
-        buttonNext = findViewById(R.id.btnNext);
-        numberPage = daoProduct.getNumberOfPage(CategoryID);
         buttonAdd = findViewById(R.id.btnAdd);
         logout = findViewById(R.id.LogOut);
         managerOrder = findViewById(R.id.manage_order);
         setDataSearch();
         setMap();
-        DisplayListProduct(page,CategoryID);
+        DisplayListProduct(CategoryID);
         setSelectedSearch();
-        backPage();
-        nextPage();
         setSelectedItem();
         AddProductActivity();
         Logout();
@@ -76,6 +67,11 @@ public class Seller_ViewProduct extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public  void startActivity(Context context, Class<?> cls){
+        Intent intent = new Intent(context, cls);
+        startActivity(intent);
     }
 
     private void Logout(){
@@ -129,8 +125,8 @@ public class Seller_ViewProduct extends AppCompatActivity {
             map.put(category.getName(),category.getID());
         }
     }
-    private void DisplayListProduct(int page ,Integer CategoryID){
-        listProduct = daoProduct.getListProduct(page,CategoryID);
+    private void DisplayListProduct(Integer CategoryID){
+        listProduct = daoProduct.getListProduct(CategoryID);
         adapter = new ViewProductAdapter(listProduct);
         listView.setAdapter(adapter);
     }
@@ -139,11 +135,9 @@ public class Seller_ViewProduct extends AppCompatActivity {
         spinnerSearch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                page = 1;
                 CategoryID = map.get(listName.get(i));
-                numberPage = daoProduct.getNumberOfPage(CategoryID);
                 spinnerSearch.setSelection(adapterArr.getPosition(listName.get(i)));
-                DisplayListProduct(page ,CategoryID);
+                DisplayListProduct(CategoryID);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -152,29 +146,4 @@ public class Seller_ViewProduct extends AppCompatActivity {
         });
     }
 
-    private void backPage(){
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                page--;
-                if(page < 1){
-                    page = 1;
-                }
-                DisplayListProduct(page,CategoryID);
-            }
-        });
-    }
-
-    private void nextPage(){
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                page++;
-                if(page > numberPage){
-                    page = numberPage;
-                }
-                DisplayListProduct(page,CategoryID);
-            }
-        });
-    }
 }

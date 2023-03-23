@@ -39,16 +39,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
     private void InsertOrder(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert ={
                 "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(2,'2023-02-16','2023-02-16','Completed','7683 Ruskin Avenue')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(4,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(5,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(5,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','In progress','0341 Everett Court')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(7,'2023-02-17','2023-02-18','Completed','0341 Everett Court')\n"
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Shopping','0341 Everett Court')\n",
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -65,7 +56,10 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Crab fried rice','https://toplist.vn/images/800px/com-rang-cua-26877.jpg',18.75,4,NULL)\n",
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Fried rice with sausage and shrimp','https://toplist.vn/images/800px/com-rang-lap-xuong-va-tom-836726.jpg',12.75,4,NULL)\n",
                 "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Kimchi fried rice','https://toplist.vn/images/800px/com-rang-kim-chi-26882.jpg',13.5,4,NULL)\n",
-                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Orange juice','https://toplist.vn/images/800px/com-rang-kim-chi-26882.jpg',6.25,5,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Orange juice','https://www.acouplecooks.com/wp-content/uploads/2021/02/Painkiller-Cocktail-008.jpg',6.25,5,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Coca cola','https://sieuthibianhap.vn/wp-content/uploads/2021/07/Coca-Cola-Nhat-Chai-300ml-Thung-24-Lon-2.jpg',5.75,5,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Milk tea','https://mccoffeetanphu.com/uploads/source/mccoffee/b45-3-min.jpg',5.55,5,NULL)\n",
+                "INSERT INTO Product(ProductName,Image,price,CategoryID,description) VALUES('Lemon juice','https://static.toiimg.com/thumb/msid-74712583,imgsize-219657,width-400,resizemode-4/74712583.jpg',5.25,5,NULL)\n",
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -74,11 +68,11 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertCategory(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-                "INSERT INTO Category ([Name], Image) VALUES ('Seafood', "+R.drawable.seafood+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Phở',"+R.drawable.noodle+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Burger', "+R.drawable.cat_2+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Pizza',"+R.drawable.cat_1+")\n",
-                "INSERT INTO Category ([Name], Image) VALUES ('Drink', "+R.drawable.cat_4+")"
+               "INSERT INTO Category ([Name], Image) VALUES ('Seafood', 'https://www.foodandwine.com/thmb/PbFkIre5NuukQtjPcR2piP6P4cI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/seafood-blog618-f86e8baba8834537bbffa1d55e71c999.jpg')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Phở', 'https://files.fm/f/pawx6whrw'\n)",
+               "INSERT INTO Category ([Name], Image) VALUES ('Burger', 'https://burgerking.vn/media/catalog/product/cache/1/small_image/316x/9df78eab33525d08d6e5fb8d27136e95/b/u/burger_ga_pho_mai_so_t_bbq.jpg')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Pizza','https://cdn.alongwalker.info/vn/wp-content/uploads/2022/02/08131916/image-top-12-quan-pizza-ngon-ha-noi-gia-re-phu-hop-moi-lua-tuoi-164427595631734.jpg')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Drink','https://www.acouplecooks.com/wp-content/uploads/2021/02/Painkiller-Cocktail-008.jpg')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -87,12 +81,12 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertUser(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Kirk Nelson','4533389559','oparagreen0@usnews.com','Female','Kirk','999@','Seller')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Thi Thu','4533389559','oparagreen0@usnews.com','Female','ThuThu','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Anh Tuan','6298446654','kfleet1@artisteer.com','Male','AnhTuan','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Chu Quang Quan','8851738015','fellcock2@earthlink.net','Male','QuangQuan','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nguyen Minh Duc','5541282702','bkervin4@fotki.com','Male','MinhDuc','123@','Customer')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName)VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer')\n"
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Kirk Nelson','4533389559','oparagreen0@usnews.com','Female','Kirk','999@','Seller',123.5)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nguyen Thi Thu','4533389559','oparagreen0@usnews.com','Female','ThuThu','123@','Customer',130)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nguyen Anh Tuan','6298446654','kfleet1@artisteer.com','Male','AnhTuan','123@','Customer',150.5)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Chu Quang Quan','8851738015','fellcock2@earthlink.net','Male','QuangQuan','123@','Customer',140)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nguyen Minh Duc','5541282702','bkervin4@fotki.com','Male','MinhDuc','123@','Customer',200)\n",
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money) VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer',1000)\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -105,16 +99,16 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tFullName TEXT NOT NULL,\n" +
                 "\tPhone TEXT NOT NULL\n," +
                 "\tEmail TEXT, \n" +
-                "\tGender TEXT, \n" +
+                "\tGender TEXT NOT NULL, \n" +
                 "\tUsername TEXT NOT NULL,\n" +
                 "\tPassword TEXT NOT NULL,\n" +
-                "\tRoleName TEXT NOT NULL\n" +
+                "\tRoleName TEXT NOT NULL,\n" +
+                "\tMoney REAL NOT NULL\n" +
                 ");";
-
         String sqlCategory = "CREATE TABLE Category(\n" +
                 "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tName TEXT NOT NULL,\n" +
-                "\tImage INTEGER);";
+                "\tImage TEXT NOT NULL);";
         String sqlOrder = "CREATE TABLE [Order](\n" +
                 "\tOrderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tUserID INTEGER  NOT NULL,\n" +

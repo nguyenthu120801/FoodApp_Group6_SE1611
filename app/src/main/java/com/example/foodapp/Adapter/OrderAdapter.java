@@ -53,9 +53,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     }
 
     private void setDisplayStatus(Order order, OrderViewHolder holder) {
-        if (order.getStatus().equals(Order.STATUS_REJECTED)) {
+        if (order.getStatus().equals(Order.STATUS_CANCELLED)) {
             holder.statusImage.setImageResource(R.drawable.rejected);
-        } else if (order.getStatus().equals(Order.SHIPPING)) {
+        } else if (order.getStatus().equals(Order.STATUS_SHIPPING)) {
             holder.statusImage.setImageResource(R.drawable.fast_shipping);
         } else if (order.getStatus().equals(Order.STATUS_COMPLETED)) {
             holder.statusImage.setImageResource(R.drawable.accept);
@@ -66,7 +66,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     }
 
     private void setDisplayCancelButton(Order order, OrderViewHolder holder) {
-        boolean displayCancelButton = order.getStatus().equals(Order.STATUS_COMPLETED) || order.getStatus().equals(Order.STATUS_REJECTED);
+        boolean displayCancelButton = order.getStatus().equals(Order.STATUS_COMPLETED) || order.getStatus().equals(Order.STATUS_CANCELLED);
         if (displayCancelButton) {
             holder.cancelButton.setVisibility(View.GONE);
         }else {

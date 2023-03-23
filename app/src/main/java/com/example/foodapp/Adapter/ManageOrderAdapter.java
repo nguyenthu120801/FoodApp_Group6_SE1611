@@ -92,9 +92,11 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            listStatus.add(Order.STATUS_IN_PROGRESS);
+            listStatus.add(Order.STATUS_NEW);
+            listStatus.add(Order.STATUS_SHIPPING);
+            listStatus.add(Order.STATUS_IS_PAID);
             listStatus.add(Order.STATUS_COMPLETED);
-            listStatus.add(Order.STATUS_REJECTED);
+            listStatus.add(Order.STATUS_CANCELLED);
             id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
 

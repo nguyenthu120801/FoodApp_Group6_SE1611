@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,7 +46,6 @@ public class Seller_AddActivity extends AppCompatActivity {
     private final Map<String, Integer> mapInt = new HashMap<>();
     private final List<String> listName = new ArrayList<>();
     private static final int MY_REQUEST_CODE = 10;
-    public static final String TAG = Seller_AddActivity.class.getName();
     private List<Category> listCategory;
     private Spinner spinner;
     private ArrayAdapter adapterArr;
@@ -72,6 +72,7 @@ public class Seller_AddActivity extends AppCompatActivity {
                         }
                         Uri uri = data.getData();
                         imageURL = uri.toString();
+                        Log.e("Test",imageURL);
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                             image.setImageBitmap(bitmap);
@@ -103,6 +104,7 @@ public class Seller_AddActivity extends AppCompatActivity {
         AddProduct();
         Home();
         Logout();
+        ManagerOrder();
     }
 
     private void ManagerOrder(){
