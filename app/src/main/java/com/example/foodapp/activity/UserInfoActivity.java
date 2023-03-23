@@ -22,7 +22,6 @@ public class UserInfoActivity extends AppCompatActivity {
     private EditText phoneEditText;
     private EditText emailEditText;
     private EditText genderEditText;
-    private EditText roleNameEditText;
     private SessionManager sessionManager;
     private Button buttonRecharge;
     private DAOUser daoUser;
@@ -54,7 +53,7 @@ public class UserInfoActivity extends AppCompatActivity {
         phoneEditText.setText(userLoggedIn.getPhone());
         emailEditText.setText(userLoggedIn.getEmail());
         genderEditText.setText(userLoggedIn.getGender());
-        moneyTxt.setText(money);
+        moneyTxt.setText(String.valueOf(userLoggedIn.getMoney()));
 
         Button updateButton = findViewById(R.id.updateUser);
         updateButton.setOnClickListener(view -> updateUserInfo(view, userID));
