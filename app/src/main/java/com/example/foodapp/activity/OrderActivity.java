@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.util.Log;
 
-import com.example.foodapp.Entity.Adapter.OrderAdapter;
+import com.example.foodapp.Adapter.OrderAdapter;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.OrderDBHelper;
 import com.example.foodapp.R;

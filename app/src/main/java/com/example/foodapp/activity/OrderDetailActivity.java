@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.foodapp.Entity.Adapter.OrderDetailAdapter;
+import com.example.foodapp.Adapter.OrderDetailAdapter;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.R;
