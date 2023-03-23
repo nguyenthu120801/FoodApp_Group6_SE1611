@@ -50,7 +50,6 @@ public class UserInfoActivity extends AppCompatActivity {
         phoneEditText.setText(userLoggedIn.getPhone());
         emailEditText.setText(userLoggedIn.getEmail());
         genderEditText.setText(userLoggedIn.getGender());
-        roleNameEditText.setText(userLoggedIn.getRoleName());
 
 
         Button updateButton = findViewById(R.id.updateUser);
