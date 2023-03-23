@@ -50,7 +50,8 @@ public class DAOUser extends ConnectDatabase {
             String email = cursor.getString(cursor.getColumnIndexOrThrow( "Email"));
             String gender = cursor.getString(cursor.getColumnIndexOrThrow("Gender"));
             String roleName = cursor.getString(cursor.getColumnIndexOrThrow("RoleName"));
-            user = new User(id, fullName, phone, email, gender, username, password, roleName);
+            double money = cursor.getDouble(cursor.getColumnIndexOrThrow("Money"));
+            user = new User(id, fullName, phone, email, gender, username, password, roleName,money);
         }
         cursor.close();
         return user;
@@ -107,7 +108,7 @@ public class DAOUser extends ConnectDatabase {
         User user = null;
         SQLiteDatabase db = getReadableDatabase();
         String[] projection = {
-                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName"};
+                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName", "Money"};
         String selection = "ID = ?";
         String[] selectionArgs = { id };
         Cursor cursor = db.query(
@@ -124,7 +125,8 @@ public class DAOUser extends ConnectDatabase {
             String roleName = cursor.getString(cursor.getColumnIndexOrThrow("RoleName"));
             String username = cursor.getString(cursor.getColumnIndexOrThrow("Username"));
             String password = cursor.getString(cursor.getColumnIndexOrThrow("Password"));
-            user = new User(ID, fullName, phone, email, gender, username, password, roleName);
+            double money = cursor.getDouble(cursor.getColumnIndexOrThrow("Money"));
+            user = new User(ID, fullName, phone, email, gender, username, password, roleName, money);
         }
         cursor.close();
         return user;
