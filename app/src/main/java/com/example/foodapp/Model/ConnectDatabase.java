@@ -39,7 +39,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
     private void InsertOrder(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert ={
                 "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(2,'2023-02-16','2023-02-16','Completed','7683 Ruskin Avenue')\n",
-                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Shopping','0341 Everett Court')\n",
+                "INSERT INTO [Order](UserID,OrderDate,ShipDate,Status,Address) VALUES(3,'2023-02-17','2023-02-18','Shipping','0341 Everett Court')\n",
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -86,7 +86,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money,Address) VALUES('Nguyen Anh Tuan','6298446654','kfleet1@artisteer.com','Male','AnhTuan','123@','Customer',150.5,'74 Phuong Mai')\n",
                 "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money,Address) VALUES('Chu Quang Quan','8851738015','fellcock2@earthlink.net','Male','QuangQuan','123@','Customer',140,'200 Giai Phong')\n",
                 "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money,Address) VALUES('Nguyen Minh Duc','5541282702','bkervin4@fotki.com','Male','MinhDuc','123@','Customer',200,'100 Dai Co Viet')\n",
-                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money,Address) VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer','189 Nguyen Van Cu')\n"
+                "INSERT INTO User(FullName,phone,email,gender,username,password,RoleName,Money,Address) VALUES('Nicky Gaitone','7583151589','ngaitone6@cyberchimps.com','Female','Nicky','123@','Customer',500,'189 Nguyen Van Cu')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
