@@ -60,9 +60,11 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
         final ManageOrder manageOrder = listManageOrder.get(position);
         holder.id.setText(String.valueOf(listManageOrder.get(position).getOrderID()));
         holder.name.setText(listManageOrder.get(position).getFullName());
+
         //holder.status.setText(listManageOrder.get(position).getStatus());
         holder.address.setText(String.valueOf(listManageOrder.get(position).getAddress()));
         holder.status.setText(String.valueOf(listManageOrder.get(position).getStatus()));
+
         holder.orderDate.setText(String.valueOf(listManageOrder.get(position).getOrderDate()));
 
 
@@ -111,13 +113,22 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
             listStatus.add(Order.STATUS_CANCELLED);
             id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
-            //status = itemView.findViewById(R.id.status);
-            btnUpdate = itemView.findViewById(R.id.btn_update);
-            tv18 = itemView.findViewById(R.id.textView18);
-
             status = itemView.findViewById(R.id.status);
             address = itemView.findViewById(R.id.address);
             orderDate = itemView.findViewById(R.id.orderDate);
+
+            //status = itemView.findViewById(R.id.status);
+            btnUpdate = itemView.findViewById(R.id.btn_update);
+
+
+            Log.d("name", name.getText().toString());
+            if(name.getText().equals("Completed")){
+                btnUpdate.setVisibility(View.INVISIBLE);
+            }
+
+            tv18 = itemView.findViewById(R.id.textView18);
+
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_item, new String[]{"Completed", "Cancelled", "New", "Is Paid", "Shipping"});
 
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
