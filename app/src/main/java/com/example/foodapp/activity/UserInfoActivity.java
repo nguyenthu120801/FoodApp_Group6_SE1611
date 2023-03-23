@@ -73,12 +73,12 @@ public class UserInfoActivity extends AppCompatActivity {
 
     private void updateUserInfo(View view, int userID) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Xác nhận");
-        builder.setMessage("Bạn có chắc chắn muốn thay đổi thông tin không?");
-        builder.setPositiveButton("Không", (dialog, which) -> {
+        builder.setTitle("Confirm");
+        builder.setMessage("Do you really want to change your information?");
+        builder.setPositiveButton("No", (dialog, which) -> {
             // Xử lý sự kiện khi người dùng chọn nút Không
         });
-        builder.setNegativeButton("Có", (dialog, which) -> {
+        builder.setNegativeButton("Yes", (dialog, which) -> {
             // Xử lý sự kiện khi người dùng chọn nút Có
             User user = new User();
             user.setID(userID);
@@ -90,12 +90,12 @@ public class UserInfoActivity extends AppCompatActivity {
             int result = daoUser.updateUser(user);
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             if (result != -1) {
-                builder1.setTitle("Thông báo");
-                builder1.setMessage("Thay đổi thông tin thành công!");
+                builder1.setTitle("Notify");
+                builder1.setMessage("Info changed!");
                 builder1.setPositiveButton("OK", null);
             } else {
-                builder1.setTitle("Thông báo");
-                builder1.setMessage("Thay đổi thông tin thất bại!");
+                builder1.setTitle("Notify");
+                builder1.setMessage("Can't change info!");
                 builder1.setNegativeButton("OK", null);
             }
             builder1.show();
