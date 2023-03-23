@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,10 +28,18 @@ public class UserInfoActivity extends AppCompatActivity {
     private DAOUser daoUser;
     public static  String money = "";
     private TextView moneyTxt;
+    ImageView img_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
+        img_back = findViewById(R.id.imageView11);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserInfoActivity.this, MainActivity.class));
+            }
+        });
         daoUser = new DAOUser(this);
         sessionManager = new SessionManager(this);
         int userID = sessionManager.getUserID();

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.foodapp.Adapter.OrderAdapter;
 import com.example.foodapp.Entity.Order;
@@ -23,6 +25,7 @@ public class ListUserOrderActivity extends AppCompatActivity implements OnRefres
     OrderDBHelper orderDBHelper;
     SessionManager sessionManager;
     DAOUser daoUser;
+    ImageView img_back;
 
     private void LoadData() {
 
@@ -49,6 +52,13 @@ public class ListUserOrderActivity extends AppCompatActivity implements OnRefres
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user_order);
+        img_back = findViewById(R.id.img_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ListUserOrderActivity.this, MainActivity.class));
+            }
+        });
         LoadData();
 
     }

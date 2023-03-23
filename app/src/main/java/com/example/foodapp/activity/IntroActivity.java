@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 
 
+import com.example.foodapp.Entity.User;
 import com.example.foodapp.ManageOrderActivity;
+import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.R;
+
+import java.util.HashMap;
 
 
 public class IntroActivity extends AppCompatActivity {
@@ -22,10 +26,10 @@ public class IntroActivity extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(IntroActivity.this, MainActivity.class));
-
+                startActivity(new Intent(IntroActivity.this, LoginActivity.class));
             }
         });
+
     }
 
 
