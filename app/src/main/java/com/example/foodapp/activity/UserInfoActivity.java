@@ -46,8 +46,6 @@ public class UserInfoActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phoneEditText);
         emailEditText = findViewById(R.id.emailEditText);
         genderEditText = findViewById(R.id.genderEditText);
-        roleNameEditText = findViewById(R.id.roleNameEditText);
-
         fullNameEditText.setText(userLoggedIn.getFullName());
         phoneEditText.setText(userLoggedIn.getPhone());
         emailEditText.setText(userLoggedIn.getEmail());
