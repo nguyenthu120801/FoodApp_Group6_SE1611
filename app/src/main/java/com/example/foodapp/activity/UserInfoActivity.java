@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOUser;
@@ -20,8 +21,8 @@ public class UserInfoActivity extends AppCompatActivity {
     private EditText phoneEditText;
     private EditText emailEditText;
     private EditText genderEditText;
-    private EditText roleNameEditText;
     private SessionManager sessionManager;
+    private TextView userMoneyText;
 
     private DAOUser daoUser;
 
@@ -45,13 +46,12 @@ public class UserInfoActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phoneEditText);
         emailEditText = findViewById(R.id.emailEditText);
         genderEditText = findViewById(R.id.genderEditText);
-        roleNameEditText = findViewById(R.id.roleNameEditText);
-
+        userMoneyText = findViewById(R.id.user_money);
         fullNameEditText.setText(userLoggedIn.getFullName());
         phoneEditText.setText(userLoggedIn.getPhone());
         emailEditText.setText(userLoggedIn.getEmail());
         genderEditText.setText(userLoggedIn.getGender());
-        roleNameEditText.setText(userLoggedIn.getRoleName());
+        userMoneyText.setText("$"+userLoggedIn.getMoney());
 
 
         Button updateButton = findViewById(R.id.updateUser);
