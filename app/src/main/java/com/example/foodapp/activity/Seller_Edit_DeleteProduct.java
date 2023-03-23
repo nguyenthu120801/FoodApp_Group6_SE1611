@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Entity.Category;
@@ -78,6 +80,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                         }
                         Uri uri = data.getData();
                         imageURL = uri.toString();
+                        Log.e("Test",imageURL);
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                             image.setImageBitmap(bitmap);
@@ -183,22 +186,19 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 int CategoryID= mapInt.get(spinner.getSelectedItem().toString());
                 textMessage.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
-                    textMessage.setText("You have to input product name");
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "You have to input product name",Toast.LENGTH_SHORT);
                 }else if(daoProduct.CheckProductExist(ProductName) && !ProductName.equalsIgnoreCase(product.getProductName())){
-                    textMessage.setText("Product existed");
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "Product existed",Toast.LENGTH_SHORT);
                 } else if(Price.isEmpty()){
-                    textMessage.setText("You have to input price");
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "You have to input price",Toast.LENGTH_SHORT);
                 }else if(Double.parseDouble(Price) == 0){
-                    textMessage.setText("Price must be greater than 0");
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "Price must be greater than 0",Toast.LENGTH_SHORT);
                 }else{
                     String image = product.getImage();
                     product = new Product(ProductID, ProductName,imageURL == null ? image : imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des.trim());
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){
-                        textMessage.setTextColor(Color.GREEN);
-                        textMessage.setText("Update successful");
-                    }else{
-                        textMessage.setText("");
+                        Toast.makeText(Seller_Edit_DeleteProduct.this, "Update successful",Toast.LENGTH_SHORT);
                     }
                 }
 
@@ -241,7 +241,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
     private void openGallery(){
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_CREATE_DOCUMENT);
         activity.launch(Intent.createChooser(intent, "Select picture"));
     }
 

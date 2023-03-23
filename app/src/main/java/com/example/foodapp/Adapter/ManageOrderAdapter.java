@@ -62,6 +62,7 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
         holder.name.setText(listManageOrder.get(position).getFullName());
 
         //holder.status.setText(listManageOrder.get(position).getStatus());
+
         holder.address.setText(String.valueOf(listManageOrder.get(position).getAddress()));
         holder.status.setText(String.valueOf(listManageOrder.get(position).getStatus()));
 
@@ -78,6 +79,7 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
             holder.tv18.setVisibility(View.VISIBLE);
             holder.tv18.setText("Cancel");
         }*/
+
     }
 
     @Override
