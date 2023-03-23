@@ -3,33 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/rounded_corner"
     android:padding="10dp"
     >
+
+    <TextView
+        android:id="@+id/detail_productID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:text="Product Name"
+        android:textStyle="bold"
+        android:textSize="24sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:padding="5dp"
-            >
-        <TextView
-            android:id="@+id/detail_productID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Product ID"
-            android:textSize="24sp"
-            android:background="@drawable/border_rect"
-            android:layout_weight="1"
-            />
+        android:weightSum="5">
         <TextView
             android:id="@+id/detail_product_quantity"
             android:layout_width="match_parent"
-            android:background="@drawable/border_rect"
             android:layout_height="wrap_content"
-            android:text="Quantity"
-            android:textSize="24sp"
-            android:layout_weight="1"
-            />
+            android:layout_weight="3"
+            android:textColor="@color/black"
+            android:text="Số lượng : "
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/detail_product_price_once"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@color/black"
+            android:text="Đơn giá : 1000d"
+            android:textSize="17sp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/detail_product_price_total_once"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textColor="@color/black"
+        android:text="Tổng giá : 1000d"
+        android:textSize="20sp" />
 </LinearLayout>
