@@ -28,7 +28,6 @@ public class UpdateManageOrder extends AppCompatActivity {
     private final DAOManageOrder dao = new DAOManageOrder(this);
     private Spinner spinStatus;
     private Button btnUpdateStatus;
-    private ManageOrder manageOrder;
     String selectedItem ;
     private boolean isUpdated = false;
     private List<String> listStatus;
@@ -41,24 +40,19 @@ public class UpdateManageOrder extends AppCompatActivity {
         spinStatus = findViewById(R.id.spin_status);
         btnUpdateStatus = findViewById(R.id.btn_updateStatus);
         listStatus = new ArrayList<>();
-        /*String status = getIntent().getStringExtra("status");
-        int status_number = -1;
-
-        if(status.equals("New")){
-            status_number = 0;
-        } else if (status.equals("Completed")) {
-            status_number = 1;
-        }
-        spinStatus.setSelection(status_number);*/
         setDataStatus();
         int id = getIntent().getIntExtra("ID", 0);
         order = dao.getOrder(id);
         setSelectedStatus();
-        //spinStatus.setSelection(new DAOManageOrder(this).getStatus(id));
+        Update();
+    }
+
+    private void Update(){
         btnUpdateStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dao.UpdateStatus(id, selectedItem);
+                selectedItem = spinStatus.getSelectedItem().toString();
+                dao.UpdateStatus(order.getOrderID(), selectedItem);
                 Intent intent = new Intent(UpdateManageOrder.this, ManageOrderActivity.class);
                 startActivity(intent);
             }
@@ -74,8 +68,9 @@ public class UpdateManageOrder extends AppCompatActivity {
                     status = listStatus.get(i);
                 }else{
                     status = order.getStatus();
+                    isUpdated = true;
                 }
-
+                spinStatus.setSelection(adapter.getPosition(status));
                 //dao.UpdateStatus(id, selectedItem);
                 return;
                 //Order order = new Order(idc,7 ,"sdfsdfsdf","sdfsdf", "sdfsdf","sdfsdf");
@@ -92,7 +87,7 @@ public class UpdateManageOrder extends AppCompatActivity {
         listStatus.add(Order.STATUS_NEW);
         listStatus.add(Order.STATUS_SHIPPING);
         listStatus.add(Order.STATUS_IS_PAID);
-        listStatus.add(Order.STATUS_CANCELLED);
+        listStatus.add(Order.STATUS_COMPLETED);
         listStatus.add(Order.STATUS_CANCELLED);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listStatus);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
