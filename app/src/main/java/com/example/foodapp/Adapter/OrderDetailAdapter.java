@@ -1,7 +1,6 @@
 package com.example.foodapp.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -38,10 +37,10 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailViewHold
         OrderDetail orderDetail = orderDetails.get(position);
         Product product = daoProduct.getProduct(orderDetail.getProductID());
         holder.productText.setText(product.getProductName());
-        holder.quantityText.setText("Số lượng : " + orderDetail.getQuantity());
-        holder.productPriceOneText.setText("Đơn giá : "  + product.getPrice());
+        holder.quantityText.setText("Quantity : " + orderDetail.getQuantity());
+        holder.productPriceOneText.setText(product.getPrice()+"/1 product");
         double totalPriceOneProduct = product.getPrice()*orderDetail.getQuantity();
-        holder.producPriceTotalOnceText.setText("Tổng giá : " + totalPriceOneProduct);
+        holder.producPriceTotalOnceText.setText("Price : " + totalPriceOneProduct);
     }
 
     @Override

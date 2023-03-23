@@ -68,11 +68,11 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertCategory(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-               "INSERT INTO Category ([Name], Image) VALUES ('Seafood', '')\n",
-               "INSERT INTO Category ([Name], Image) VALUES ('Phở', ''\n)",
-               "INSERT INTO Category ([Name], Image) VALUES ('Burger', '')\n",
-               "INSERT INTO Category ([Name], Image) VALUES ('Pizza','')\n",
-               "INSERT INTO Category ([Name], Image) VALUES ('Drink','')\n"
+               "INSERT INTO Category ([Name], Image) VALUES ('Seafood', "+R.drawable.seafood+")\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Phở',"+R.drawable.noodle+"\n)",
+               "INSERT INTO Category ([Name], Image) VALUES ('Burger',"+R.drawable.logo+")\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Pizza',"+R.drawable.pizza+")\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Drink',"+R.drawable.cat_4+")\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
@@ -109,7 +109,7 @@ public class ConnectDatabase extends SQLiteOpenHelper {
         String sqlCategory = "CREATE TABLE Category(\n" +
                 "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tName TEXT NOT NULL,\n" +
-                "\tImage TEXT NOT NULL);";
+                "\tImage INTEGER NOT NULL);";
         String sqlOrder = "CREATE TABLE [Order](\n" +
                 "\tOrderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\tUserID INTEGER  NOT NULL,\n" +

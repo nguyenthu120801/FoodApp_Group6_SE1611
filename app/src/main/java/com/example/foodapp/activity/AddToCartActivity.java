@@ -7,17 +7,14 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +24,7 @@ import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOCart;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
@@ -53,7 +51,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     Button checkoutBtn;
     SessionManager sessionManager;
     FoodAdapter adapter;
-    int userID;
+    int userID, quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +68,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
         cartList = new DAOCart(this).getListCart(userID);
         rcv = findViewById(R.id.rv_category);
         int id = getIntent().getIntExtra("id", 0);
+         quantity = getIntent().getIntExtra("quantity", 1);
         LoadRecyclerView(cartList, id);
         homebtn = findViewById(R.id.btn_homePage);
         homebtn.setOnClickListener(new View.OnClickListener() {
@@ -125,13 +124,26 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     private void checkout() {
         if (addressText.getText().toString().trim().isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Thông báo");
-            builder.setMessage("Vui lòng nhập giá trị cho address");
+            builder.setTitle("Notify");
+            builder.setMessage("Please fill address!");
+            builder.setPositiveButton("OK", null);
+            builder.show();
+            return;
+        }
+        double totalPrice = getTotalPrice();
+        Log.d("infoOrder", "Total Price is : " + totalPrice);
+        User user = daoUser.getUser(String.valueOf(userID));
+        if(user.getMoney()<= totalPrice){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Notify");
+            builder.setMessage("Account don't have enough money to pay!");
             builder.setPositiveButton("OK", null);
             builder.show();
             return;
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        user.setMoney(user.getMoney()- totalPrice);
+        daoUser.updateUser(user);
         Order order = new Order();
         order.setUserID(userID);
         order.setOrderDate(dateFormat.format(new Date()));
@@ -151,19 +163,32 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
                 Log.d("infoOrder", "Order Detail add vào db : " + orderDetail);
                 daoOrderDetail.AddOrderDetail(orderDetail);
             }
-            Log.d("infoOrder", "delete all cart");
             new DAOCart(this).DeleteAllCart();
-            Log.d("infoOrder", "insert order detail successful");
-            orderDBHelper.getAllOrders();
-            Intent intent = new Intent(this, ListUserOrderActivity.class);
-            startActivity(intent);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Notify");
+            builder.setMessage("Checkout success!");
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                Intent intent = new Intent(this, ListUserOrderActivity.class);
+                startActivity(intent);
+            });
+            builder.show();
+
         } else {
             Log.d("infoOrder", "insert order fail");
         }
 
 
     }
-
+    public  double getTotalPrice(){
+        double total = 0;
+        cartList = new DAOCart(this).getListCart(sessionManager.getUserID());
+        for (Cart cart : cartList) {
+            Product product = new DAOProduct(this).getProduct(cart.getProductID());
+            Log.d("infoOrder", "quantity : " + cart.getQuantity() + ", product price: "+ product.getPrice());
+            total += (cart.getQuantity() * product.getPrice());
+        }
+        return total;
+    }
     @Override
     public void onPriceChange(double price) {
         tv_total.setText("$" + price);
@@ -180,14 +205,14 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             for (Cart c : cartList) {
                 if (c.getProductID() == id) {
                     pID = id;
-                    c.setQuantity(c.getQuantity() + 1);
+                    c.setQuantity(c.getQuantity() + quantity);
                     int n = new DAOCart(this).UpdateCart(c);
                 }
 
             }
             if (pID != id) {
-                long n = new DAOCart(this).AddCart(new Cart(userID, product.getProductID(), 1));
-                cartList.add(new Cart(new DAOCart(this).getMaxCartID(), userID, product.getProductID(), 1));
+                long n = new DAOCart(this).AddCart(new Cart(userID, product.getProductID(), quantity));
+                cartList.add(new Cart(new DAOCart(this).getMaxCartID(), userID, product.getProductID(), quantity));
             }
 
         }

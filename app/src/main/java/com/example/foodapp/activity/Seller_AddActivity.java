@@ -150,21 +150,21 @@ public class Seller_AddActivity extends AppCompatActivity {
                 int CategoryID= mapInt.get(spinner.getSelectedItem().toString());
                 textMess.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
-                    Toast.makeText(Seller_AddActivity.this, "You have to input product name",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_AddActivity.this, "You have to input product name",Toast.LENGTH_SHORT).show();
                 }else if(daoProduct.CheckProductExist(ProductName)){
-                    Toast.makeText(Seller_AddActivity.this, "Product existed",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_AddActivity.this, "Product existed",Toast.LENGTH_SHORT).show();
                 }else if(Price.isEmpty()){
-                    Toast.makeText(Seller_AddActivity.this, "You have to input price",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_AddActivity.this, "You have to input price",Toast.LENGTH_SHORT).show();
                 }else if(Double.parseDouble(Price) == 0){
-                    Toast.makeText(Seller_AddActivity.this, "Price must be greater than 0",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_AddActivity.this, "Price must be greater than 0",Toast.LENGTH_SHORT).show();
                 } else if(imageURL == null){
-                    Toast.makeText(Seller_AddActivity.this, "You have to upload image",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_AddActivity.this, "You have to upload image",Toast.LENGTH_SHORT).show();
                 } else{
                     Product product = new Product(ProductName,imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des);
                     long number = daoProduct.AddProduct(product);
                     if(number > 0){
                         textMess.setTextColor(Color.GREEN);
-                        Toast.makeText(Seller_AddActivity.this, "Add successful",Toast.LENGTH_SHORT);
+                        Toast.makeText(Seller_AddActivity.this, "Add successful",Toast.LENGTH_SHORT).show();
                     }
                 }
             }

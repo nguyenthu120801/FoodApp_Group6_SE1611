@@ -8,10 +8,18 @@
     android:padding="10dp"
     tools:context=".activity.ListUserOrderActivity">
 
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="40dp"
+        android:layout_height="37dp"
+        app:srcCompat="@drawable/back" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_user_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        />
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
