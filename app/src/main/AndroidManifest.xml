@@ -37,6 +37,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".activity.Seller_AddActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.OrderActivity"
             android:exported="false">
             <meta-data
