@@ -48,7 +48,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         }
         holder.addressText.setText(order.getAddress());
         setDisplayStatus(order, holder);
-        setDisplayCancelButton(order, holder);
+//        setDisplayCancelButton(order, holder);
         holder.linearLayout.setOnClickListener(view -> toOrderDetail(order.getOrderID()));
     }
 
@@ -65,15 +65,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         holder.statusText.setText(order.getStatus());
     }
 
-    private void setDisplayCancelButton(Order order, OrderViewHolder holder) {
-        boolean displayCancelButton = order.getStatus().equals(Order.STATUS_COMPLETED) || order.getStatus().equals(Order.STATUS_CANCELLED);
-        if (displayCancelButton) {
-            holder.cancelButton.setVisibility(View.GONE);
-        }else {
-            holder.cancelButton.setVisibility(View.VISIBLE);
-            holder.cancelButton.setOnClickListener(view -> cancelOrder(order.getOrderID()));
-        }
-    }
+//    private void setDisplayCancelButton(Order order, OrderViewHolder holder) {
+//        boolean displayCancelButton = order.getStatus().equals(Order.STATUS_COMPLETED) || order.getStatus().equals(Order.STATUS_CANCELLED);
+//        if (displayCancelButton) {
+//            holder.cancelButton.setVisibility(View.GONE);
+//        }else {
+//            holder.cancelButton.setVisibility(View.VISIBLE);
+//            holder.cancelButton.setOnClickListener(view -> cancelOrder(order.getOrderID()));
+//        }
+//    }
 
     private void cancelOrder(int orderId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
