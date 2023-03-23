@@ -68,11 +68,11 @@ public class ConnectDatabase extends SQLiteOpenHelper {
 
     private void InsertCategory(SQLiteDatabase sqLiteDatabase){
         String[] sqlInsert = {
-               "INSERT INTO Category ([Name], Image) VALUES ('Seafood', 'https://www.foodandwine.com/thmb/PbFkIre5NuukQtjPcR2piP6P4cI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/seafood-blog618-f86e8baba8834537bbffa1d55e71c999.jpg')\n",
-               "INSERT INTO Category ([Name], Image) VALUES ('Phở', 'https://files.fm/f/pawx6whrw'\n)",
-               "INSERT INTO Category ([Name], Image) VALUES ('Burger', 'https://burgerking.vn/media/catalog/product/cache/1/small_image/316x/9df78eab33525d08d6e5fb8d27136e95/b/u/burger_ga_pho_mai_so_t_bbq.jpg')\n",
-               "INSERT INTO Category ([Name], Image) VALUES ('Pizza','https://cdn.alongwalker.info/vn/wp-content/uploads/2022/02/08131916/image-top-12-quan-pizza-ngon-ha-noi-gia-re-phu-hop-moi-lua-tuoi-164427595631734.jpg')\n",
-               "INSERT INTO Category ([Name], Image) VALUES ('Drink','https://www.acouplecooks.com/wp-content/uploads/2021/02/Painkiller-Cocktail-008.jpg')\n"
+               "INSERT INTO Category ([Name], Image) VALUES ('Seafood', '')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Phở', ''\n)",
+               "INSERT INTO Category ([Name], Image) VALUES ('Burger', '')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Pizza','')\n",
+               "INSERT INTO Category ([Name], Image) VALUES ('Drink','')\n"
         };
         for(String sql : sqlInsert){
             sqLiteDatabase.execSQL(sql);
