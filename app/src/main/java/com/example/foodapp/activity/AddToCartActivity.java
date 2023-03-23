@@ -24,6 +24,7 @@ import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Entity.Product;
+import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOCart;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.Model.DAOProduct;
@@ -123,13 +124,26 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
     private void checkout() {
         if (addressText.getText().toString().trim().isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Thông báo");
-            builder.setMessage("Vui lòng nhập giá trị cho address");
+            builder.setTitle("Notify");
+            builder.setMessage("Please fill address!");
+            builder.setPositiveButton("OK", null);
+            builder.show();
+            return;
+        }
+        double totalPrice = getTotalPrice();
+        Log.d("infoOrder", "Total Price is : " + totalPrice);
+        User user = daoUser.getUser(String.valueOf(userID));
+        if(user.getMoney()<= totalPrice){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Notify");
+            builder.setMessage("Account don't have enough money to pay!");
             builder.setPositiveButton("OK", null);
             builder.show();
             return;
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        user.setMoney(user.getMoney()- totalPrice);
+        daoUser.updateUser(user);
         Order order = new Order();
         order.setUserID(userID);
         order.setOrderDate(dateFormat.format(new Date()));
@@ -161,7 +175,16 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
 
 
     }
-
+    public  double getTotalPrice(){
+        double total = 0;
+        cartList = new DAOCart(this).getListCart(sessionManager.getUserID());
+        for (Cart cart : cartList) {
+            Product product = new DAOProduct(this).getProduct(cart.getProductID());
+            Log.d("infoOrder", "quantity : " + cart.getQuantity() + ", product price: "+ product.getPrice());
+            total += (cart.getQuantity() * product.getPrice());
+        }
+        return total;
+    }
     @Override
     public void onPriceChange(double price) {
         tv_total.setText("$" + price);
