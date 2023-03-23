@@ -7,22 +7,19 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodapp.Adapter.FoodAdapter;
+import com.example.foodapp.Entity.Adapter.FoodAdapter;
 import com.example.foodapp.Entity.Cart;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Entity.OrderDetail;

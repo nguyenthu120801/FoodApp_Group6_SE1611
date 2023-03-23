@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOUser;
@@ -21,9 +20,9 @@ public class UserInfoActivity extends AppCompatActivity {
     private EditText phoneEditText;
     private EditText emailEditText;
     private EditText genderEditText;
+    private EditText roleNameEditText;
     private SessionManager sessionManager;
-    private TextView userMoneyText;
-
+    private Button buttonRecharge;
     private DAOUser daoUser;
 
     @Override
@@ -33,6 +32,7 @@ public class UserInfoActivity extends AppCompatActivity {
         daoUser = new DAOUser(this);
         sessionManager = new SessionManager(this);
         int userID = sessionManager.getUserID();
+        buttonRecharge = findViewById(R.id.recharge);
         if (userID == -1) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -46,16 +46,27 @@ public class UserInfoActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phoneEditText);
         emailEditText = findViewById(R.id.emailEditText);
         genderEditText = findViewById(R.id.genderEditText);
-        userMoneyText = findViewById(R.id.user_money);
         fullNameEditText.setText(userLoggedIn.getFullName());
         phoneEditText.setText(userLoggedIn.getPhone());
         emailEditText.setText(userLoggedIn.getEmail());
         genderEditText.setText(userLoggedIn.getGender());
-        userMoneyText.setText("$"+userLoggedIn.getMoney());
+        roleNameEditText.setText(userLoggedIn.getRoleName());
 
 
         Button updateButton = findViewById(R.id.updateUser);
         updateButton.setOnClickListener(view -> updateUserInfo(view, userID));
+        Recharge(userID);
+    }
+
+    private void Recharge(int userID){
+        buttonRecharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RechargeActivity.UserID = userID;
+                Intent intent = new Intent(UserInfoActivity.this, RechargeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateUserInfo(View view, int userID) {

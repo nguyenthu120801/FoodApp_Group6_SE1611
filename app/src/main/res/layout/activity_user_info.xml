@@ -142,4 +142,10 @@
         android:layout_height="wrap_content"
         android:text="Update" />
 
+    <Button
+        android:id="@+id/recharge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RECHARGE" />
+
 </LinearLayout>

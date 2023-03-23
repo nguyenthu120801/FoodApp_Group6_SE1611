@@ -8,10 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.foodapp.Adapter.OrderDetailAdapter;
-import com.example.foodapp.Adapter.OrderDetailViewHolder;
+import com.example.foodapp.Entity.Adapter.OrderDetailAdapter;
 import com.example.foodapp.Entity.OrderDetail;
 import com.example.foodapp.Model.DAOOrderDetail;
 import com.example.foodapp.R;

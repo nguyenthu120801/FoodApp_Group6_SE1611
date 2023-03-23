@@ -1,7 +1,6 @@
-package com.example.foodapp.Adapter;
+package com.example.foodapp.Entity.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Entity.Product;
 import com.example.foodapp.R;
-import com.example.foodapp.activity.FoodDetailActivity;
 import com.example.foodapp.onProductItemClick;
 
 import java.util.ArrayList;

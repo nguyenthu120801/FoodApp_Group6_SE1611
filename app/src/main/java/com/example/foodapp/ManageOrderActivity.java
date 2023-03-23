@@ -7,20 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.foodapp.Adapter.ManageOrderAdapter;
+import com.example.foodapp.Entity.Adapter.ManageOrderAdapter;
 import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOManageOrder;
 import com.example.foodapp.activity.UpdateManageOrder;
 import com.example.foodapp.activity.LoginActivity;
-import com.example.foodapp.activity.Seller_Edit_DeleteProduct;
 import com.example.foodapp.activity.Seller_ViewProduct;
 import com.example.foodapp.activity.SessionManager;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class ManageOrderActivity extends AppCompatActivity implements OnClick, OnUpdateStatus {

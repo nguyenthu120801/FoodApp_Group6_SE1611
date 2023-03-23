@@ -1,4 +1,4 @@
-package com.example.foodapp.Adapter;
+package com.example.foodapp.Entity.Adapter;
 
 import android.view.View;
 import android.widget.TextView;
