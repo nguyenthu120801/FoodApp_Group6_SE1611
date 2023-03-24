@@ -175,12 +175,13 @@ public class Seller_AddActivity extends AppCompatActivity {
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickRequestPermission();
+                openGallery();
             }
         });
     }
 
     private void onClickRequestPermission(){
+
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
             openGallery();
         }else{

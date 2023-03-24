@@ -210,7 +210,7 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickRequestPermission();
+                openGallery();
             }
         });
     }
