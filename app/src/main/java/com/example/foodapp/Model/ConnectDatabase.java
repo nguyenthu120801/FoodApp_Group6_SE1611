@@ -103,8 +103,8 @@ public class ConnectDatabase extends SQLiteOpenHelper {
                 "\tUsername TEXT NOT NULL,\n" +
                 "\tPassword TEXT NOT NULL,\n" +
                 "\tRoleName TEXT NOT NULL,\n" +
-                "\tMoney REAL NOT NULL,\n" +
-                "\tAddress TEXT NOT NULL\n" +
+                "\tMoney REAL, \n" +
+                "\tAddress TEXT \n" +
                 ");";
         String sqlCategory = "CREATE TABLE Category(\n" +
                 "\tID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
