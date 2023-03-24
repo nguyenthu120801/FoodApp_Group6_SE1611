@@ -41,8 +41,11 @@ public class Seller_ViewProduct extends AppCompatActivity {
     private Integer CategoryID = null;
     private Button buttonAdd;
     private LinearLayout logout;
-    private LinearLayout managerOrder, account;
-    @SuppressLint("MissingInflatedId")
+
+
+    private LinearLayout managerOrder;
+    private LinearLayout account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +55,14 @@ public class Seller_ViewProduct extends AppCompatActivity {
         buttonAdd = findViewById(R.id.btnAdd);
         logout = findViewById(R.id.LogOut);
         managerOrder = findViewById(R.id.manage_order);
-        account = findViewById(R.id.btn_accountSeller);
+
+        account = findViewById(R.id.view_account);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(Seller_ViewProduct.this , UserInfoActivity.class));
+            }
+        });
         setDataSearch();
         setMap();
         DisplayListProduct(CategoryID);
@@ -159,5 +169,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

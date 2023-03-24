@@ -130,6 +130,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             builder.show();
             return;
         }
+
         double totalPrice = getTotalPrice();
         Log.d("infoOrder", "Total Price is : " + totalPrice);
         User user = daoUser.getUser(String.valueOf(userID));
@@ -141,6 +142,9 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             builder.show();
             return;
         }
+        new DAOCart(this).DeleteAllCart();
+        User u = new DAOUser(this).getInfoUser(userID);
+        new DAOUser(this).UpdateMoney(u.getMoney() - totalPrice,userID);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         user.setMoney(user.getMoney()- totalPrice);
         daoUser.updateUser(user);
