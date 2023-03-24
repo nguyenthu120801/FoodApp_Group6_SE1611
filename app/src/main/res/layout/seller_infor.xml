@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="16dp"
-    tools:context=".activity.UserInfoActivity">
+    android:paddingHorizontal="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,12 +47,11 @@
         android:orientation="horizontal"
         android:weightSum="3">
 
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Recharge" />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Money: "
+           android:textSize="30dp"></TextView>
 
         <TextView
             android:id="@+id/user_money"
@@ -167,5 +165,4 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Update" />
-
 </LinearLayout>

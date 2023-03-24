@@ -91,7 +91,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/manager_order"
+                    android:id="@+id/manager_order2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -125,6 +125,7 @@
                     android:visibility="invisible"></LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_SellerAccount2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"

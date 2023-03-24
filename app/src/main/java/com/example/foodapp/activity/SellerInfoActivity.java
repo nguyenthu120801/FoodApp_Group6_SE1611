@@ -3,7 +3,6 @@ package com.example.foodapp.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,33 +16,30 @@ import com.example.foodapp.Entity.User;
 import com.example.foodapp.Model.DAOUser;
 import com.example.foodapp.R;
 
-public class UserInfoActivity extends AppCompatActivity {
+public class SellerInfoActivity extends AppCompatActivity {
     private EditText fullNameEditText;
     private EditText phoneEditText;
     private EditText emailEditText;
     private EditText genderEditText;
     private SessionManager sessionManager;
-    private Button buttonRecharge;
     private DAOUser daoUser;
     public static  String money = "";
     private TextView moneyTxt;
     ImageView img_back;
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
+        setContentView(R.layout.seller_infor);
         img_back = findViewById(R.id.btn_OrderDetailback);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserInfoActivity.this, MainActivity.class));
+                startActivity(new Intent(SellerInfoActivity.this, Seller_ViewProduct.class));
             }
         });
         daoUser = new DAOUser(this);
         sessionManager = new SessionManager(this);
         int userID = sessionManager.getUserID();
-        buttonRecharge = findViewById(R.id.btnAdd);
         moneyTxt = findViewById(R.id.user_money);
         if (userID == -1) {
             Intent intent = new Intent(this, LoginActivity.class);
@@ -66,19 +62,10 @@ public class UserInfoActivity extends AppCompatActivity {
 
         Button updateButton = findViewById(R.id.updateUser);
         updateButton.setOnClickListener(view -> updateUserInfo(view, userID));
-        Recharge(userID);
+
     }
 
-    private void Recharge(int userID){
-        buttonRecharge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RechargeActivity.UserID = userID;
-                Intent intent = new Intent(UserInfoActivity.this, RechargeActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+
 
     private void updateUserInfo(View view, int userID) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -111,6 +98,5 @@ public class UserInfoActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 }
