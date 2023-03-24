@@ -186,19 +186,19 @@ public class Seller_Edit_DeleteProduct extends AppCompatActivity {
                 int CategoryID= mapInt.get(spinner.getSelectedItem().toString());
                 textMessage.setTextColor(Color.RED);
                 if(ProductName.isEmpty()){
-                    Toast.makeText(Seller_Edit_DeleteProduct.this, "You have to input product name",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "You have to input product name",Toast.LENGTH_SHORT).show();
                 }else if(daoProduct.CheckProductExist(ProductName) && !ProductName.equalsIgnoreCase(product.getProductName())){
-                    Toast.makeText(Seller_Edit_DeleteProduct.this, "Product existed",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "Product existed",Toast.LENGTH_SHORT).show();
                 } else if(Price.isEmpty()){
-                    Toast.makeText(Seller_Edit_DeleteProduct.this, "You have to input price",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "You have to input price",Toast.LENGTH_SHORT).show();
                 }else if(Double.parseDouble(Price) == 0){
-                    Toast.makeText(Seller_Edit_DeleteProduct.this, "Price must be greater than 0",Toast.LENGTH_SHORT);
+                    Toast.makeText(Seller_Edit_DeleteProduct.this, "Price must be greater than 0",Toast.LENGTH_SHORT).show();
                 }else{
                     String image = product.getImage();
                     product = new Product(ProductID, ProductName,imageURL == null ? image : imageURL.trim(),Double.parseDouble(Price),CategoryID,des.isEmpty() ? null : des.trim());
                     int number = daoProduct.UpdateProduct(product);
                     if(number > 0){
-                        Toast.makeText(Seller_Edit_DeleteProduct.this, "Update successful",Toast.LENGTH_SHORT);
+                        Toast.makeText(Seller_Edit_DeleteProduct.this, "Update successful",Toast.LENGTH_SHORT).show();
                     }
                 }
 

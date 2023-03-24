@@ -34,8 +34,7 @@ public class DAOUser extends ConnectDatabase {
     public User getUser(String username, String password) {
         User user = null;
         SQLiteDatabase db = getReadableDatabase();
-        String[] projection = {
-                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName"};
+        String[] projection = {"ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName", "Money"};
         String selection = "Username = ? AND Password = ?";
         String[] selectionArgs = { username, password };
         Cursor cursor = db.query(
@@ -50,7 +49,8 @@ public class DAOUser extends ConnectDatabase {
             String email = cursor.getString(cursor.getColumnIndexOrThrow( "Email"));
             String gender = cursor.getString(cursor.getColumnIndexOrThrow("Gender"));
             String roleName = cursor.getString(cursor.getColumnIndexOrThrow("RoleName"));
-            user = new User(id, fullName, phone, email, gender, username, password, roleName);
+            double money = cursor.getDouble(cursor.getColumnIndexOrThrow("Money"));
+            user = new User(id, fullName, phone, email, gender, username, password, roleName,money);
         }
         cursor.close();
         return user;
@@ -107,7 +107,7 @@ public class DAOUser extends ConnectDatabase {
         User user = null;
         SQLiteDatabase db = getReadableDatabase();
         String[] projection = {
-                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName"};
+                "ID", "FullName", "Phone", "Email", "Gender", "Username", "Password", "RoleName", "Money"};
         String selection = "ID = ?";
         String[] selectionArgs = { id };
         Cursor cursor = db.query(
@@ -124,10 +124,41 @@ public class DAOUser extends ConnectDatabase {
             String roleName = cursor.getString(cursor.getColumnIndexOrThrow("RoleName"));
             String username = cursor.getString(cursor.getColumnIndexOrThrow("Username"));
             String password = cursor.getString(cursor.getColumnIndexOrThrow("Password"));
-            user = new User(ID, fullName, phone, email, gender, username, password, roleName);
+            double money = cursor.getDouble(cursor.getColumnIndexOrThrow("Money"));
+            user = new User(ID, fullName, phone, email, gender, username, password, roleName, money);
         }
         cursor.close();
         return user;
+    }
+
+    public User getInfoUser(int ID){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "select * from User where ID = ?";
+        String [] selectionArgs = {ID + ""};
+        Cursor cursor = db.rawQuery(sql,selectionArgs);
+        if(cursor!= null && cursor.moveToNext()){
+            String fullName = cursor.getString(cursor.getColumnIndexOrThrow("FullName"));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow("Phone"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow( "Email"));
+            String gender = cursor.getString(cursor.getColumnIndexOrThrow("Gender"));
+            String roleName = cursor.getString(cursor.getColumnIndexOrThrow("RoleName"));
+            String username = cursor.getString(cursor.getColumnIndexOrThrow("Username"));
+            String password = cursor.getString(cursor.getColumnIndexOrThrow("Password"));
+            double money = cursor.getDouble(cursor.getColumnIndexOrThrow("Money"));
+            String address = cursor.getString(cursor.getColumnIndexOrThrow("Address"));
+            User user = new User(ID, fullName, phone, email, gender, username, password, roleName,money,address);
+            return user;
+        }
+        return null;
+    }
+
+    public int UpdateMoney(double money , int UserID){
+        SQLiteDatabase lite = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        String whereClause = "ID = ?";
+        String[] whereArgs = {String.valueOf(UserID)};
+        values.put("money",money);
+        return lite.update("User",values,whereClause,whereArgs);
     }
 }
 
