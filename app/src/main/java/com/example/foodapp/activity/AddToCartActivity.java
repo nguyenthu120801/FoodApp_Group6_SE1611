@@ -155,6 +155,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
             Log.d("infoOrder", "delete all cart");
             new DAOCart(this).DeleteAllCart();
             Log.d("infoOrder", "insert order detail successful");
+            
             orderDBHelper.getAllOrders();
             Intent intent = new Intent(this, ListUserOrderActivity.class);
             startActivity(intent);
