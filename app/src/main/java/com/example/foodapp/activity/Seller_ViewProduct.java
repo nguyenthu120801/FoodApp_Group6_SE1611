@@ -2,6 +2,7 @@ package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,8 +41,11 @@ public class Seller_ViewProduct extends AppCompatActivity {
     private Integer CategoryID = null;
     private Button buttonAdd;
     private LinearLayout logout;
+
+
     private LinearLayout managerOrder;
     private LinearLayout account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
         buttonAdd = findViewById(R.id.btnAdd);
         logout = findViewById(R.id.LogOut);
         managerOrder = findViewById(R.id.manage_order);
+
         account = findViewById(R.id.view_account);
         account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +71,7 @@ public class Seller_ViewProduct extends AppCompatActivity {
         AddProductActivity();
         Logout();
         ManagerOrder();
+        SellerAccount();
     }
     private void ManagerOrder(){
         managerOrder.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +86,16 @@ public class Seller_ViewProduct extends AppCompatActivity {
     public  void startActivity(Context context, Class<?> cls){
         Intent intent = new Intent(context, cls);
         startActivity(intent);
+    }
+
+    private void SellerAccount(){
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Seller_ViewProduct.this, SellerInfoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void Logout(){

@@ -168,6 +168,7 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
                 daoOrderDetail.AddOrderDetail(orderDetail);
             }
             new DAOCart(this).DeleteAllCart();
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Notify");
             builder.setMessage("Checkout success!");
@@ -176,7 +177,6 @@ public class AddToCartActivity extends AppCompatActivity implements onChangeItem
                 startActivity(intent);
             });
             builder.show();
-
         } else {
             Log.d("infoOrder", "insert order fail");
         }

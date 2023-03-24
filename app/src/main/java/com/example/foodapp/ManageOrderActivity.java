@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.foodapp.Entity.ManageOrder;
 import com.example.foodapp.Entity.Order;
 import com.example.foodapp.Model.DAOManageOrder;
 import com.example.foodapp.activity.DetailManageOrder;
+import com.example.foodapp.activity.SellerInfoActivity;
 import com.example.foodapp.activity.UpdateManageOrder;
 import com.example.foodapp.activity.LoginActivity;
 import com.example.foodapp.activity.Seller_ViewProduct;
@@ -32,6 +34,8 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
     private LinearLayout homePage;
     private LinearLayout logout;
     private final DAOManageOrder dao = new DAOManageOrder(this);
+    private LinearLayout managerOrder, account;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,8 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
         logout = findViewById(R.id.LogOut);
         homePage = findViewById(R.id.btn_homePage);
         manageorder = findViewById(R.id.rv_allManageOrder);
+        managerOrder = findViewById(R.id.manager_order2);
+        account = findViewById(R.id.btn_SellerAccount2);
         LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         manageorder.setLayoutManager(linearLayoutManager);
         DAOManageOrder manageOrder = new DAOManageOrder(this);
@@ -47,6 +53,7 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
         manageorder.setAdapter(adapter);
         Logout();
         HomePage();
+        SellerAccount();
     }
 
     private void HomePage(){
@@ -54,6 +61,16 @@ public class ManageOrderActivity extends AppCompatActivity implements OnClick, O
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ManageOrderActivity.this, Seller_ViewProduct.class));
+            }
+        });
+    }
+
+    private void SellerAccount(){
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ManageOrderActivity.this, SellerInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
